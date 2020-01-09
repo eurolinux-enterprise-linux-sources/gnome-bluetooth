@@ -1,0 +1,344 @@
+<refentry id="BluetoothChooser">
+<refmeta>
+<refentrytitle role="top_of_page" id="BluetoothChooser.top_of_page">BluetoothChooser</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>BluetoothChooser</refname>
+<refpurpose>a Bluetooth chooser widget</refpurpose>
+</refnamediv>
+<refsect1 id="BluetoothChooser.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="BluetoothChooser.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;bluetooth-plugin.h&gt;
+
+#define             <link linkend="BLUETOOTH-GET-CHOOSER-CLASS--CAPS">BLUETOOTH_GET_CHOOSER_CLASS</link>         (obj)
+                    <link linkend="BluetoothChooser-struct">BluetoothChooser</link>;
+<link linkend="GtkWidget">GtkWidget</link> *         <link linkend="bluetooth-chooser-new">bluetooth_chooser_new</link>               (const <link linkend="char">char</link> *title);
+<link linkend="void">void</link>                <link linkend="bluetooth-chooser-set-title">bluetooth_chooser_set_title</link>         (<link linkend="BluetoothChooser">BluetoothChooser</link> *self,
+                                                         const <link linkend="char">char</link> *title);
+<link linkend="char">char</link> *              <link linkend="bluetooth-chooser-get-selected-device">bluetooth_chooser_get_selected_device</link>
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="bluetooth-chooser-get-selected-device-info">bluetooth_chooser_get_selected_device_info</link>
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self,
+                                                         const <link linkend="char">char</link> *field,
+                                                         <link linkend="GValue">GValue</link> *value);
+<link linkend="char">char</link> *              <link linkend="bluetooth-chooser-get-selected-device-name">bluetooth_chooser_get_selected_device_name</link>
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);
+<link linkend="char">char</link> *              <link linkend="bluetooth-chooser-get-selected-device-icon">bluetooth_chooser_get_selected_device_icon</link>
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);
+<link linkend="BluetoothType">BluetoothType</link>       <link linkend="bluetooth-chooser-get-selected-device-type">bluetooth_chooser_get_selected_device_type</link>
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);
+<link linkend="gboolean">gboolean</link>            <link linkend="bluetooth-chooser-get-selected-device-is-connected">bluetooth_chooser_get_selected_device_is_connected</link>
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);
+<link linkend="void">void</link>                <link linkend="bluetooth-chooser-start-discovery">bluetooth_chooser_start_discovery</link>   (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);
+<link linkend="void">void</link>                <link linkend="bluetooth-chooser-stop-discovery">bluetooth_chooser_stop_discovery</link>    (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="BluetoothChooser.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="GtkObject">GtkObject</link>
+               +----<link linkend="GtkWidget">GtkWidget</link>
+                     +----<link linkend="GtkContainer">GtkContainer</link>
+                           +----<link linkend="GtkBox">GtkBox</link>
+                                 +----<link linkend="GtkVBox">GtkVBox</link>
+                                       +----BluetoothChooser
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="BluetoothChooser.implemented-interfaces" role="impl_interfaces">
+<title role="impl_interfaces.title">Implemented Interfaces</title>
+<para>
+BluetoothChooser implements
+ <link linkend="GtkBuildable">GtkBuildable</link>,  <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="GtkOrientable">GtkOrientable</link>.</para>
+</refsect1>
+
+
+<refsect1 id="BluetoothChooser.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="BluetoothChooser--device-category-filter">device-category-filter</link>&quot;   <link linkend="BluetoothCategory">BluetoothCategory</link>     : Read / Write / Construct
+  &quot;<link linkend="BluetoothChooser--device-selected">device-selected</link>&quot;          <link linkend="gchar">gchar</link>*                : Read / Write
+  &quot;<link linkend="BluetoothChooser--device-service-filter">device-service-filter</link>&quot;    <link linkend="gchar">gchar</link>*                : Write
+  &quot;<link linkend="BluetoothChooser--device-type-filter">device-type-filter</link>&quot;       <link linkend="gint">gint</link>                  : Read / Write / Construct
+  &quot;<link linkend="BluetoothChooser--has-internal-device-filter">has-internal-device-filter</link>&quot; <link linkend="gboolean">gboolean</link>              : Read / Write / Construct Only
+  &quot;<link linkend="BluetoothChooser--show-connected">show-connected</link>&quot;           <link linkend="gboolean">gboolean</link>              : Read / Write
+  &quot;<link linkend="BluetoothChooser--show-device-category">show-device-category</link>&quot;     <link linkend="gboolean">gboolean</link>              : Read / Write / Construct
+  &quot;<link linkend="BluetoothChooser--show-device-type">show-device-type</link>&quot;         <link linkend="gboolean">gboolean</link>              : Read / Write / Construct
+  &quot;<link linkend="BluetoothChooser--show-pairing">show-pairing</link>&quot;             <link linkend="gboolean">gboolean</link>              : Read / Write
+  &quot;<link linkend="BluetoothChooser--show-searching">show-searching</link>&quot;           <link linkend="gboolean">gboolean</link>              : Read / Write
+  &quot;<link linkend="BluetoothChooser--title">title</link>&quot;                    <link linkend="gchar">gchar</link>*                : Write
+</synopsis>
+</refsect1>
+
+<refsect1 id="BluetoothChooser.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="BluetoothChooser-selected-device-changed">selected-device-changed</link>&quot;                        : Run Last
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="BluetoothChooser.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+A tree-like widget used to select Bluetooth devices.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="BluetoothChooser.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="BLUETOOTH-GET-CHOOSER-CLASS--CAPS" role="macro">
+<title>BLUETOOTH_GET_CHOOSER_CLASS()</title>
+<indexterm zone="BLUETOOTH-GET-CHOOSER-CLASS--CAPS"><primary sortas="BLUETOOTH_GET_CHOOSER_CLASS">BLUETOOTH_GET_CHOOSER_CLASS</primary></indexterm><programlisting>#define             BLUETOOTH_GET_CHOOSER_CLASS(obj)</programlisting>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&#160;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="BluetoothChooser-struct" role="struct">
+<title>BluetoothChooser</title>
+<indexterm zone="BluetoothChooser-struct"><primary sortas="BluetoothChooser">BluetoothChooser</primary></indexterm><programlisting>typedef struct _BluetoothChooser BluetoothChooser;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bluetooth-chooser-new" role="function">
+<title>bluetooth_chooser_new ()</title>
+<indexterm zone="bluetooth-chooser-new"><primary sortas="bluetooth_chooser_new">bluetooth_chooser_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link> *         bluetooth_chooser_new               (const <link linkend="char">char</link> *title);</programlisting>
+<para>
+Returns a new <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>title</parameter>&#160;:</term>
+<listitem><simpara> the widget header title, if <link linkend="NULL--CAPS"><literal>NULL</literal></link>, the widget header will be hidden.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> A <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-set-title" role="function">
+<title>bluetooth_chooser_set_title ()</title>
+<indexterm zone="bluetooth-chooser-set-title"><primary sortas="bluetooth_chooser_set_title">bluetooth_chooser_set_title</primary></indexterm><programlisting><link linkend="void">void</link>                bluetooth_chooser_set_title         (<link linkend="BluetoothChooser">BluetoothChooser</link> *self,
+                                                         const <link linkend="char">char</link> *title);</programlisting>
+<para>
+Sets the <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link>'s title.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a BluetoothChooser widget.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>title</parameter>&#160;:</term>
+<listitem><simpara> the widget header title.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-get-selected-device" role="function">
+<title>bluetooth_chooser_get_selected_device ()</title>
+<indexterm zone="bluetooth-chooser-get-selected-device"><primary sortas="bluetooth_chooser_get_selected_device">bluetooth_chooser_get_selected_device</primary></indexterm><programlisting><link linkend="char">char</link> *              bluetooth_chooser_get_selected_device
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);</programlisting>
+<para>
+Returns the Bluetooth address for the currently selected device.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the Bluetooth address for the currently selected device, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-get-selected-device-info" role="function">
+<title>bluetooth_chooser_get_selected_device_info ()</title>
+<indexterm zone="bluetooth-chooser-get-selected-device-info"><primary sortas="bluetooth_chooser_get_selected_device_info">bluetooth_chooser_get_selected_device_info</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            bluetooth_chooser_get_selected_device_info
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self,
+                                                         const <link linkend="char">char</link> *field,
+                                                         <link linkend="GValue">GValue</link> *value);</programlisting>
+<para>
+Returns whether the <parameter>value</parameter> has been set.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> A <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>field</parameter>&#160;:</term>
+<listitem><simpara> The identifier for the field to get data for.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>value</parameter>&#160;:</term>
+<listitem><simpara> An empty <link linkend="GValue"><type>GValue</type></link> to set.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="TRUE--CAPS"><literal>TRUE</literal></link> if the <parameter>value</parameter> has been set.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-get-selected-device-name" role="function">
+<title>bluetooth_chooser_get_selected_device_name ()</title>
+<indexterm zone="bluetooth-chooser-get-selected-device-name"><primary sortas="bluetooth_chooser_get_selected_device_name">bluetooth_chooser_get_selected_device_name</primary></indexterm><programlisting><link linkend="char">char</link> *              bluetooth_chooser_get_selected_device_name
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);</programlisting>
+<para>
+Returns the name for the currently selected device.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the name for the currently selected device, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-get-selected-device-icon" role="function">
+<title>bluetooth_chooser_get_selected_device_icon ()</title>
+<indexterm zone="bluetooth-chooser-get-selected-device-icon"><primary sortas="bluetooth_chooser_get_selected_device_icon">bluetooth_chooser_get_selected_device_icon</primary></indexterm><programlisting><link linkend="char">char</link> *              bluetooth_chooser_get_selected_device_icon
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);</programlisting>
+<para>
+Returns the icon name to use to represent the currently selected device.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the icon name to use to represent the currently selected device, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-get-selected-device-type" role="function">
+<title>bluetooth_chooser_get_selected_device_type ()</title>
+<indexterm zone="bluetooth-chooser-get-selected-device-type"><primary sortas="bluetooth_chooser_get_selected_device_type">bluetooth_chooser_get_selected_device_type</primary></indexterm><programlisting><link linkend="BluetoothType">BluetoothType</link>       bluetooth_chooser_get_selected_device_type
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);</programlisting>
+<para>
+Returns the <link linkend="BluetoothType"><type>BluetoothType</type></link> of the device selected.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> the <link linkend="BluetoothType"><type>BluetoothType</type></link> of the device selected, or '0' if unknown.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-get-selected-device-is-connected" role="function">
+<title>bluetooth_chooser_get_selected_device_is_connected ()</title>
+<indexterm zone="bluetooth-chooser-get-selected-device-is-connected"><primary sortas="bluetooth_chooser_get_selected_device_is_connected">bluetooth_chooser_get_selected_device_is_connected</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            bluetooth_chooser_get_selected_device_is_connected
+                                                        (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);</programlisting>
+<para>
+Returns whether the selected device is connected to this computer.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> whether the selected device is connected to this computer,
+will always be <link linkend="FALSE--CAPS"><literal>FALSE</literal></link> if no devices are selected.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-start-discovery" role="function">
+<title>bluetooth_chooser_start_discovery ()</title>
+<indexterm zone="bluetooth-chooser-start-discovery"><primary sortas="bluetooth_chooser_start_discovery">bluetooth_chooser_start_discovery</primary></indexterm><programlisting><link linkend="void">void</link>                bluetooth_chooser_start_discovery   (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);</programlisting>
+<para>
+Starts a discovery on the default Bluetooth adapter. Note that this will
+only work if the Search label is visible, as otherwise the user has no
+visual feedback that the process is on-going.
+</para>
+<para>
+See also: <link linkend="BluetoothChooser--show-searching"><type>"show-searching"</type></link></para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-stop-discovery" role="function">
+<title>bluetooth_chooser_stop_discovery ()</title>
+<indexterm zone="bluetooth-chooser-stop-discovery"><primary sortas="bluetooth_chooser_stop_discovery">bluetooth_chooser_stop_discovery</primary></indexterm><programlisting><link linkend="void">void</link>                bluetooth_chooser_stop_discovery    (<link linkend="BluetoothChooser">BluetoothChooser</link> *self);</programlisting>
+<para>
+Stops a discovery started with <link linkend="bluetooth-chooser-start-discovery"><type>bluetooth_chooser_start_discovery</type></link>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1 id="BluetoothChooser.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="BluetoothChooser--device-category-filter" role="property"><title>The <literal>&quot;device-category-filter&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--device-category-filter"><primary sortas="BluetoothChooser:device-category-filter">BluetoothChooser:device-category-filter</primary></indexterm><programlisting>  &quot;device-category-filter&quot;   <link linkend="BluetoothCategory">BluetoothCategory</link>     : Read / Write / Construct</programlisting>
+<para>The #BluetoothCategory to show.</para><para>Default value: BLUETOOTH_CATEGORY_ALL</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--device-selected" role="property"><title>The <literal>&quot;device-selected&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--device-selected"><primary sortas="BluetoothChooser:device-selected">BluetoothChooser:device-selected</primary></indexterm><programlisting>  &quot;device-selected&quot;          <link linkend="gchar">gchar</link>*                : Read / Write</programlisting>
+<para>the Bluetooth address for the currently selected device, or %NULL.</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--device-service-filter" role="property"><title>The <literal>&quot;device-service-filter&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--device-service-filter"><primary sortas="BluetoothChooser:device-service-filter">BluetoothChooser:device-service-filter</primary></indexterm><programlisting>  &quot;device-service-filter&quot;    <link linkend="gchar">gchar</link>*                : Write</programlisting>
+<para>A string representing the service to filter for.</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--device-type-filter" role="property"><title>The <literal>&quot;device-type-filter&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--device-type-filter"><primary sortas="BluetoothChooser:device-type-filter">BluetoothChooser:device-type-filter</primary></indexterm><programlisting>  &quot;device-type-filter&quot;       <link linkend="gint">gint</link>                  : Read / Write / Construct</programlisting>
+<para>A bitmask of #BluetoothType to show.</para><para>Allowed values: [1,16383]</para>
+<para>Default value: 1</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--has-internal-device-filter" role="property"><title>The <literal>&quot;has-internal-device-filter&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--has-internal-device-filter"><primary sortas="BluetoothChooser:has-internal-device-filter">BluetoothChooser:has-internal-device-filter</primary></indexterm><programlisting>  &quot;has-internal-device-filter&quot; <link linkend="gboolean">gboolean</link>              : Read / Write / Construct Only</programlisting>
+<para>Whether the #BluetoothChooser should be constructed with a visible #BluetoothFilterWidget.</para><para>Default value: TRUE</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--show-connected" role="property"><title>The <literal>&quot;show-connected&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--show-connected"><primary sortas="BluetoothChooser:show-connected">BluetoothChooser:show-connected</primary></indexterm><programlisting>  &quot;show-connected&quot;           <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<para>Whether to show the connected column in the tree.</para><para>Default value: FALSE</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--show-device-category" role="property"><title>The <literal>&quot;show-device-category&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--show-device-category"><primary sortas="BluetoothChooser:show-device-category">BluetoothChooser:show-device-category</primary></indexterm><programlisting>  &quot;show-device-category&quot;     <link linkend="gboolean">gboolean</link>              : Read / Write / Construct</programlisting>
+<para>Whether to show the device category filter.</para><para>Default value: TRUE</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--show-device-type" role="property"><title>The <literal>&quot;show-device-type&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--show-device-type"><primary sortas="BluetoothChooser:show-device-type">BluetoothChooser:show-device-type</primary></indexterm><programlisting>  &quot;show-device-type&quot;         <link linkend="gboolean">gboolean</link>              : Read / Write / Construct</programlisting>
+<para>Whether to show the device type filter.</para><para>Default value: TRUE</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--show-pairing" role="property"><title>The <literal>&quot;show-pairing&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--show-pairing"><primary sortas="BluetoothChooser:show-pairing">BluetoothChooser:show-pairing</primary></indexterm><programlisting>  &quot;show-pairing&quot;             <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<para>Whether to show the pairing column in the tree.</para><para>Default value: FALSE</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--show-searching" role="property"><title>The <literal>&quot;show-searching&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--show-searching"><primary sortas="BluetoothChooser:show-searching">BluetoothChooser:show-searching</primary></indexterm><programlisting>  &quot;show-searching&quot;           <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<para>Whether to show the Searching label , this is necessary if you want to programmatically start a discovery, using bluetooth_chooser_start_discovery().</para><para>Default value: FALSE</para>
+</refsect2>
+<refsect2 id="BluetoothChooser--title" role="property"><title>The <literal>&quot;title&quot;</literal> property</title>
+<indexterm zone="BluetoothChooser--title"><primary sortas="BluetoothChooser:title">BluetoothChooser:title</primary></indexterm><programlisting>  &quot;title&quot;                    <link linkend="gchar">gchar</link>*                : Write</programlisting>
+<para>The widget header title.</para><para>Default value: NULL</para>
+</refsect2>
+</refsect1>
+
+<refsect1 id="BluetoothChooser.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="BluetoothChooser-selected-device-changed" role="signal"><title>The <literal>&quot;selected-device-changed&quot;</literal> signal</title>
+<indexterm zone="BluetoothChooser-selected-device-changed"><primary sortas="BluetoothChooser::selected-device-changed">BluetoothChooser::selected-device-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="BluetoothChooser">BluetoothChooser</link> *chooser,
+                                                        <link linkend="gchar">gchar</link>            *address,
+                                                        <link linkend="gpointer">gpointer</link>          user_data)      : Run Last</programlisting>
+<para>
+The <link linkend="BluetoothChooser--selected-device-changed"><type>"selected-device-changed"</type></link> signal is launched when the
+selected device is changed, it will be <link linkend="NULL--CAPS"><literal>NULL</literal></link> if a device was unselected.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>chooser</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget which received the signal
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>address</parameter>&#160;:</term>
+<listitem><simpara> the Bluetooth address for the currently selected device, or <link linkend="NULL--CAPS"><literal>NULL</literal></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&#160;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>

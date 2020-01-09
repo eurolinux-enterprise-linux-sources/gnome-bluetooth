@@ -1,0 +1,237 @@
+<refentry id="gnome-bluetooth-BluetoothClient">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnome-bluetooth-BluetoothClient.top_of_page">BluetoothClient</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>BluetoothClient</refname>
+<refpurpose>Bluetooth client object</refpurpose>
+</refnamediv>
+<refsect1 id="gnome-bluetooth-BluetoothClient.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="gnome-bluetooth-BluetoothClient.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;bluetooth-client.h&gt;
+
+#define             <link linkend="BLUETOOTH-GET-CLIENT-CLASS--CAPS">BLUETOOTH_GET_CLIENT_CLASS</link>          (obj)
+                    <link linkend="BluetoothClient">BluetoothClient</link>;
+<link linkend="BluetoothClient">BluetoothClient</link> *   <link linkend="bluetooth-client-new">bluetooth_client_new</link>                (void);
+<link linkend="GtkTreeModel">GtkTreeModel</link> *      <link linkend="bluetooth-client-get-model">bluetooth_client_get_model</link>          (<link linkend="BluetoothClient">BluetoothClient</link> *client);
+<link linkend="GtkTreeModel">GtkTreeModel</link> *      <link linkend="bluetooth-client-get-filter-model">bluetooth_client_get_filter_model</link>   (<link linkend="BluetoothClient">BluetoothClient</link> *client,
+                                                         <link linkend="GtkTreeModelFilterVisibleFunc">GtkTreeModelFilterVisibleFunc</link> func,
+                                                         <link linkend="gpointer">gpointer</link> data,
+                                                         <link linkend="GDestroyNotify">GDestroyNotify</link> destroy);
+<link linkend="GtkTreeModel">GtkTreeModel</link> *      <link linkend="bluetooth-client-get-adapter-model">bluetooth_client_get_adapter_model</link>  (<link linkend="BluetoothClient">BluetoothClient</link> *client);
+<link linkend="GtkTreeModel">GtkTreeModel</link> *      <link linkend="bluetooth-client-get-device-model">bluetooth_client_get_device_model</link>   (<link linkend="BluetoothClient">BluetoothClient</link> *client,
+                                                         <link linkend="DBusGProxy">DBusGProxy</link> *adapter);
+<link linkend="GtkTreeModel">GtkTreeModel</link> *      <link linkend="bluetooth-client-get-device-filter-model">bluetooth_client_get_device_filter_model</link>
+                                                        (<link linkend="BluetoothClient">BluetoothClient</link> *client,
+                                                         <link linkend="DBusGProxy">DBusGProxy</link> *adapter,
+                                                         <link linkend="GtkTreeModelFilterVisibleFunc">GtkTreeModelFilterVisibleFunc</link> func,
+                                                         <link linkend="gpointer">gpointer</link> data,
+                                                         <link linkend="GDestroyNotify">GDestroyNotify</link> destroy);
+const <link linkend="gchar">gchar</link> *       <link linkend="bluetooth-type-to-string">bluetooth_type_to_string</link>            (<link linkend="guint">guint</link> type);
+<link linkend="gboolean">gboolean</link>            <link linkend="bluetooth-verify-address">bluetooth_verify_address</link>            (const <link linkend="char">char</link> *bdaddr);
+const <link linkend="char">char</link> *        <link linkend="bluetooth-uuid-to-string">bluetooth_uuid_to_string</link>            (const <link linkend="char">char</link> *uuid);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="gnome-bluetooth-BluetoothClient.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+The <link linkend="BluetoothClient"><type>BluetoothClient</type></link> object is used to query the state of Bluetooth
+devices and adapters.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="gnome-bluetooth-BluetoothClient.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="BLUETOOTH-GET-CLIENT-CLASS--CAPS" role="macro">
+<title>BLUETOOTH_GET_CLIENT_CLASS()</title>
+<indexterm zone="BLUETOOTH-GET-CLIENT-CLASS--CAPS"><primary sortas="BLUETOOTH_GET_CLIENT_CLASS">BLUETOOTH_GET_CLIENT_CLASS</primary></indexterm><programlisting>#define             BLUETOOTH_GET_CLIENT_CLASS(obj)</programlisting>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&#160;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="BluetoothClient" role="struct">
+<title>BluetoothClient</title>
+<indexterm zone="BluetoothClient"><primary sortas="BluetoothClient">BluetoothClient</primary></indexterm><programlisting>typedef struct {
+	GObject parent;
+} BluetoothClient;
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bluetooth-client-new" role="function">
+<title>bluetooth_client_new ()</title>
+<indexterm zone="bluetooth-client-new"><primary sortas="bluetooth_client_new">bluetooth_client_new</primary></indexterm><programlisting><link linkend="BluetoothClient">BluetoothClient</link> *   bluetooth_client_new                (void);</programlisting>
+<para>
+Returns a reference to the <link linkend="BluetoothClient"><type>BluetoothClient</type></link> singleton. Use #<link linkend="g-object-unref"><function>g_object_unref()</function></link> the object when done.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="BluetoothClient"><type>BluetoothClient</type></link> object.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-client-get-model" role="function">
+<title>bluetooth_client_get_model ()</title>
+<indexterm zone="bluetooth-client-get-model"><primary sortas="bluetooth_client_get_model">bluetooth_client_get_model</primary></indexterm><programlisting><link linkend="GtkTreeModel">GtkTreeModel</link> *      bluetooth_client_get_model          (<link linkend="BluetoothClient">BluetoothClient</link> *client);</programlisting>
+<para>
+Returns an unfiltered <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> representing the adapter and devices available on the system.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>client</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothClient"><type>BluetoothClient</type></link> object
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> object.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-client-get-filter-model" role="function">
+<title>bluetooth_client_get_filter_model ()</title>
+<indexterm zone="bluetooth-client-get-filter-model"><primary sortas="bluetooth_client_get_filter_model">bluetooth_client_get_filter_model</primary></indexterm><programlisting><link linkend="GtkTreeModel">GtkTreeModel</link> *      bluetooth_client_get_filter_model   (<link linkend="BluetoothClient">BluetoothClient</link> *client,
+                                                         <link linkend="GtkTreeModelFilterVisibleFunc">GtkTreeModelFilterVisibleFunc</link> func,
+                                                         <link linkend="gpointer">gpointer</link> data,
+                                                         <link linkend="GDestroyNotify">GDestroyNotify</link> destroy);</programlisting>
+<para>
+Returns a <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> of devices filtered using the <parameter>func</parameter>, <parameter>data</parameter> and <parameter>destroy</parameter> arguments to pass to <link linkend="gtk-tree-model-filter-set-visible-func"><function>gtk_tree_model_filter_set_visible_func()</function></link>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>client</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothClient"><type>BluetoothClient</type></link> object
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>func</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkTreeModelFilterVisibleFunc"><type>GtkTreeModelFilterVisibleFunc</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara> user data to pass to <link linkend="gtk-tree-model-filter-set-visible-func"><function>gtk_tree_model_filter_set_visible_func()</function></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>destroy</parameter>&#160;:</term>
+<listitem><simpara> a destroy function for <link linkend="gtk-tree-model-filter-set-visible-func"><function>gtk_tree_model_filter_set_visible_func()</function></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> object.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-client-get-adapter-model" role="function">
+<title>bluetooth_client_get_adapter_model ()</title>
+<indexterm zone="bluetooth-client-get-adapter-model"><primary sortas="bluetooth_client_get_adapter_model">bluetooth_client_get_adapter_model</primary></indexterm><programlisting><link linkend="GtkTreeModel">GtkTreeModel</link> *      bluetooth_client_get_adapter_model  (<link linkend="BluetoothClient">BluetoothClient</link> *client);</programlisting>
+<para>
+Returns a filtered <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> with only adapters present.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>client</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothClient"><type>BluetoothClient</type></link> object
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> object.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-client-get-device-model" role="function">
+<title>bluetooth_client_get_device_model ()</title>
+<indexterm zone="bluetooth-client-get-device-model"><primary sortas="bluetooth_client_get_device_model">bluetooth_client_get_device_model</primary></indexterm><programlisting><link linkend="GtkTreeModel">GtkTreeModel</link> *      bluetooth_client_get_device_model   (<link linkend="BluetoothClient">BluetoothClient</link> *client,
+                                                         <link linkend="DBusGProxy">DBusGProxy</link> *adapter);</programlisting>
+<para>
+Returns a filtered <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> with only devices belonging to the selected adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter when <link linkend="NULL--CAPS"><literal>NULL</literal></link> is passed.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>client</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothClient"><type>BluetoothClient</type></link> object
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>adapter</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="DBusGProxy"><type>DBusGProxy</type></link> of the adapter object, or <link linkend="NULL--CAPS"><literal>NULL</literal></link> to get the default adapter.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> object.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-client-get-device-filter-model" role="function">
+<title>bluetooth_client_get_device_filter_model ()</title>
+<indexterm zone="bluetooth-client-get-device-filter-model"><primary sortas="bluetooth_client_get_device_filter_model">bluetooth_client_get_device_filter_model</primary></indexterm><programlisting><link linkend="GtkTreeModel">GtkTreeModel</link> *      bluetooth_client_get_device_filter_model
+                                                        (<link linkend="BluetoothClient">BluetoothClient</link> *client,
+                                                         <link linkend="DBusGProxy">DBusGProxy</link> *adapter,
+                                                         <link linkend="GtkTreeModelFilterVisibleFunc">GtkTreeModelFilterVisibleFunc</link> func,
+                                                         <link linkend="gpointer">gpointer</link> data,
+                                                         <link linkend="GDestroyNotify">GDestroyNotify</link> destroy);</programlisting>
+<para>
+Returns a <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> of adapters filtered using the <parameter>func</parameter>, <parameter>data</parameter> and
+<parameter>destroy</parameter> arguments to pass to <link linkend="gtk-tree-model-filter-set-visible-func"><function>gtk_tree_model_filter_set_visible_func()</function></link>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>client</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothClient"><type>BluetoothClient</type></link> object
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>adapter</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="DBusGProxy"><type>DBusGProxy</type></link> representing a particular adapter, or <link linkend="NULL--CAPS"><literal>NULL</literal></link> for the default adapter.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>func</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GtkTreeModelFilterVisibleFunc"><type>GtkTreeModelFilterVisibleFunc</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&#160;:</term>
+<listitem><simpara> user data to pass to <link linkend="gtk-tree-model-filter-set-visible-func"><function>gtk_tree_model_filter_set_visible_func()</function></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>destroy</parameter>&#160;:</term>
+<listitem><simpara> a destroy function for <link linkend="gtk-tree-model-filter-set-visible-func"><function>gtk_tree_model_filter_set_visible_func()</function></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="GtkTreeModel"><type>GtkTreeModel</type></link> object.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-type-to-string" role="function">
+<title>bluetooth_type_to_string ()</title>
+<indexterm zone="bluetooth-type-to-string"><primary sortas="bluetooth_type_to_string">bluetooth_type_to_string</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link> *       bluetooth_type_to_string            (<link linkend="guint">guint</link> type);</programlisting>
+<para>
+Returns the string representation of the <parameter>type</parameter> passed. Do not free the return value.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>type</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothType"><type>BluetoothType</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a string.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-verify-address" role="function">
+<title>bluetooth_verify_address ()</title>
+<indexterm zone="bluetooth-verify-address"><primary sortas="bluetooth_verify_address">bluetooth_verify_address</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            bluetooth_verify_address            (const <link linkend="char">char</link> *bdaddr);</programlisting>
+<para>
+Returns whether the string is a valid Bluetooth address. This does not contact the device in any way.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>bdaddr</parameter>&#160;:</term>
+<listitem><simpara> a string representing a Bluetooth address
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="TRUE--CAPS"><literal>TRUE</literal></link> if the address is valid, <link linkend="FALSE--CAPS"><literal>FALSE</literal></link> if not.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-uuid-to-string" role="function">
+<title>bluetooth_uuid_to_string ()</title>
+<indexterm zone="bluetooth-uuid-to-string"><primary sortas="bluetooth_uuid_to_string">bluetooth_uuid_to_string</primary></indexterm><programlisting>const <link linkend="char">char</link> *        bluetooth_uuid_to_string            (const <link linkend="char">char</link> *uuid);</programlisting>
+<para>
+Returns a string representing a human-readable (but not usable for display to users) version of the <parameter>uuid</parameter>. Do not free the return value.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>uuid</parameter>&#160;:</term>
+<listitem><simpara> a string representing a Bluetooth UUID
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a string.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

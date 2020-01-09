@@ -1,0 +1,322 @@
+<refentry id="gnome-bluetooth-bluetooth-enums">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnome-bluetooth-bluetooth-enums.top_of_page">bluetooth-enums</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>bluetooth-enums</refname>
+<refpurpose>Bluetooth related enumerations</refpurpose>
+</refnamediv>
+<refsect1 id="gnome-bluetooth-bluetooth-enums.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="gnome-bluetooth-bluetooth-enums.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;bluetooth-enums.h&gt;
+
+enum                <link linkend="BluetoothCategory">BluetoothCategory</link>;
+enum                <link linkend="BluetoothType">BluetoothType</link>;
+#define             <link linkend="BLUETOOTH-TYPE-INPUT--CAPS">BLUETOOTH_TYPE_INPUT</link>
+#define             <link linkend="BLUETOOTH-TYPE-AUDIO--CAPS">BLUETOOTH_TYPE_AUDIO</link>
+enum                <link linkend="BluetoothColumn">BluetoothColumn</link>;
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="gnome-bluetooth-bluetooth-enums.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+Enumerations related to Bluetooth.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="gnome-bluetooth-bluetooth-enums.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="BluetoothCategory" role="enum">
+<title>enum BluetoothCategory</title>
+<indexterm zone="BluetoothCategory"><primary sortas="BluetoothCategory">BluetoothCategory</primary></indexterm><programlisting>typedef enum {
+	BLUETOOTH_CATEGORY_ALL,
+	BLUETOOTH_CATEGORY_PAIRED,
+	BLUETOOTH_CATEGORY_TRUSTED,
+	BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED,
+	BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED,
+	BLUETOOTH_CATEGORY_NUM_CATEGORIES /*&lt; skip &gt;*/
+} BluetoothCategory;
+</programlisting>
+<para>
+The category of a Bluetooth devices.</para>
+<para>
+</para><variablelist role="enum">
+<varlistentry id="BLUETOOTH-CATEGORY-ALL--CAPS" role="constant">
+<term><literal>BLUETOOTH_CATEGORY_ALL</literal></term>
+<listitem><simpara> all devices
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-CATEGORY-PAIRED--CAPS" role="constant">
+<term><literal>BLUETOOTH_CATEGORY_PAIRED</literal></term>
+<listitem><simpara> paired devices
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-CATEGORY-TRUSTED--CAPS" role="constant">
+<term><literal>BLUETOOTH_CATEGORY_TRUSTED</literal></term>
+<listitem><simpara> trusted devices
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-CATEGORY-NOT-PAIRED-OR-TRUSTED--CAPS" role="constant">
+<term><literal>BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED</literal></term>
+<listitem><simpara> neither paired, nor trusted devices
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-CATEGORY-PAIRED-OR-TRUSTED--CAPS" role="constant">
+<term><literal>BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED</literal></term>
+<listitem><simpara> paired and/or trusted devices
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-CATEGORY-NUM-CATEGORIES--CAPS" role="constant">
+<term><literal>BLUETOOTH_CATEGORY_NUM_CATEGORIES</literal></term>
+<listitem><simpara>
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="BluetoothType" role="enum">
+<title>enum BluetoothType</title>
+<indexterm zone="BluetoothType"><primary sortas="BluetoothType">BluetoothType</primary></indexterm><programlisting>typedef enum {
+	BLUETOOTH_TYPE_ANY		= 1 &lt;&lt; 0,
+	BLUETOOTH_TYPE_PHONE		= 1 &lt;&lt; 1,
+	BLUETOOTH_TYPE_MODEM		= 1 &lt;&lt; 2,
+	BLUETOOTH_TYPE_COMPUTER		= 1 &lt;&lt; 3,
+	BLUETOOTH_TYPE_NETWORK		= 1 &lt;&lt; 4,
+	BLUETOOTH_TYPE_HEADSET		= 1 &lt;&lt; 5,
+	BLUETOOTH_TYPE_HEADPHONES	= 1 &lt;&lt; 6,
+	BLUETOOTH_TYPE_OTHER_AUDIO	= 1 &lt;&lt; 7,
+	BLUETOOTH_TYPE_KEYBOARD		= 1 &lt;&lt; 8,
+	BLUETOOTH_TYPE_MOUSE		= 1 &lt;&lt; 9,
+	BLUETOOTH_TYPE_CAMERA		= 1 &lt;&lt; 10,
+	BLUETOOTH_TYPE_PRINTER		= 1 &lt;&lt; 11,
+	BLUETOOTH_TYPE_JOYPAD		= 1 &lt;&lt; 12,
+	BLUETOOTH_TYPE_TABLET		= 1 &lt;&lt; 13,
+} BluetoothType;
+</programlisting>
+<para>
+The type of a Bluetooth device. See also <link linkend="BLUETOOTH-TYPE-INPUT--CAPS"><literal>BLUETOOTH_TYPE_INPUT</literal></link> and <link linkend="BLUETOOTH-TYPE-AUDIO--CAPS"><literal>BLUETOOTH_TYPE_AUDIO</literal></link></para>
+<para>
+</para><variablelist role="enum">
+<varlistentry id="BLUETOOTH-TYPE-ANY--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_ANY</literal></term>
+<listitem><simpara> any device, or a device of an unknown type
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-PHONE--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_PHONE</literal></term>
+<listitem><simpara> a telephone (usually a cell/mobile phone)
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-MODEM--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_MODEM</literal></term>
+<listitem><simpara> a modem
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-COMPUTER--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_COMPUTER</literal></term>
+<listitem><simpara> a computer, can be a laptop, a wearable computer, etc.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-NETWORK--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_NETWORK</literal></term>
+<listitem><simpara> a network device, such as a router
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-HEADSET--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_HEADSET</literal></term>
+<listitem><simpara> a headset (usually a hands-free device)
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-HEADPHONES--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_HEADPHONES</literal></term>
+<listitem><simpara> headphones (covers two ears)
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-OTHER-AUDIO--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_OTHER_AUDIO</literal></term>
+<listitem><simpara> another type of audio device
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-KEYBOARD--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_KEYBOARD</literal></term>
+<listitem><simpara> a keyboard
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-MOUSE--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_MOUSE</literal></term>
+<listitem><simpara> a mouse
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-CAMERA--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_CAMERA</literal></term>
+<listitem><simpara> a camera (still or moving)
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-PRINTER--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_PRINTER</literal></term>
+<listitem><simpara> a printer
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-JOYPAD--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_JOYPAD</literal></term>
+<listitem><simpara> a joypad, joystick, or other game controller
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-TYPE-TABLET--CAPS" role="constant">
+<term><literal>BLUETOOTH_TYPE_TABLET</literal></term>
+<listitem><simpara> a drawing tablet
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="BLUETOOTH-TYPE-INPUT--CAPS" role="macro">
+<title>BLUETOOTH_TYPE_INPUT</title>
+<indexterm zone="BLUETOOTH-TYPE-INPUT--CAPS"><primary sortas="BLUETOOTH_TYPE_INPUT">BLUETOOTH_TYPE_INPUT</primary></indexterm><programlisting>#define BLUETOOTH_TYPE_INPUT (BLUETOOTH_TYPE_KEYBOARD | BLUETOOTH_TYPE_MOUSE | BLUETOOTH_TYPE_TABLET | BLUETOOTH_TYPE_JOYPAD)
+</programlisting>
+<para>
+a bitmask for use in filters representing any input Bluetooth device.
+</para></refsect2>
+<refsect2 id="BLUETOOTH-TYPE-AUDIO--CAPS" role="macro">
+<title>BLUETOOTH_TYPE_AUDIO</title>
+<indexterm zone="BLUETOOTH-TYPE-AUDIO--CAPS"><primary sortas="BLUETOOTH_TYPE_AUDIO">BLUETOOTH_TYPE_AUDIO</primary></indexterm><programlisting>#define BLUETOOTH_TYPE_AUDIO (BLUETOOTH_TYPE_HEADSET | BLUETOOTH_TYPE_HEADPHONES | BLUETOOTH_TYPE_OTHER_AUDIO)
+</programlisting>
+<para>
+a bitmask for use in filters representing any audio Bluetooth device.
+</para></refsect2>
+<refsect2 id="BluetoothColumn" role="enum">
+<title>enum BluetoothColumn</title>
+<indexterm zone="BluetoothColumn"><primary sortas="BluetoothColumn">BluetoothColumn</primary></indexterm><programlisting>typedef enum {
+	BLUETOOTH_COLUMN_PROXY,
+	BLUETOOTH_COLUMN_ADDRESS,
+	BLUETOOTH_COLUMN_ALIAS,
+	BLUETOOTH_COLUMN_NAME,
+	BLUETOOTH_COLUMN_TYPE,
+	BLUETOOTH_COLUMN_ICON,
+	BLUETOOTH_COLUMN_DEFAULT,
+	BLUETOOTH_COLUMN_PAIRED,
+	BLUETOOTH_COLUMN_TRUSTED,
+	BLUETOOTH_COLUMN_CONNECTED,
+	BLUETOOTH_COLUMN_DISCOVERABLE,
+	BLUETOOTH_COLUMN_DISCOVERING,
+	BLUETOOTH_COLUMN_LEGACYPAIRING,
+	BLUETOOTH_COLUMN_POWERED,
+	BLUETOOTH_COLUMN_SERVICES,
+	BLUETOOTH_COLUMN_UUIDS,
+	_BLUETOOTH_NUM_COLUMNS /*&lt; skip &gt;*/
+} BluetoothColumn;
+</programlisting>
+<para>
+A column identifier to pass to <link linkend="bluetooth-chooser-get-selected-device-info"><function>bluetooth_chooser_get_selected_device_info()</function></link>.</para>
+<para>
+</para><variablelist role="enum">
+<varlistentry id="BLUETOOTH-COLUMN-PROXY--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_PROXY</literal></term>
+<listitem><simpara> a <link linkend="DBusGProxy"><type>DBusGProxy</type></link> object
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-ADDRESS--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_ADDRESS</literal></term>
+<listitem><simpara> a string representing a Bluetooth address
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-ALIAS--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_ALIAS</literal></term>
+<listitem><simpara> a string to use for display (the name of the device, or its address if the name is not known). Only available for devices.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-NAME--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_NAME</literal></term>
+<listitem><simpara> a string representing the device or adapter's name
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-TYPE--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_TYPE</literal></term>
+<listitem><simpara> the <link linkend="BluetoothType"><type>BluetoothType</type></link> of the device. Only available for devices.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-ICON--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_ICON</literal></term>
+<listitem><simpara> a string representing the icon name for the device. Only available for devices.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-DEFAULT--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_DEFAULT</literal></term>
+<listitem><simpara> whether the adapter is the default one. Only available for adapters.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-PAIRED--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_PAIRED</literal></term>
+<listitem><simpara> whether the device is paired to its parent adapter. Only available for devices.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-TRUSTED--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_TRUSTED</literal></term>
+<listitem><simpara> whether the device is trusted. Only available for devices.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-CONNECTED--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_CONNECTED</literal></term>
+<listitem><simpara> whether the device is connected. Only available for devices.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-DISCOVERABLE--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_DISCOVERABLE</literal></term>
+<listitem><simpara> whether the adapter is discoverable/visible. Only available for adapters.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-DISCOVERING--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_DISCOVERING</literal></term>
+<listitem><simpara> whether the adapter is discovering. Only available for adapters.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-LEGACYPAIRING--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_LEGACYPAIRING</literal></term>
+<listitem><simpara> whether the device does not support Bluetooth 2.1 Simple Secure Pairing. Only available for devices.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-POWERED--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_POWERED</literal></term>
+<listitem><simpara> whether the adapter is powered. Only available for adapters.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-SERVICES--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_SERVICES</literal></term>
+<listitem><simpara> an array of service names and <link linkend="BluetoothStatus"><type>BluetoothStatus</type></link> connection statuses.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-COLUMN-UUIDS--CAPS" role="constant">
+<term><literal>BLUETOOTH_COLUMN_UUIDS</literal></term>
+<listitem><simpara> a string array of human-readable UUIDs.
+</simpara></listitem>
+</varlistentry>
+<varlistentry id="BLUETOOTH-NUM-COLUMNS--CAPS" role="constant">
+<term><literal>_BLUETOOTH_NUM_COLUMNS</literal></term>
+<listitem><simpara>
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

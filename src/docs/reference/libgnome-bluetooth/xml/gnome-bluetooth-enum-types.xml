@@ -1,0 +1,90 @@
+<refentry id="gnome-bluetooth-gnome-bluetooth-enum-types">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnome-bluetooth-gnome-bluetooth-enum-types.top_of_page">gnome-bluetooth-enum-types</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>gnome-bluetooth-enum-types</refname>
+<refpurpose></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv id="gnome-bluetooth-gnome-bluetooth-enum-types.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+<link linkend="GType">GType</link>               <link linkend="bluetooth-category-get-type">bluetooth_category_get_type</link>         (void);
+#define             <link linkend="BLUETOOTH-TYPE-CATEGORY--CAPS">BLUETOOTH_TYPE_CATEGORY</link>
+<link linkend="GType">GType</link>               <link linkend="bluetooth-type-get-type">bluetooth_type_get_type</link>             (void);
+#define             <link linkend="BLUETOOTH-TYPE-TYPE--CAPS">BLUETOOTH_TYPE_TYPE</link>
+<link linkend="GType">GType</link>               <link linkend="bluetooth-column-get-type">bluetooth_column_get_type</link>           (void);
+#define             <link linkend="BLUETOOTH-TYPE-COLUMN--CAPS">BLUETOOTH_TYPE_COLUMN</link>
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="gnome-bluetooth-gnome-bluetooth-enum-types.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="gnome-bluetooth-gnome-bluetooth-enum-types.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="bluetooth-category-get-type" role="function">
+<title>bluetooth_category_get_type ()</title>
+<indexterm zone="bluetooth-category-get-type"><primary sortas="bluetooth_category_get_type">bluetooth_category_get_type</primary></indexterm><programlisting><link linkend="GType">GType</link>               bluetooth_category_get_type         (void);</programlisting>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="BLUETOOTH-TYPE-CATEGORY--CAPS" role="macro">
+<title>BLUETOOTH_TYPE_CATEGORY</title>
+<indexterm zone="BLUETOOTH-TYPE-CATEGORY--CAPS"><primary sortas="BLUETOOTH_TYPE_CATEGORY">BLUETOOTH_TYPE_CATEGORY</primary></indexterm><programlisting>#define BLUETOOTH_TYPE_CATEGORY (bluetooth_category_get_type())
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bluetooth-type-get-type" role="function">
+<title>bluetooth_type_get_type ()</title>
+<indexterm zone="bluetooth-type-get-type"><primary sortas="bluetooth_type_get_type">bluetooth_type_get_type</primary></indexterm><programlisting><link linkend="GType">GType</link>               bluetooth_type_get_type             (void);</programlisting>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="BLUETOOTH-TYPE-TYPE--CAPS" role="macro">
+<title>BLUETOOTH_TYPE_TYPE</title>
+<indexterm zone="BLUETOOTH-TYPE-TYPE--CAPS"><primary sortas="BLUETOOTH_TYPE_TYPE">BLUETOOTH_TYPE_TYPE</primary></indexterm><programlisting>#define BLUETOOTH_TYPE_TYPE (bluetooth_type_get_type())
+</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bluetooth-column-get-type" role="function">
+<title>bluetooth_column_get_type ()</title>
+<indexterm zone="bluetooth-column-get-type"><primary sortas="bluetooth_column_get_type">bluetooth_column_get_type</primary></indexterm><programlisting><link linkend="GType">GType</link>               bluetooth_column_get_type           (void);</programlisting>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="BLUETOOTH-TYPE-COLUMN--CAPS" role="macro">
+<title>BLUETOOTH_TYPE_COLUMN</title>
+<indexterm zone="BLUETOOTH-TYPE-COLUMN--CAPS"><primary sortas="BLUETOOTH_TYPE_COLUMN">BLUETOOTH_TYPE_COLUMN</primary></indexterm><programlisting>#define BLUETOOTH_TYPE_COLUMN (bluetooth_column_get_type())
+</programlisting>
+<para>
+</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

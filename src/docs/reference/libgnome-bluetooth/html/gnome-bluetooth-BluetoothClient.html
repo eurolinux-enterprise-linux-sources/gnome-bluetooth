@@ -1,0 +1,542 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BluetoothClient</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="gnome-bluetooth Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference">
+<link rel="prev" href="BluetoothChooser.html" title="BluetoothChooser">
+<link rel="next" href="BluetoothChooserButton.html" title="BluetoothChooserButton">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="BluetoothChooser.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">gnome-bluetooth Reference Manual</th>
+<td><a accesskey="n" href="BluetoothChooserButton.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#gnome-bluetooth-BluetoothClient.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#gnome-bluetooth-BluetoothClient.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="BluetoothClient">
+<a name="gnome-bluetooth-BluetoothClient"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="gnome-bluetooth-BluetoothClient.top_of_page"></a>BluetoothClient</span></h2>
+<p>BluetoothClient — Bluetooth client object</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1" title="Stability Level">
+<a name="gnome-bluetooth-BluetoothClient.stability-level"></a><h2>Stability Level</h2>
+Stable, unless otherwise indicated
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="gnome-bluetooth-BluetoothClient.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;bluetooth-client.h&gt;
+
+#define             <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BLUETOOTH-GET-CLIENT-CLASS--CAPS"
+>BLUETOOTH_GET_CLIENT_CLASS</a>          (obj)
+                    <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a>;
+<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *   <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-client-new"
+>bluetooth_client_new</a>                (void);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-client-get-model"
+>bluetooth_client_get_model</a>          (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-client-get-filter-model"
+>bluetooth_client_get_filter_model</a>   (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#GtkTreeModelFilterVisibleFunc"
+>GtkTreeModelFilterVisibleFunc</a> func,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"
+>GDestroyNotify</a> destroy);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-client-get-adapter-model"
+>bluetooth_client_get_adapter_model</a>  (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-client-get-device-model"
+>bluetooth_client_get_device_model</a>   (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client,
+                                                         <a
+href="/usr/share/gtk-doc/html/dbus-glib/dbus-glib-DBusGProxy.html#DBusGProxy"
+>DBusGProxy</a> *adapter);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-client-get-device-filter-model"
+>bluetooth_client_get_device_filter_model</a>
+                                                        (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client,
+                                                         <a
+href="/usr/share/gtk-doc/html/dbus-glib/dbus-glib-DBusGProxy.html#DBusGProxy"
+>DBusGProxy</a> *adapter,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#GtkTreeModelFilterVisibleFunc"
+>GtkTreeModelFilterVisibleFunc</a> func,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"
+>GDestroyNotify</a> destroy);
+const <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-type-to-string"
+>bluetooth_type_to_string</a>            (<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"
+>guint</a> type);
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-verify-address"
+>bluetooth_verify_address</a>            (const char *bdaddr);
+const char *        <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#bluetooth-uuid-to-string"
+>bluetooth_uuid_to_string</a>            (const char *uuid);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="gnome-bluetooth-BluetoothClient.description"></a><h2>Description</h2>
+<p>
+The <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> object is used to query the state of Bluetooth
+devices and adapters.</p>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="gnome-bluetooth-BluetoothClient.details"></a><h2>Details</h2>
+<div class="refsect2" title="BLUETOOTH_GET_CLIENT_CLASS()">
+<a name="BLUETOOTH-GET-CLIENT-CLASS--CAPS"></a><h3>BLUETOOTH_GET_CLIENT_CLASS()</h3>
+<pre class="programlisting">#define             BLUETOOTH_GET_CLIENT_CLASS(obj)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BluetoothClient">
+<a name="BluetoothClient"></a><h3>BluetoothClient</h3>
+<pre class="programlisting">typedef struct {
+	GObject parent;
+} BluetoothClient;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_client_new ()">
+<a name="bluetooth-client-new"></a><h3>bluetooth_client_new ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *   bluetooth_client_new                (void);</pre>
+<p>
+Returns a reference to the <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> singleton. Use #<a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"
+><code class="function">g_object_unref()</code></a> the object when done.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> object.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_client_get_model ()">
+<a name="bluetooth-client-get-model"></a><h3>bluetooth_client_get_model ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      bluetooth_client_get_model          (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client);</pre>
+<p>
+Returns an unfiltered <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> representing the adapter and devices available on the system.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_client_get_filter_model ()">
+<a name="bluetooth-client-get-filter-model"></a><h3>bluetooth_client_get_filter_model ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      bluetooth_client_get_filter_model   (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#GtkTreeModelFilterVisibleFunc"
+>GtkTreeModelFilterVisibleFunc</a> func,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"
+>GDestroyNotify</a> destroy);</pre>
+<p>
+Returns a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> of devices filtered using the <em class="parameter"><code>func</code></em>, <em class="parameter"><code>data</code></em> and <em class="parameter"><code>destroy</code></em> arguments to pass to <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#gtk-tree-model-filter-set-visible-func"
+><code class="function">gtk_tree_model_filter_set_visible_func()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#GtkTreeModelFilterVisibleFunc"
+><span class="type">GtkTreeModelFilterVisibleFunc</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td> user data to pass to <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#gtk-tree-model-filter-set-visible-func"
+><code class="function">gtk_tree_model_filter_set_visible_func()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
+<td> a destroy function for <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#gtk-tree-model-filter-set-visible-func"
+><code class="function">gtk_tree_model_filter_set_visible_func()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_client_get_adapter_model ()">
+<a name="bluetooth-client-get-adapter-model"></a><h3>bluetooth_client_get_adapter_model ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      bluetooth_client_get_adapter_model  (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client);</pre>
+<p>
+Returns a filtered <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> with only adapters present.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_client_get_device_model ()">
+<a name="bluetooth-client-get-device-model"></a><h3>bluetooth_client_get_device_model ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      bluetooth_client_get_device_model   (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client,
+                                                         <a
+href="/usr/share/gtk-doc/html/dbus-glib/dbus-glib-DBusGProxy.html#DBusGProxy"
+>DBusGProxy</a> *adapter);</pre>
+<p>
+Returns a filtered <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> with only devices belonging to the selected adapter listed. Note that the model will follow a specific adapter, and will not follow the default-adapter when <code class="literal">NULL</code> is passed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>adapter</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/dbus-glib/dbus-glib-DBusGProxy.html#DBusGProxy"
+><span class="type">DBusGProxy</span></a> of the adapter object, or <code class="literal">NULL</code> to get the default adapter.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_client_get_device_filter_model ()">
+<a name="bluetooth-client-get-device-filter-model"></a><h3>bluetooth_client_get_device_filter_model ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+>GtkTreeModel</a> *      bluetooth_client_get_device_filter_model
+                                                        (<a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+>BluetoothClient</a> *client,
+                                                         <a
+href="/usr/share/gtk-doc/html/dbus-glib/dbus-glib-DBusGProxy.html#DBusGProxy"
+>DBusGProxy</a> *adapter,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#GtkTreeModelFilterVisibleFunc"
+>GtkTreeModelFilterVisibleFunc</a> func,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"
+>GDestroyNotify</a> destroy);</pre>
+<p>
+Returns a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> of adapters filtered using the <em class="parameter"><code>func</code></em>, <em class="parameter"><code>data</code></em> and
+<em class="parameter"><code>destroy</code></em> arguments to pass to <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#gtk-tree-model-filter-set-visible-func"
+><code class="function">gtk_tree_model_filter_set_visible_func()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-BluetoothClient.html#BluetoothClient"
+><span class="type">BluetoothClient</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>adapter</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/dbus-glib/dbus-glib-DBusGProxy.html#DBusGProxy"
+><span class="type">DBusGProxy</span></a> representing a particular adapter, or <code class="literal">NULL</code> for the default adapter.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#GtkTreeModelFilterVisibleFunc"
+><span class="type">GtkTreeModelFilterVisibleFunc</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td> user data to pass to <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#gtk-tree-model-filter-set-visible-func"
+><code class="function">gtk_tree_model_filter_set_visible_func()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
+<td> a destroy function for <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModelFilter.html#gtk-tree-model-filter-set-visible-func"
+><code class="function">gtk_tree_model_filter_set_visible_func()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkTreeModel.html"
+><span class="type">GtkTreeModel</span></a> object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_type_to_string ()">
+<a name="bluetooth-type-to-string"></a><h3>bluetooth_type_to_string ()</h3>
+<pre class="programlisting">const <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"
+>gchar</a> *       bluetooth_type_to_string            (<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"
+>guint</a> type);</pre>
+<p>
+Returns the string representation of the <em class="parameter"><code>type</code></em> passed. Do not free the return value.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a
+href="http://library.gnome.org/devel/gnome-bluetooth/unstable/gnome-bluetooth-bluetooth-enums.html#BluetoothType"
+><span class="type">BluetoothType</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a string.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_verify_address ()">
+<a name="bluetooth-verify-address"></a><h3>bluetooth_verify_address ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            bluetooth_verify_address            (const char *bdaddr);</pre>
+<p>
+Returns whether the string is a valid Bluetooth address. This does not contact the device in any way.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bdaddr</code></em> :</span></p></td>
+<td> a string representing a Bluetooth address
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the address is valid, <code class="literal">FALSE</code> if not.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bluetooth_uuid_to_string ()">
+<a name="bluetooth-uuid-to-string"></a><h3>bluetooth_uuid_to_string ()</h3>
+<pre class="programlisting">const char *        bluetooth_uuid_to_string            (const char *uuid);</pre>
+<p>
+Returns a string representing a human-readable (but not usable for display to users) version of the <em class="parameter"><code>uuid</code></em>. Do not free the return value.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uuid</code></em> :</span></p></td>
+<td> a string representing a Bluetooth UUID
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a string.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<indexdiv>
+<indexdiv><title>B</title>
+<indexentry><primaryie linkends="BluetoothCategory"><link linkend="BluetoothCategory">BluetoothCategory</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser-struct"><link linkend="BluetoothChooser-struct">BluetoothChooser</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser-selected-device-changed"><link linkend="BluetoothChooser-selected-device-changed">BluetoothChooser::selected-device-changed</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--device-category-filter"><link linkend="BluetoothChooser--device-category-filter">BluetoothChooser:device-category-filter</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--device-selected"><link linkend="BluetoothChooser--device-selected">BluetoothChooser:device-selected</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--device-service-filter"><link linkend="BluetoothChooser--device-service-filter">BluetoothChooser:device-service-filter</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--device-type-filter"><link linkend="BluetoothChooser--device-type-filter">BluetoothChooser:device-type-filter</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--has-internal-device-filter"><link linkend="BluetoothChooser--has-internal-device-filter">BluetoothChooser:has-internal-device-filter</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--show-connected"><link linkend="BluetoothChooser--show-connected">BluetoothChooser:show-connected</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--show-device-category"><link linkend="BluetoothChooser--show-device-category">BluetoothChooser:show-device-category</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--show-device-type"><link linkend="BluetoothChooser--show-device-type">BluetoothChooser:show-device-type</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--show-pairing"><link linkend="BluetoothChooser--show-pairing">BluetoothChooser:show-pairing</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--show-searching"><link linkend="BluetoothChooser--show-searching">BluetoothChooser:show-searching</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooser--title"><link linkend="BluetoothChooser--title">BluetoothChooser:title</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooserButton-struct"><link linkend="BluetoothChooserButton-struct">BluetoothChooserButton</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooserButton-chooser-created"><link linkend="BluetoothChooserButton-chooser-created">BluetoothChooserButton::chooser-created</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooserButton--device"><link linkend="BluetoothChooserButton--device">BluetoothChooserButton:device</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothChooserButton--is-available"><link linkend="BluetoothChooserButton--is-available">BluetoothChooserButton:is-available</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothClient"><link linkend="BluetoothClient">BluetoothClient</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothColumn"><link linkend="BluetoothColumn">BluetoothColumn</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BluetoothType"><link linkend="BluetoothType">BluetoothType</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-category-get-type"><link linkend="bluetooth-category-get-type">bluetooth_category_get_type</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-button-available"><link linkend="bluetooth-chooser-button-available">bluetooth_chooser_button_available</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-button-new"><link linkend="bluetooth-chooser-button-new">bluetooth_chooser_button_new</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-get-selected-device"><link linkend="bluetooth-chooser-get-selected-device">bluetooth_chooser_get_selected_device</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-get-selected-device-icon"><link linkend="bluetooth-chooser-get-selected-device-icon">bluetooth_chooser_get_selected_device_icon</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-get-selected-device-info"><link linkend="bluetooth-chooser-get-selected-device-info">bluetooth_chooser_get_selected_device_info</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-get-selected-device-is-connected"><link linkend="bluetooth-chooser-get-selected-device-is-connected">bluetooth_chooser_get_selected_device_is_connected</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-get-selected-device-name"><link linkend="bluetooth-chooser-get-selected-device-name">bluetooth_chooser_get_selected_device_name</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-get-selected-device-type"><link linkend="bluetooth-chooser-get-selected-device-type">bluetooth_chooser_get_selected_device_type</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-new"><link linkend="bluetooth-chooser-new">bluetooth_chooser_new</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-set-title"><link linkend="bluetooth-chooser-set-title">bluetooth_chooser_set_title</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-start-discovery"><link linkend="bluetooth-chooser-start-discovery">bluetooth_chooser_start_discovery</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-chooser-stop-discovery"><link linkend="bluetooth-chooser-stop-discovery">bluetooth_chooser_stop_discovery</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-client-get-adapter-model"><link linkend="bluetooth-client-get-adapter-model">bluetooth_client_get_adapter_model</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-client-get-device-filter-model"><link linkend="bluetooth-client-get-device-filter-model">bluetooth_client_get_device_filter_model</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-client-get-device-model"><link linkend="bluetooth-client-get-device-model">bluetooth_client_get_device_model</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-client-get-filter-model"><link linkend="bluetooth-client-get-filter-model">bluetooth_client_get_filter_model</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-client-get-model"><link linkend="bluetooth-client-get-model">bluetooth_client_get_model</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-client-new"><link linkend="bluetooth-client-new">bluetooth_client_new</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-column-get-type"><link linkend="bluetooth-column-get-type">bluetooth_column_get_type</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BLUETOOTH-GET-CHOOSER-CLASS--CAPS"><link linkend="BLUETOOTH-GET-CHOOSER-CLASS--CAPS">BLUETOOTH_GET_CHOOSER_CLASS</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BLUETOOTH-GET-CLIENT-CLASS--CAPS"><link linkend="BLUETOOTH-GET-CLIENT-CLASS--CAPS">BLUETOOTH_GET_CLIENT_CLASS</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-plugin-manager-cleanup"><link linkend="bluetooth-plugin-manager-cleanup">bluetooth_plugin_manager_cleanup</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-plugin-manager-device-deleted"><link linkend="bluetooth-plugin-manager-device-deleted">bluetooth_plugin_manager_device_deleted</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-plugin-manager-get-widgets"><link linkend="bluetooth-plugin-manager-get-widgets">bluetooth_plugin_manager_get_widgets</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-plugin-manager-init"><link linkend="bluetooth-plugin-manager-init">bluetooth_plugin_manager_init</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BLUETOOTH-TYPE-AUDIO--CAPS"><link linkend="BLUETOOTH-TYPE-AUDIO--CAPS">BLUETOOTH_TYPE_AUDIO</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BLUETOOTH-TYPE-CATEGORY--CAPS"><link linkend="BLUETOOTH-TYPE-CATEGORY--CAPS">BLUETOOTH_TYPE_CATEGORY</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BLUETOOTH-TYPE-COLUMN--CAPS"><link linkend="BLUETOOTH-TYPE-COLUMN--CAPS">BLUETOOTH_TYPE_COLUMN</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-type-get-type"><link linkend="bluetooth-type-get-type">bluetooth_type_get_type</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BLUETOOTH-TYPE-INPUT--CAPS"><link linkend="BLUETOOTH-TYPE-INPUT--CAPS">BLUETOOTH_TYPE_INPUT</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-type-to-string"><link linkend="bluetooth-type-to-string">bluetooth_type_to_string</link></primaryie></indexentry>
+<indexentry><primaryie linkends="BLUETOOTH-TYPE-TYPE--CAPS"><link linkend="BLUETOOTH-TYPE-TYPE--CAPS">BLUETOOTH_TYPE_TYPE</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-uuid-to-string"><link linkend="bluetooth-uuid-to-string">bluetooth_uuid_to_string</link></primaryie></indexentry>
+<indexentry><primaryie linkends="bluetooth-verify-address"><link linkend="bluetooth-verify-address">bluetooth_verify_address</link></primaryie></indexentry>
+</indexdiv>
+<indexdiv><title>G</title>
+<indexentry><primaryie linkends="GbtPlugin"><link linkend="GbtPlugin">GbtPlugin</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GbtPluginInfo"><link linkend="GbtPluginInfo">GbtPluginInfo</link></primaryie></indexentry>
+<indexentry><primaryie linkends="GBT-INIT-PLUGIN--CAPS"><link linkend="GBT-INIT-PLUGIN--CAPS">GBT_INIT_PLUGIN</link></primaryie></indexentry>
+</indexdiv>
+</indexdiv>

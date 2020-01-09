@@ -1,0 +1,51 @@
+<refentry id="gnome-bluetooth-BluetoothKillswitch">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnome-bluetooth-BluetoothKillswitch.top_of_page">BluetoothKillswitch</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>BluetoothKillswitch</refname>
+<refpurpose>a Bluetooth killswitch object</refpurpose>
+</refnamediv>
+<refsect1 id="gnome-bluetooth-BluetoothKillswitch.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="gnome-bluetooth-BluetoothKillswitch.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;bluetooth-killswitch.h&gt;
+
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="gnome-bluetooth-BluetoothKillswitch.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+An object to manipulate Bluetooth killswitches.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="gnome-bluetooth-BluetoothKillswitch.details" role="details">
+<title role="details.title">Details</title>
+
+</refsect1>
+
+
+
+
+</refentry>

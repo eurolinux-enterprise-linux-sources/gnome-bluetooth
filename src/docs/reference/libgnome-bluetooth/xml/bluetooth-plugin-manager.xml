@@ -1,0 +1,107 @@
+<refentry id="gnome-bluetooth-bluetooth-plugin-manager">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnome-bluetooth-bluetooth-plugin-manager.top_of_page">bluetooth-plugin-manager</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>bluetooth-plugin-manager</refname>
+<refpurpose>Bluetooth plug-in manager</refpurpose>
+</refnamediv>
+<refsect1 id="gnome-bluetooth-bluetooth-plugin-manager.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="gnome-bluetooth-bluetooth-plugin-manager.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;bluetooth-plugin-manager.h&gt;
+
+<link linkend="gboolean">gboolean</link>            <link linkend="bluetooth-plugin-manager-init">bluetooth_plugin_manager_init</link>       (void);
+<link linkend="void">void</link>                <link linkend="bluetooth-plugin-manager-cleanup">bluetooth_plugin_manager_cleanup</link>    (void);
+<link linkend="GList">GList</link> *             <link linkend="bluetooth-plugin-manager-get-widgets">bluetooth_plugin_manager_get_widgets</link>
+                                                        (const <link linkend="char">char</link> *bdaddr,
+                                                         const <link linkend="char">char</link> **uuids);
+<link linkend="void">void</link>                <link linkend="bluetooth-plugin-manager-device-deleted">bluetooth_plugin_manager_device_deleted</link>
+                                                        (const <link linkend="char">char</link> *bdaddr);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="gnome-bluetooth-bluetooth-plugin-manager.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+The plugin manager is used to extend set up wizards, or preferences.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="gnome-bluetooth-bluetooth-plugin-manager.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="bluetooth-plugin-manager-init" role="function">
+<title>bluetooth_plugin_manager_init ()</title>
+<indexterm zone="bluetooth-plugin-manager-init"><primary sortas="bluetooth_plugin_manager_init">bluetooth_plugin_manager_init</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            bluetooth_plugin_manager_init       (void);</programlisting>
+<para>
+Initialise the plugin manager for Bluetooth plugins.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="TRUE--CAPS"><literal>TRUE</literal></link> if the initialisation succedeed, <link linkend="FALSE--CAPS"><literal>FALSE</literal></link> otherwise.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-plugin-manager-cleanup" role="function">
+<title>bluetooth_plugin_manager_cleanup ()</title>
+<indexterm zone="bluetooth-plugin-manager-cleanup"><primary sortas="bluetooth_plugin_manager_cleanup">bluetooth_plugin_manager_cleanup</primary></indexterm><programlisting><link linkend="void">void</link>                bluetooth_plugin_manager_cleanup    (void);</programlisting>
+<para>
+Free all the resources used by the Bluetooth plugins.</para>
+<para>
+</para></refsect2>
+<refsect2 id="bluetooth-plugin-manager-get-widgets" role="function">
+<title>bluetooth_plugin_manager_get_widgets ()</title>
+<indexterm zone="bluetooth-plugin-manager-get-widgets"><primary sortas="bluetooth_plugin_manager_get_widgets">bluetooth_plugin_manager_get_widgets</primary></indexterm><programlisting><link linkend="GList">GList</link> *             bluetooth_plugin_manager_get_widgets
+                                                        (const <link linkend="char">char</link> *bdaddr,
+                                                         const <link linkend="char">char</link> **uuids);</programlisting>
+<para>
+Returns a list of widgets suitable for configuring the device
+represented by <parameter>address</parameter>, for the services listed in <parameter>uuids</parameter>.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>bdaddr</parameter>&#160;:</term>
+<listitem><simpara> a Bluetooth address representing a device
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>uuids</parameter>&#160;:</term>
+<listitem><simpara> an array of UUIDs supported by the device.
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="GList"><type>GList</type></link> of <link linkend="GtkWidget"><type>GtkWidget</type></link>, or <link linkend="NULL--CAPS"><literal>NULL</literal></link> is none.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-plugin-manager-device-deleted" role="function">
+<title>bluetooth_plugin_manager_device_deleted ()</title>
+<indexterm zone="bluetooth-plugin-manager-device-deleted"><primary sortas="bluetooth_plugin_manager_device_deleted">bluetooth_plugin_manager_device_deleted</primary></indexterm><programlisting><link linkend="void">void</link>                bluetooth_plugin_manager_device_deleted
+                                                        (const <link linkend="char">char</link> *bdaddr);</programlisting>
+<para>
+Removes all existing configuration for the device, as
+supported by the plug-ins.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>bdaddr</parameter>&#160;:</term>
+<listitem><simpara> a Bluetooth address representing a device
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

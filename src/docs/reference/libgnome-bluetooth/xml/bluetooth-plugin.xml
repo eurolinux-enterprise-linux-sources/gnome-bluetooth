@@ -1,0 +1,121 @@
+<refentry id="gnome-bluetooth-bluetooth-plugin">
+<refmeta>
+<refentrytitle role="top_of_page" id="gnome-bluetooth-bluetooth-plugin.top_of_page">bluetooth-plugin</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>bluetooth-plugin</refname>
+<refpurpose>Bluetooth plug-in</refpurpose>
+</refnamediv>
+<refsect1 id="gnome-bluetooth-bluetooth-plugin.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="gnome-bluetooth-bluetooth-plugin.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;bluetooth-plugin.h&gt;
+
+                    <link linkend="GbtPluginInfo">GbtPluginInfo</link>;
+                    <link linkend="GbtPlugin">GbtPlugin</link>;
+#define             <link linkend="GBT-INIT-PLUGIN--CAPS">GBT_INIT_PLUGIN</link>                     (plugininfo)
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="gnome-bluetooth-bluetooth-plugin.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+Plug-ins can be used to extend set up wizards and preferences.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="gnome-bluetooth-bluetooth-plugin.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="GbtPluginInfo" role="struct">
+<title>GbtPluginInfo</title>
+<indexterm zone="GbtPluginInfo"><primary sortas="GbtPluginInfo">GbtPluginInfo</primary></indexterm><programlisting>typedef struct {
+	const char                         *id;
+	gboolean (* has_config_widget)     (const char *bdaddr, const char **uuids);
+	GtkWidget * (* get_config_widgets) (const char *bdaddr, const char **uuids);
+	void (* device_removed)            (const char *bdaddr);
+} GbtPluginInfo;
+</programlisting>
+<para>
+A structure representing a gnome-bluetooth wizard and properties plugin. You should also call <link linkend="GBT-INIT-PLUGIN--CAPS"><function>GBT_INIT_PLUGIN()</function></link> on the plugin structure to export it.</para>
+<para>
+</para><variablelist role="struct">
+<varlistentry>
+<term>const&#160;<link linkend="char">char</link>&#160;*<structfield>id</structfield>;</term>
+<listitem><simpara> A unique ID representing the plugin
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>has_config_widget</structfield>&#160;()</term>
+<listitem><simpara> Whether the passed Bluetooth address and UUIDs would have a configuration widget
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>get_config_widgets</structfield>&#160;()</term>
+<listitem><simpara> Returns the configuration widget for the passed Bluetooth address and UUIDs
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><structfield>device_removed</structfield>&#160;()</term>
+<listitem><simpara> Remove any configuration relating to the Bluetooth address passed
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="GbtPlugin" role="struct">
+<title>GbtPlugin</title>
+<indexterm zone="GbtPlugin"><primary sortas="GbtPlugin">GbtPlugin</primary></indexterm><programlisting>typedef struct {
+	GModule *module;
+	GbtPluginInfo *info;
+} GbtPlugin;
+</programlisting>
+<para>
+A structure as used in gnome-bluetooth.</para>
+<para>
+</para><variablelist role="struct">
+<varlistentry>
+<term><link linkend="GModule">GModule</link>&#160;*<structfield>module</structfield>;</term>
+<listitem><simpara> the <link linkend="GModule"><type>GModule</type></link> for the opened shared library
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><link linkend="GbtPluginInfo">GbtPluginInfo</link>&#160;*<structfield>info</structfield>;</term>
+<listitem><simpara> a <link linkend="GbtPluginInfo"><type>GbtPluginInfo</type></link> structure
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2 id="GBT-INIT-PLUGIN--CAPS" role="macro">
+<title>GBT_INIT_PLUGIN()</title>
+<indexterm zone="GBT-INIT-PLUGIN--CAPS"><primary sortas="GBT_INIT_PLUGIN">GBT_INIT_PLUGIN</primary></indexterm><programlisting>#define             GBT_INIT_PLUGIN(plugininfo)</programlisting>
+<para>
+Call this on an <link linkend="GbtPluginInfo"><type>GbtPluginInfo</type></link> structure to make it available to gnome-bluetooth.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugininfo</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="GbtPluginInfo"><type>GbtPluginInfo</type></link> structure representing the plugin
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

@@ -1,0 +1,157 @@
+<refentry id="BluetoothChooserButton">
+<refmeta>
+<refentrytitle role="top_of_page" id="BluetoothChooserButton.top_of_page">BluetoothChooserButton</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>GNOME-BLUETOOTH Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>BluetoothChooserButton</refname>
+<refpurpose>a Bluetooth chooser button</refpurpose>
+</refnamediv>
+<refsect1 id="BluetoothChooserButton.stability-level">
+<title>Stability Level</title>
+Stable, unless otherwise indicated
+</refsect1>
+
+<refsynopsisdiv id="BluetoothChooserButton.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+
+#include &lt;bluetooth-plugin.h&gt;
+
+                    <link linkend="BluetoothChooserButton-struct">BluetoothChooserButton</link>;
+<link linkend="GtkWidget">GtkWidget</link> *         <link linkend="bluetooth-chooser-button-new">bluetooth_chooser_button_new</link>        (void);
+<link linkend="gboolean">gboolean</link>            <link linkend="bluetooth-chooser-button-available">bluetooth_chooser_button_available</link>  (<link linkend="BluetoothChooserButton">BluetoothChooserButton</link> *button);
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="BluetoothChooserButton.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="GtkObject">GtkObject</link>
+               +----<link linkend="GtkWidget">GtkWidget</link>
+                     +----<link linkend="GtkContainer">GtkContainer</link>
+                           +----<link linkend="GtkBin">GtkBin</link>
+                                 +----<link linkend="GtkButton">GtkButton</link>
+                                       +----BluetoothChooserButton
+</synopsis>
+</refsect1>
+
+
+
+<refsect1 id="BluetoothChooserButton.implemented-interfaces" role="impl_interfaces">
+<title role="impl_interfaces.title">Implemented Interfaces</title>
+<para>
+BluetoothChooserButton implements
+ <link linkend="GtkBuildable">GtkBuildable</link>,  <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="GtkActivatable">GtkActivatable</link>.</para>
+</refsect1>
+
+
+<refsect1 id="BluetoothChooserButton.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="BluetoothChooserButton--device">device</link>&quot;                   <link linkend="gchar">gchar</link>*                : Read / Write
+  &quot;<link linkend="BluetoothChooserButton--is-available">is-available</link>&quot;             <link linkend="gboolean">gboolean</link>              : Read
+</synopsis>
+</refsect1>
+
+<refsect1 id="BluetoothChooserButton.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="BluetoothChooserButton-chooser-created">chooser-created</link>&quot;                                : Run Last
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="BluetoothChooserButton.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+A button used to select Bluetooth devices which will pop-up a
+<link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget inside a dialogue when clicked.</para>
+<para>
+</para>
+</refsect1>
+
+<refsect1 id="BluetoothChooserButton.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="BluetoothChooserButton-struct" role="struct">
+<title>BluetoothChooserButton</title>
+<indexterm zone="BluetoothChooserButton-struct"><primary sortas="BluetoothChooserButton">BluetoothChooserButton</primary></indexterm><programlisting>typedef struct _BluetoothChooserButton BluetoothChooserButton;</programlisting>
+<para>
+</para></refsect2>
+<refsect2 id="bluetooth-chooser-button-new" role="function">
+<title>bluetooth_chooser_button_new ()</title>
+<indexterm zone="bluetooth-chooser-button-new"><primary sortas="bluetooth_chooser_button_new">bluetooth_chooser_button_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link> *         bluetooth_chooser_button_new        (void);</programlisting>
+<para>
+Returns a new <link linkend="BluetoothChooserButton"><type>BluetoothChooserButton</type></link> widget.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> a <link linkend="BluetoothChooserButton"><type>BluetoothChooserButton</type></link> widget.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="bluetooth-chooser-button-available" role="function">
+<title>bluetooth_chooser_button_available ()</title>
+<indexterm zone="bluetooth-chooser-button-available"><primary sortas="bluetooth_chooser_button_available">bluetooth_chooser_button_available</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            bluetooth_chooser_button_available  (<link linkend="BluetoothChooserButton">BluetoothChooserButton</link> *button);</programlisting>
+<para>
+Returns whether there is a powered Bluetooth adapter.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>button</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooserButton"><type>BluetoothChooserButton</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&#160;:</term><listitem><simpara> <link linkend="TRUE--CAPS"><literal>TRUE</literal></link> if there is a powered Bluetooth adapter available, and the button should be sensitive.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1 id="BluetoothChooserButton.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="BluetoothChooserButton--device" role="property"><title>The <literal>&quot;device&quot;</literal> property</title>
+<indexterm zone="BluetoothChooserButton--device"><primary sortas="BluetoothChooserButton:device">BluetoothChooserButton:device</primary></indexterm><programlisting>  &quot;device&quot;                   <link linkend="gchar">gchar</link>*                : Read / Write</programlisting>
+<para>
+The Bluetooth address of the selected device or <link linkend="NULL--CAPS"><literal>NULL</literal></link></para>
+<para>
+</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="BluetoothChooserButton--is-available" role="property"><title>The <literal>&quot;is-available&quot;</literal> property</title>
+<indexterm zone="BluetoothChooserButton--is-available"><primary sortas="BluetoothChooserButton:is-available">BluetoothChooserButton:is-available</primary></indexterm><programlisting>  &quot;is-available&quot;             <link linkend="gboolean">gboolean</link>              : Read</programlisting>
+<para>
+<link linkend="TRUE--CAPS"><literal>TRUE</literal></link> if there is a powered Bluetooth adapter available.
+</para>
+<para>
+See also: <link linkend="bluetooth-chooser-button-available"><function>bluetooth_chooser_button_available()</function></link></para>
+<para>
+</para><para>Default value: TRUE</para>
+</refsect2>
+</refsect1>
+
+<refsect1 id="BluetoothChooserButton.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="BluetoothChooserButton-chooser-created" role="signal"><title>The <literal>&quot;chooser-created&quot;</literal> signal</title>
+<indexterm zone="BluetoothChooserButton-chooser-created"><primary sortas="BluetoothChooserButton::chooser-created">BluetoothChooserButton::chooser-created</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="BluetoothChooserButton">BluetoothChooserButton</link> *self,
+                                                        <link linkend="GObject">GObject</link>                *chooser,
+                                                        <link linkend="gpointer">gpointer</link>                user_data)      : Run Last</programlisting>
+<para>
+The signal is sent when a popup dialogue is created for the user to select
+a device. This signal allows you to change the configuration and filtering
+of the tree from its defaults.</para>
+<para>
+</para><variablelist role="params">
+<varlistentry><term><parameter>self</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooserButton"><type>BluetoothChooserButton</type></link> widget
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>chooser</parameter>&#160;:</term>
+<listitem><simpara> a <link linkend="BluetoothChooser"><type>BluetoothChooser</type></link> widget
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&#160;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>

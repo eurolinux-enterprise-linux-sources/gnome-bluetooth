@@ -1,0 +1,548 @@
+<?xml version="1.0"?>
+<!-- This file was automatically generated from C sources - DO NOT EDIT!
+To affect the contents of this file, edit the original C definitions,
+and/or use gtk-doc annotations.  -->
+<repository version="1.0"
+            xmlns="http://www.gtk.org/introspection/core/1.0"
+            xmlns:c="http://www.gtk.org/introspection/c/1.0"
+            xmlns:glib="http://www.gtk.org/introspection/glib/1.0">
+  <include name="Atk" version="1.0"/>
+  <include name="DBusGLib" version="1.0"/>
+  <include name="GLib" version="2.0"/>
+  <include name="GModule" version="2.0"/>
+  <include name="GObject" version="2.0"/>
+  <include name="Gdk" version="2.0"/>
+  <include name="GdkPixbuf" version="2.0"/>
+  <include name="Gio" version="2.0"/>
+  <include name="Gtk" version="2.0"/>
+  <include name="Pango" version="1.0"/>
+  <include name="cairo" version="1.0"/>
+  <include name="xlib" version="2.0"/>
+  <package name="dbus-glib-1"/>
+  <package name="gmodule-2.0"/>
+  <package name="gobject-2.0"/>
+  <package name="gtk+-2.0"/>
+  <namespace name="GnomeBluetooth"
+             version="1.0"
+             shared-library="libgnome-bluetooth.so.7"
+             c:prefix="GnomeBluetooth">
+    <constant name="BLUETOOTH_TYPE_AUDIO" value="0">
+      <type name="int"/>
+    </constant>
+    <constant name="BLUETOOTH_TYPE_INPUT" value="0">
+      <type name="int"/>
+    </constant>
+    <constant name="BLUETOOTH_TYPE_NUM_TYPES" value="14">
+      <type name="int"/>
+    </constant>
+    <enumeration name="BluetoothCategory"
+                 doc="The category of a Bluetooth devices."
+                 c:type="BluetoothCategory">
+      <member name="all" value="0" c:identifier="BLUETOOTH_CATEGORY_ALL"/>
+      <member name="paired"
+              value="1"
+              c:identifier="BLUETOOTH_CATEGORY_PAIRED"/>
+      <member name="trusted"
+              value="2"
+              c:identifier="BLUETOOTH_CATEGORY_TRUSTED"/>
+      <member name="not_paired_or_trusted"
+              value="3"
+              c:identifier="BLUETOOTH_CATEGORY_NOT_PAIRED_OR_TRUSTED"/>
+      <member name="paired_or_trusted"
+              value="4"
+              c:identifier="BLUETOOTH_CATEGORY_PAIRED_OR_TRUSTED"/>
+      <member name="num_categories"
+              value="5"
+              c:identifier="BLUETOOTH_CATEGORY_NUM_CATEGORIES"/>
+    </enumeration>
+    <class name="BluetoothChooser"
+           c:type="BluetoothChooser"
+           parent="Gtk.VBox"
+           glib:type-name="BluetoothChooser"
+           glib:get-type="bluetooth_chooser_get_type"
+           glib:type-struct="BluetoothChooserClass">
+      <implements name="Atk.ImplementorIface"/>
+      <implements name="Gtk.Buildable"/>
+      <implements name="Gtk.Orientable"/>
+      <constructor name="new" c:identifier="bluetooth_chooser_new">
+        <return-value transfer-ownership="full">
+          <type name="BluetoothChooser" c:type="GtkWidget*"/>
+        </return-value>
+        <parameters>
+          <parameter name="title" transfer-ownership="none">
+            <type name="utf8" c:type="char*"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="set_title" c:identifier="bluetooth_chooser_set_title">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="title" transfer-ownership="none">
+            <type name="utf8" c:type="char*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_selected_device"
+              c:identifier="bluetooth_chooser_get_selected_device">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="char*"/>
+        </return-value>
+      </method>
+      <method name="get_selected_device_info"
+              c:identifier="bluetooth_chooser_get_selected_device_info">
+        <return-value transfer-ownership="none">
+          <type name="boolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="field" transfer-ownership="none">
+            <type name="utf8" c:type="char*"/>
+          </parameter>
+          <parameter name="value" transfer-ownership="none">
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_selected_device_name"
+              c:identifier="bluetooth_chooser_get_selected_device_name">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="char*"/>
+        </return-value>
+      </method>
+      <method name="get_selected_device_icon"
+              c:identifier="bluetooth_chooser_get_selected_device_icon">
+        <return-value transfer-ownership="full">
+          <type name="utf8" c:type="char*"/>
+        </return-value>
+      </method>
+      <method name="get_selected_device_type"
+              c:identifier="bluetooth_chooser_get_selected_device_type">
+        <return-value transfer-ownership="full">
+          <type name="BluetoothType" c:type="BluetoothType"/>
+        </return-value>
+      </method>
+      <method name="get_selected_device_is_connected"
+              c:identifier="bluetooth_chooser_get_selected_device_is_connected">
+        <return-value transfer-ownership="none">
+          <type name="boolean" c:type="gboolean"/>
+        </return-value>
+      </method>
+      <method name="start_discovery"
+              c:identifier="bluetooth_chooser_start_discovery">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </method>
+      <method name="stop_discovery"
+              c:identifier="bluetooth_chooser_stop_discovery">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+      </method>
+      <property name="title" readable="0" writable="1">
+        <type name="utf8" c:type="gchararray"/>
+      </property>
+      <property name="device-selected">
+        <type name="utf8" c:type="gchararray"/>
+      </property>
+      <property name="show-pairing" writable="1">
+        <type name="boolean" c:type="gboolean"/>
+      </property>
+      <property name="show-connected" writable="1">
+        <type name="boolean" c:type="gboolean"/>
+      </property>
+      <property name="show-searching" writable="1">
+        <type name="boolean" c:type="gboolean"/>
+      </property>
+      <property name="show-device-type" writable="1">
+        <type name="boolean" c:type="gboolean"/>
+      </property>
+      <property name="show-device-category" writable="1">
+        <type name="boolean" c:type="gboolean"/>
+      </property>
+      <property name="device-type-filter" writable="1">
+        <type name="int" c:type="gint"/>
+      </property>
+      <property name="device-category-filter" writable="1">
+        <type name="BluetoothCategory" c:type="BluetoothCategory"/>
+      </property>
+      <property name="device-service-filter" readable="0" writable="1">
+        <type name="utf8" c:type="gchararray"/>
+      </property>
+      <field name="parent">
+        <type name="Gtk.VBox" c:type="GtkVBox"/>
+      </field>
+      <glib:signal name="selected-device-changed">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="object" transfer-ownership="none">
+            <type name="utf8" c:type="gchararray"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+    </class>
+    <class name="BluetoothChooserButton"
+           c:type="BluetoothChooserButton"
+           parent="Gtk.Button"
+           glib:type-name="BluetoothChooserButton"
+           glib:get-type="bluetooth_chooser_button_get_type"
+           glib:type-struct="BluetoothChooserButtonClass">
+      <implements name="Atk.ImplementorIface"/>
+      <implements name="Gtk.Buildable"/>
+      <implements name="Gtk.Activatable"/>
+      <constructor name="new" c:identifier="bluetooth_chooser_button_new">
+        <return-value transfer-ownership="full">
+          <type name="BluetoothChooserButton" c:type="GtkWidget*"/>
+        </return-value>
+      </constructor>
+      <method name="available"
+              c:identifier="bluetooth_chooser_button_available">
+        <return-value transfer-ownership="none">
+          <type name="boolean" c:type="gboolean"/>
+        </return-value>
+      </method>
+      <property name="device" writable="1">
+        <type name="utf8" c:type="gchararray"/>
+      </property>
+      <property name="is-available">
+        <type name="boolean" c:type="gboolean"/>
+      </property>
+      <glib:signal name="chooser-created">
+        <return-value transfer-ownership="full">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="object" transfer-ownership="none">
+            <type name="GObject.Object" c:type="GObject"/>
+          </parameter>
+        </parameters>
+      </glib:signal>
+    </class>
+    <record name="BluetoothChooserButtonClass"
+            c:type="_BluetoothChooserButtonClass"
+            glib:is-gtype-struct-for="BluetoothChooserButton">
+      <field name="parent_class">
+        <type name="Gtk.ButtonClass" c:type="GtkButtonClass"/>
+      </field>
+      <callback name="chooser_created" c:type="chooser_created">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="self" transfer-ownership="none">
+            <type name="BluetoothChooserButton"
+                  c:type="BluetoothChooserButton*"/>
+          </parameter>
+          <parameter name="chooser" transfer-ownership="none">
+            <type name="Gtk.Widget" c:type="GtkWidget*"/>
+          </parameter>
+        </parameters>
+      </callback>
+    </record>
+    <record name="BluetoothChooserClass"
+            c:type="BluetoothChooserClass"
+            glib:is-gtype-struct-for="BluetoothChooser">
+      <field name="parent_class">
+        <type name="Gtk.VBoxClass" c:type="GtkVBoxClass"/>
+      </field>
+      <callback name="selected_device_changed"
+                c:type="selected_device_changed">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="chooser" transfer-ownership="none">
+            <type name="BluetoothChooser" c:type="BluetoothChooser*"/>
+          </parameter>
+          <parameter name="address" transfer-ownership="none">
+            <type name="utf8" c:type="char*"/>
+          </parameter>
+        </parameters>
+      </callback>
+    </record>
+    <class name="BluetoothClient"
+           c:type="BluetoothClient"
+           parent="GObject.Object"
+           glib:type-name="BluetoothClient"
+           glib:get-type="bluetooth_client_get_type"
+           glib:type-struct="BluetoothClientClass">
+      <constructor name="new" c:identifier="bluetooth_client_new">
+        <return-value transfer-ownership="full">
+          <type name="BluetoothClient" c:type="BluetoothClient*"/>
+        </return-value>
+      </constructor>
+      <method name="get_model" c:identifier="bluetooth_client_get_model">
+        <return-value transfer-ownership="full">
+          <type name="Gtk.TreeModel" c:type="GtkTreeModel*"/>
+        </return-value>
+      </method>
+      <method name="get_filter_model"
+              c:identifier="bluetooth_client_get_filter_model">
+        <return-value transfer-ownership="full">
+          <type name="Gtk.TreeModel" c:type="GtkTreeModel*"/>
+        </return-value>
+        <parameters>
+          <parameter name="func" transfer-ownership="none">
+            <type name="Gtk.TreeModelFilterVisibleFunc"
+                  c:type="GtkTreeModelFilterVisibleFunc"/>
+          </parameter>
+          <parameter name="data" transfer-ownership="none">
+            <type name="any" c:type="gpointer"/>
+          </parameter>
+          <parameter name="destroy" transfer-ownership="none">
+            <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_adapter_model"
+              c:identifier="bluetooth_client_get_adapter_model">
+        <return-value transfer-ownership="full">
+          <type name="Gtk.TreeModel" c:type="GtkTreeModel*"/>
+        </return-value>
+      </method>
+      <method name="get_device_model"
+              c:identifier="bluetooth_client_get_device_model">
+        <return-value transfer-ownership="full">
+          <type name="Gtk.TreeModel" c:type="GtkTreeModel*"/>
+        </return-value>
+        <parameters>
+          <parameter name="adapter" transfer-ownership="none">
+            <type name="DBusGLib.Proxy" c:type="DBusGProxy*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="get_device_filter_model"
+              c:identifier="bluetooth_client_get_device_filter_model">
+        <return-value transfer-ownership="full">
+          <type name="Gtk.TreeModel" c:type="GtkTreeModel*"/>
+        </return-value>
+        <parameters>
+          <parameter name="adapter" transfer-ownership="none">
+            <type name="DBusGLib.Proxy" c:type="DBusGProxy*"/>
+          </parameter>
+          <parameter name="func" transfer-ownership="none">
+            <type name="Gtk.TreeModelFilterVisibleFunc"
+                  c:type="GtkTreeModelFilterVisibleFunc"/>
+          </parameter>
+          <parameter name="data" transfer-ownership="none">
+            <type name="any" c:type="gpointer"/>
+          </parameter>
+          <parameter name="destroy" transfer-ownership="none">
+            <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
+          </parameter>
+        </parameters>
+      </method>
+      <property name="default-adapter">
+        <type name="utf8" c:type="gchararray"/>
+      </property>
+      <property name="default-adapter-powered">
+        <type name="boolean" c:type="gboolean"/>
+      </property>
+      <field name="parent">
+        <type name="GObject.Object" c:type="GObject"/>
+      </field>
+    </class>
+    <record name="BluetoothClientClass"
+            c:type="BluetoothClientClass"
+            glib:is-gtype-struct-for="BluetoothClient">
+      <field name="parent_class">
+        <type name="GObject.ObjectClass" c:type="GObjectClass"/>
+      </field>
+    </record>
+    <enumeration name="BluetoothColumn"
+                 doc="A column identifier to pass to bluetooth_chooser_get_selected_device_info()."
+                 c:type="BluetoothColumn">
+      <member name="bluetooth_column_proxy"
+              value="0"
+              c:identifier="BLUETOOTH_COLUMN_PROXY"/>
+      <member name="bluetooth_column_address"
+              value="1"
+              c:identifier="BLUETOOTH_COLUMN_ADDRESS"/>
+      <member name="bluetooth_column_alias"
+              value="2"
+              c:identifier="BLUETOOTH_COLUMN_ALIAS"/>
+      <member name="bluetooth_column_name"
+              value="3"
+              c:identifier="BLUETOOTH_COLUMN_NAME"/>
+      <member name="bluetooth_column_type"
+              value="4"
+              c:identifier="BLUETOOTH_COLUMN_TYPE"/>
+      <member name="bluetooth_column_icon"
+              value="5"
+              c:identifier="BLUETOOTH_COLUMN_ICON"/>
+      <member name="bluetooth_column_rssi"
+              value="6"
+              c:identifier="BLUETOOTH_COLUMN_RSSI"/>
+      <member name="bluetooth_column_default"
+              value="7"
+              c:identifier="BLUETOOTH_COLUMN_DEFAULT"/>
+      <member name="bluetooth_column_paired"
+              value="8"
+              c:identifier="BLUETOOTH_COLUMN_PAIRED"/>
+      <member name="bluetooth_column_trusted"
+              value="9"
+              c:identifier="BLUETOOTH_COLUMN_TRUSTED"/>
+      <member name="bluetooth_column_connected"
+              value="10"
+              c:identifier="BLUETOOTH_COLUMN_CONNECTED"/>
+      <member name="bluetooth_column_discovering"
+              value="11"
+              c:identifier="BLUETOOTH_COLUMN_DISCOVERING"/>
+      <member name="bluetooth_column_legacypairing"
+              value="12"
+              c:identifier="BLUETOOTH_COLUMN_LEGACYPAIRING"/>
+      <member name="bluetooth_column_powered"
+              value="13"
+              c:identifier="BLUETOOTH_COLUMN_POWERED"/>
+      <member name="bluetooth_column_services"
+              value="14"
+              c:identifier="BLUETOOTH_COLUMN_SERVICES"/>
+      <member name="bluetooth_column_uuids"
+              value="15"
+              c:identifier="BLUETOOTH_COLUMN_UUIDS"/>
+      <member name="bluetooth_num_columns"
+              value="16"
+              c:identifier="_BLUETOOTH_NUM_COLUMNS"/>
+    </enumeration>
+    <enumeration name="BluetoothStatus"
+                 doc="The connection status of a service on a particular device. Note that @BLUETOOTH_STATUS_CONNECTING and @BLUETOOTH_STATUS_PLAYING might not be available for all services."
+                 c:type="BluetoothStatus">
+      <member name="invalid"
+              value="0"
+              c:identifier="BLUETOOTH_STATUS_INVALID"/>
+      <member name="disconnected"
+              value="1"
+              c:identifier="BLUETOOTH_STATUS_DISCONNECTED"/>
+      <member name="connected"
+              value="2"
+              c:identifier="BLUETOOTH_STATUS_CONNECTED"/>
+      <member name="connecting"
+              value="3"
+              c:identifier="BLUETOOTH_STATUS_CONNECTING"/>
+      <member name="playing"
+              value="4"
+              c:identifier="BLUETOOTH_STATUS_PLAYING"/>
+    </enumeration>
+    <bitfield name="BluetoothType"
+              doc="The type of a Bluetooth device. See also %BLUETOOTH_TYPE_INPUT and %BLUETOOTH_TYPE_AUDIO"
+              c:type="BluetoothType">
+      <member name="any" value="1" c:identifier="BLUETOOTH_TYPE_ANY"/>
+      <member name="phone" value="2" c:identifier="BLUETOOTH_TYPE_PHONE"/>
+      <member name="modem" value="4" c:identifier="BLUETOOTH_TYPE_MODEM"/>
+      <member name="computer"
+              value="8"
+              c:identifier="BLUETOOTH_TYPE_COMPUTER"/>
+      <member name="network" value="16" c:identifier="BLUETOOTH_TYPE_NETWORK"/>
+      <member name="headset" value="32" c:identifier="BLUETOOTH_TYPE_HEADSET"/>
+      <member name="headphones"
+              value="64"
+              c:identifier="BLUETOOTH_TYPE_HEADPHONES"/>
+      <member name="other_audio"
+              value="128"
+              c:identifier="BLUETOOTH_TYPE_OTHER_AUDIO"/>
+      <member name="keyboard"
+              value="256"
+              c:identifier="BLUETOOTH_TYPE_KEYBOARD"/>
+      <member name="mouse" value="512" c:identifier="BLUETOOTH_TYPE_MOUSE"/>
+      <member name="camera" value="1024" c:identifier="BLUETOOTH_TYPE_CAMERA"/>
+      <member name="printer"
+              value="2048"
+              c:identifier="BLUETOOTH_TYPE_PRINTER"/>
+      <member name="joypad" value="4096" c:identifier="BLUETOOTH_TYPE_JOYPAD"/>
+      <member name="tablet" value="8192" c:identifier="BLUETOOTH_TYPE_TABLET"/>
+    </bitfield>
+    <record name="GbtPlugin"
+            c:type="GbtPlugin"
+            doc="A structure as used in gnome-bluetooth.">
+      <field name="module" writable="1">
+        <type name="GModule.Module" c:type="GModule*"/>
+      </field>
+      <field name="info" writable="1">
+        <type name="GbtPluginInfo" c:type="GbtPluginInfo*"/>
+      </field>
+    </record>
+    <record name="GbtPluginInfo"
+            c:type="GbtPluginInfo"
+            doc="A structure representing a gnome-bluetooth wizard and properties plugin. You should also call GBT_INIT_PLUGIN() on the plugin structure to export it.">
+      <field name="id" writable="1">
+        <type name="utf8" c:type="char*"/>
+      </field>
+      <callback name="has_config_widget" c:type="has_config_widget">
+        <return-value transfer-ownership="none">
+          <type name="boolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <parameter name="bdaddr" transfer-ownership="none">
+            <type name="utf8" c:type="char*"/>
+          </parameter>
+          <parameter name="uuids" transfer-ownership="none">
+            <array c:type="char**">
+              <type name="utf8"/>
+            </array>
+          </parameter>
+        </parameters>
+      </callback>
+      <callback name="get_config_widgets" c:type="get_config_widgets">
+        <return-value transfer-ownership="full">
+          <type name="Gtk.Widget" c:type="GtkWidget*"/>
+        </return-value>
+        <parameters>
+          <parameter name="bdaddr" transfer-ownership="none">
+            <type name="utf8" c:type="char*"/>
+          </parameter>
+          <parameter name="uuids" transfer-ownership="none">
+            <array c:type="char**">
+              <type name="utf8"/>
+            </array>
+          </parameter>
+        </parameters>
+      </callback>
+      <callback name="device_removed" c:type="device_removed">
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <parameter name="bdaddr" transfer-ownership="none">
+            <type name="utf8" c:type="char*"/>
+          </parameter>
+        </parameters>
+      </callback>
+    </record>
+    <function name="bluetooth_type_to_string"
+              c:identifier="bluetooth_type_to_string">
+      <return-value transfer-ownership="none">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <type name="uint" c:type="guint"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="bluetooth_uuid_to_string"
+              c:identifier="bluetooth_uuid_to_string">
+      <return-value transfer-ownership="none">
+        <type name="utf8" c:type="char*"/>
+      </return-value>
+      <parameters>
+        <parameter name="uuid" transfer-ownership="none">
+          <type name="utf8" c:type="char*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="bluetooth_verify_address"
+              c:identifier="bluetooth_verify_address">
+      <return-value transfer-ownership="none">
+        <type name="boolean" c:type="gboolean"/>
+      </return-value>
+      <parameters>
+        <parameter name="bdaddr" transfer-ownership="none">
+          <type name="utf8" c:type="char*"/>
+        </parameter>
+      </parameters>
+    </function>
+  </namespace>
+</repository>
