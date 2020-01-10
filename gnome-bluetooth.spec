@@ -1,7 +1,7 @@
 Name:		gnome-bluetooth
 Epoch:		1
 Version:	3.8.2.1
-Release:	1%{?dist}
+Release:	3%{?dist}
 Summary:	Bluetooth graphical utilities
 
 Group:		Applications/Communications
@@ -9,6 +9,10 @@ License:	GPLv2+
 URL:		http://live.gnome.org/GnomeBluetooth
 Source0:	http://download.gnome.org/sources/gnome-bluetooth/3.8/gnome-bluetooth-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
+
+Patch0:		0001-lib-Fix-a-few-memory-leaks.patch
+Patch1:		0002-lib-Fix-cancellation-handling.patch
+Patch2:		0003-lib-Fix-extraneous-reference-that-could-lead-to-cras.patch
 
 %if 0%{?rhel}
 ExcludeArch:	s390 s390x
@@ -68,6 +72,9 @@ for writing applications that require a Bluetooth device selection widget.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %configure --disable-desktop-update --disable-icon-update --disable-schemas-compile --disable-compile-warnings
@@ -142,6 +149,13 @@ fi
 %{_datadir}/gtk-doc
 
 %changelog
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1:3.8.2.1-3
+- Mass rebuild 2013-12-27
+
+* Fri Nov 22 2013 Bastien Nocera <bnocera@redhat.com> 3.8.2.1-2
+- Fix crasher when disconnecting from a Bluetooth device
+Resolves: #1028078
+
 * Thu Oct 31 2013 Bastien Nocera <bnocera@redhat.com> 3.8.2.1-1
 - Update to 3.8.2.1
 Resolves: #886464
