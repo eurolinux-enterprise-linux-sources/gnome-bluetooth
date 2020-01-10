@@ -1,0 +1,485 @@
+# Swedish translat ion for gnome-bluetooth
+# Copyright © 2007-2014 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-bluetooth package.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2009, 2010, 2011, 2012.
+# Mattias Eriksson <snaggen@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-bluetooth\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-10-06 18:09+0000\n"
+"PO-Revision-Date: 2014-09-06 14:37+0100\n"
+"Last-Translator: Mattias Eriksson <snaggen@gmail.com>\n"
+"Language-Team: Svenska <tp-sv@listor.tp-sv.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: ../lib/bluetooth-chooser-button.c:73
+msgid "Click to select device…"
+msgstr "Klicka för att välja enhet…"
+
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#: ../lib/bluetooth-chooser-button.c:204
+msgid "_OK"
+msgstr "_OK"
+
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:101
+msgid "Unknown"
+msgstr "Okänd"
+
+#: ../lib/bluetooth-chooser.c:176
+msgid "No adapters available"
+msgstr "Inga adaptrar finns tillgängliga"
+
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+msgid "Searching for devices…"
+msgstr "Söker efter enheter…"
+
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+msgid "Device"
+msgstr "Enhet"
+
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+msgid "Type"
+msgstr "Typ"
+
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+msgid "Devices"
+msgstr "Enheter"
+
+#: ../lib/bluetooth-filter-widget.c:72
+msgid "All categories"
+msgstr "Alla kategorier"
+
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+msgid "Paired"
+msgstr "Ihopparad"
+
+#: ../lib/bluetooth-filter-widget.c:76
+msgid "Trusted"
+msgstr "Pålitlig"
+
+#: ../lib/bluetooth-filter-widget.c:78
+msgid "Not paired or trusted"
+msgstr "Inte ihopparad eller pålitlig"
+
+#: ../lib/bluetooth-filter-widget.c:80
+msgid "Paired or trusted"
+msgstr "Ihopparad eller pålitlig"
+
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "Visa:"
+
+#. The device category filter
+#: ../lib/bluetooth-filter-widget.c:247
+msgid "Device _category:"
+msgstr "Enhets_kategori:"
+
+#: ../lib/bluetooth-filter-widget.c:258
+msgid "Select the device category to filter"
+msgstr "Välj enhetskategori för att filtrera"
+
+#. The device type filter
+#: ../lib/bluetooth-filter-widget.c:272
+msgid "Device _type:"
+msgstr "Enhets_typ:"
+
+#: ../lib/bluetooth-filter-widget.c:289
+msgid "Select the device type to filter"
+msgstr "Välj enhetstyp för att filtrera"
+
+#: ../lib/bluetooth-filter-widget.c:295
+msgid "Input devices (mice, keyboards, etc.)"
+msgstr "Inmatningsenheter (möss, tangentbord, etc.)"
+
+#: ../lib/bluetooth-filter-widget.c:299
+msgid "Headphones, headsets and other audio devices"
+msgstr "Hörlurar, headsets och andra ljudenheter"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "Bekräfta PIN-kod för Bluetooth"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "Bekräfta PIN-koden som angavs på '%s'."
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "Bekräfta"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"Bekräfta PIN-kod för Bluetooth avseende '%s'. Den kan vanligen hittas i "
+"enhetens manual."
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "Parar ihop '%s'"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "Bekräfta att följande PIN-kod matchar den som visas på '%s'."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "Bluetooth-förfrågan för ihopparning"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr "'%s' vill paras ihop med denna enhet. Vill du tillåta ihopparning?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "Ange följande PIN-kod på '%s'."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "Ange följande PIN-kod på '%s'. Tryck sedan \"Enter\" på tangentbordet."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"Rör på styrspaken på din iCade i följande riktningar. Tryck sedan på någon "
+"av de vita knapparna."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "Tillåt"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "Avfärda"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+msgid "Cancel"
+msgstr "Avbryt"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:290
+msgid "Accept"
+msgstr "Acceptera"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Set Up"
+msgstr "Inte konfigurerat"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "Ansluten"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "Frånkopplad"
+
+#: ../lib/bluetooth-settings-widget.c:1069
+msgid "Yes"
+msgstr "Ja"
+
+#: ../lib/bluetooth-settings-widget.c:1069
+msgid "No"
+msgstr "Nej"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1164
+#, c-format
+msgid "Visible as “%s”"
+msgstr "Synlig som ”%s”"
+
+#: ../lib/bluetooth-settings-widget.c:1190
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Ta bort \"%s\" från listan över enheter?"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Om du tar bort enheten så måste du konfigurera den igen innan du kan använda "
+"den."
+
+#: ../lib/bluetooth-settings-widget.c:1196
+msgid "_Remove"
+msgstr "_Ta bort"
+
+#: ../lib/bluetooth-utils.c:59
+msgid "All types"
+msgstr "Alla typer"
+
+#: ../lib/bluetooth-utils.c:61
+msgid "Phone"
+msgstr "Telefon"
+
+#: ../lib/bluetooth-utils.c:63
+msgid "Modem"
+msgstr "Modem"
+
+#: ../lib/bluetooth-utils.c:65
+msgid "Computer"
+msgstr "Dator"
+
+#: ../lib/bluetooth-utils.c:67
+msgid "Network"
+msgstr "Nätverk"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:70
+msgid "Headset"
+msgstr "Headset"
+
+#: ../lib/bluetooth-utils.c:72
+msgid "Headphones"
+msgstr "Hörlurar"
+
+#: ../lib/bluetooth-utils.c:74
+msgid "Audio device"
+msgstr "Ljudenhet"
+
+#: ../lib/bluetooth-utils.c:76
+msgid "Keyboard"
+msgstr "Tangentbord"
+
+#: ../lib/bluetooth-utils.c:78
+msgid "Mouse"
+msgstr "Mus"
+
+#: ../lib/bluetooth-utils.c:80
+msgid "Camera"
+msgstr "Kamera"
+
+#: ../lib/bluetooth-utils.c:82
+msgid "Printer"
+msgstr "Skrivare"
+
+#: ../lib/bluetooth-utils.c:84
+msgid "Joypad"
+msgstr "Styrspak"
+
+#: ../lib/bluetooth-utils.c:86
+msgid "Tablet"
+msgstr "Ritbord"
+
+#: ../lib/bluetooth-utils.c:88
+msgid "Video device"
+msgstr "Videoenhet"
+
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "Fjärrkontroll"
+
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "Skanner"
+
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "Skärm"
+
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "Kroppsnära"
+
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "Leksak"
+
+#: ../lib/settings.ui.h:1
+msgid "Connection"
+msgstr "Anslutning"
+
+#: ../lib/settings.ui.h:2
+msgid "page 1"
+msgstr "sida 1"
+
+#: ../lib/settings.ui.h:3
+msgid "page 2"
+msgstr "sida 2"
+
+#: ../lib/settings.ui.h:6
+msgid "Address"
+msgstr "Adress"
+
+#: ../lib/settings.ui.h:7
+msgid "_Mouse & Touchpad Settings"
+msgstr "Inställningar för _mus och styrplatta"
+
+#: ../lib/settings.ui.h:8
+msgid "_Sound Settings"
+msgstr "Ljudin_ställningar"
+
+#: ../lib/settings.ui.h:9
+msgid "_Keyboard Settings"
+msgstr "_Tangentbordsinställningar"
+
+#: ../lib/settings.ui.h:10
+msgid "Send _Files…"
+msgstr "Skicka _filer…"
+
+#: ../lib/settings.ui.h:11
+msgid "_Remove Device"
+msgstr "Ta bo_rt enhet"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "Bluetooth-överföring"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "Skicka filer via Bluetooth"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "Ett okänt fel inträffade"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d sekund"
+msgstr[1] "%'d sekunder"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d minut"
+msgstr[1] "%'d minuter"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d timme"
+msgstr[1] "%'d timmar"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "ungefär %'d timme"
+msgstr[1] "ungefär %'d timmar"
+
+#: ../sendto/main.c:378 ../sendto/main.c:476
+msgid "Connecting…"
+msgstr "Ansluter…"
+
+#: ../sendto/main.c:420
+msgid "Bluetooth File Transfer"
+msgstr "Bluetooth-filöverföring"
+
+#: ../sendto/main.c:424
+msgid "_Retry"
+msgstr "Försök _igen"
+
+#: ../sendto/main.c:446
+msgid "From:"
+msgstr "Från:"
+
+#: ../sendto/main.c:460
+msgid "To:"
+msgstr "Till:"
+
+#: ../sendto/main.c:555
+#, c-format
+msgid "Sending %s"
+msgstr "Skickar %s"
+
+#: ../sendto/main.c:562 ../sendto/main.c:611
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "Skickar fil %d av %d"
+
+#: ../sendto/main.c:607
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:609
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:640
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "%u överföring slutförd"
+msgstr[1] "%u överföringar slutförda"
+
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "S_täng"
+
+#: ../sendto/main.c:657
+msgid "There was an error"
+msgstr "Det uppstod ett fel"
+
+#: ../sendto/main.c:695
+msgid "Select device to send to"
+msgstr "Välj enhet att skicka till"
+
+#: ../sendto/main.c:700
+msgid "_Send"
+msgstr "_Skicka"
+
+#: ../sendto/main.c:750
+msgid "Choose files to send"
+msgstr "Välj filer att skicka"
+
+#: ../sendto/main.c:756
+msgid "Select"
+msgstr "Välj"
+
+#: ../sendto/main.c:786
+msgid "Remote device to use"
+msgstr "Fjärrenhet att använda"
+
+#: ../sendto/main.c:786
+msgid "ADDRESS"
+msgstr "ADRESS"
+
+#: ../sendto/main.c:788
+msgid "Remote device's name"
+msgstr "Fjärrenhetens namn"
+
+#: ../sendto/main.c:788
+msgid "NAME"
+msgstr "NAMN"
+
+#: ../sendto/main.c:807
+msgid "[FILE...]"
+msgstr "[FIL...]"

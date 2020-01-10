@@ -1,0 +1,496 @@
+# gnome-bluetooth translation
+# This file is distributed under the same license as the gnome-bluetooth package.
+#
+# Based on Rosetta translation:
+# Korean translation for bluez-gnome
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the bluez-gnome package.
+# Hyunseok Hwang <fr.hwang@gmail.com>, 2007, 2008.
+# Young-Ho Cha <ganadist@gmail.com>, 2008.
+#
+# Update in gnome-bluetooth:
+# Changwoo Ryu <cwryu@debian.org>, 2009, 2010, 2011.
+# Seong-ho Cho <darkcircle.0426@gmail.com>, 2011, 2012, 2013, 2014.
+#
+# 새로 번역하시는 분은 상단 주석에 추가하세요.
+#
+# 주의:
+# - Bluetooth는 "블루투스"로 번역.
+# - pair(ing)은 "결합하다"("결합")로 번역 (MS에서는 "페어링"으로 사용)
+#   -> Sep 2013 부터 페어링으로 음역합니다. 표현의 보편화로 인한 정책변경
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-bluetooth\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"bluetooth&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2014-09-07 15:32+0000\n"
+"PO-Revision-Date: 2014-09-07 17:17+0900\n"
+"Last-Translator: Seong-ho Cho <shcho@gnome.org>\n"
+"Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
+"Language: Korean\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: ../lib/bluetooth-chooser-button.c:73
+msgid "Click to select device…"
+msgstr "선택할 장치를 누르십시오…"
+
+#: ../lib/bluetooth-chooser-button.c:203
+#: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
+#: ../sendto/main.c:699 ../sendto/main.c:755
+msgid "_Cancel"
+msgstr "취소(_C)"
+
+#: ../lib/bluetooth-chooser-button.c:204
+msgid "_OK"
+msgstr "확인(_O)"
+
+#: ../lib/bluetooth-chooser.c:135 ../lib/bluetooth-filter-widget.c:82
+#: ../lib/bluetooth-utils.c:101
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: ../lib/bluetooth-chooser.c:176
+msgid "No adapters available"
+msgstr "어댑터가 없습니다"
+
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+msgid "Searching for devices…"
+msgstr "장치 검색 중…"
+
+#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+msgid "Device"
+msgstr "장치"
+
+#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+msgid "Type"
+msgstr "종류"
+
+#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+msgid "Devices"
+msgstr "장치"
+
+#: ../lib/bluetooth-filter-widget.c:72
+msgid "All categories"
+msgstr "모든 분류"
+
+#: ../lib/bluetooth-filter-widget.c:74 ../lib/settings.ui.h:4
+msgid "Paired"
+msgstr "페어링함"
+
+#: ../lib/bluetooth-filter-widget.c:76
+msgid "Trusted"
+msgstr "신뢰함"
+
+#: ../lib/bluetooth-filter-widget.c:78
+msgid "Not paired or trusted"
+msgstr "페어링 상태 아니거나 신뢰하지 않음"
+
+#: ../lib/bluetooth-filter-widget.c:80
+msgid "Paired or trusted"
+msgstr "페어링함 또는 신뢰함"
+
+#. This is the title of the filter section of the Bluetooth device chooser.
+#. * It used to say Show Only Bluetooth Devices With...
+#: ../lib/bluetooth-filter-widget.c:231
+msgid "Show:"
+msgstr "보기:"
+
+#. The device category filter
+#: ../lib/bluetooth-filter-widget.c:247
+msgid "Device _category:"
+msgstr "장치 분류(_C):"
+
+#: ../lib/bluetooth-filter-widget.c:258
+msgid "Select the device category to filter"
+msgstr "필터링할 장치 분류를 선택하십시오"
+
+#. The device type filter
+#: ../lib/bluetooth-filter-widget.c:272
+msgid "Device _type:"
+msgstr "장치 종류(_T):"
+
+#: ../lib/bluetooth-filter-widget.c:289
+msgid "Select the device type to filter"
+msgstr "필터링할 장치 종류를 선택하십시오"
+
+#: ../lib/bluetooth-filter-widget.c:295
+msgid "Input devices (mice, keyboards, etc.)"
+msgstr "입력 장치(마우스, 키보드 등)"
+
+#: ../lib/bluetooth-filter-widget.c:299
+msgid "Headphones, headsets and other audio devices"
+msgstr "헤드폰, 헤드셋 및 기타 오디오 장치"
+
+#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
+#: ../lib/bluetooth-pairing-dialog.c:108
+msgid "Confirm Bluetooth PIN"
+msgstr "블루투스 PIN 확인"
+
+#: ../lib/bluetooth-pairing-dialog.c:88
+#, c-format
+msgid "Please confirm the PIN that was entered on '%s'."
+msgstr "'%s' 장치에 입력한 PIN을 확인하십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
+#: ../lib/bluetooth-pairing-dialog.c:146
+msgid "Confirm"
+msgstr "확인"
+
+#: ../lib/bluetooth-pairing-dialog.c:95
+#, c-format
+msgid ""
+"Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
+"device's manual."
+msgstr ""
+"'%s' 장치의 블루투스 PIN을 확인하십시오. 장치 설명서에서 찾을 수 있습니다."
+
+#: ../lib/bluetooth-pairing-dialog.c:101
+#, c-format
+msgid "Pairing '%s'"
+msgstr "'%s' 장치 페어링 중"
+
+#: ../lib/bluetooth-pairing-dialog.c:109
+#, c-format
+msgid ""
+"Please confirm that the following PIN matches the one displayed on '%s'."
+msgstr "'%s' 장치에 표시된 PIN이 다음 PIN과 일치하는지 확인하십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:114
+msgid "Bluetooth Pairing Request"
+msgstr "블루투스 페어링 요청"
+
+#: ../lib/bluetooth-pairing-dialog.c:115
+#, c-format
+msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
+msgstr "'%s' 장치가 이 장치와 페어링하려고 합니다. 페어링을 허용하시겠습니까?"
+
+#: ../lib/bluetooth-pairing-dialog.c:123
+#, c-format
+msgid "Please enter the following PIN on '%s'."
+msgstr "'%s' 장치에 다음 PIN을 입력하십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:126
+#, c-format
+msgid ""
+"Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
+msgstr "'%s' 장치에 다음 PIN을 입력하고 키보드에서 “Return”을 누르십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:129
+msgid ""
+"Please move the joystick of your iCade in the following directions. Then "
+"press any of the white buttons."
+msgstr ""
+"다음 방향을 따라 iCade의 조이스틱을 움직이십시오. 그 다음 흰색 단추중 아무거"
+"나 누르십시오."
+
+#: ../lib/bluetooth-pairing-dialog.c:136
+msgid "Allow"
+msgstr "허용"
+
+#: ../lib/bluetooth-pairing-dialog.c:140
+msgid "Dismiss"
+msgstr "무시"
+
+#. Cancel button
+#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+msgid "Cancel"
+msgstr "취소"
+
+#. OK button
+#: ../lib/bluetooth-pairing-dialog.c:290
+msgid "Accept"
+msgstr "수락"
+
+#. Placeholder text
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+msgid "Not Set Up"
+msgstr "설정하지 않음"
+
+#: ../lib/bluetooth-settings-row.c:81
+msgid "Connected"
+msgstr "연결함"
+
+#: ../lib/bluetooth-settings-row.c:83
+msgid "Disconnected"
+msgstr "연결 끊김"
+
+#: ../lib/bluetooth-settings-widget.c:1069
+msgid "Yes"
+msgstr "예"
+
+#: ../lib/bluetooth-settings-widget.c:1069
+msgid "No"
+msgstr "아니요"
+
+#. translators: %s is the name of the computer, for example:
+#. * Visible as “Bastien Nocera's Computer”
+#: ../lib/bluetooth-settings-widget.c:1164
+#, c-format
+msgid "Visible as “%s”"
+msgstr "“%s”(으)로 보이기"
+
+#: ../lib/bluetooth-settings-widget.c:1190
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "장치 목록에서 '%s' 장치를 제거하시겠습니까?"
+
+#: ../lib/bluetooth-settings-widget.c:1192
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr "장치를 제거하면 다음에 사용하기 전에 설정해야 합니다."
+
+#: ../lib/bluetooth-settings-widget.c:1196
+msgid "_Remove"
+msgstr "제거(_R)"
+
+#: ../lib/bluetooth-utils.c:59
+msgid "All types"
+msgstr "모든 종류"
+
+#: ../lib/bluetooth-utils.c:61
+msgid "Phone"
+msgstr "전화"
+
+#: ../lib/bluetooth-utils.c:63
+msgid "Modem"
+msgstr "모뎀"
+
+#: ../lib/bluetooth-utils.c:65
+msgid "Computer"
+msgstr "컴퓨터"
+
+#: ../lib/bluetooth-utils.c:67
+msgid "Network"
+msgstr "네트워크"
+
+#. translators: a hands-free headset, a combination of a single speaker with a microphone
+#: ../lib/bluetooth-utils.c:70
+msgid "Headset"
+msgstr "헤드셋"
+
+#: ../lib/bluetooth-utils.c:72
+msgid "Headphones"
+msgstr "헤드폰"
+
+#: ../lib/bluetooth-utils.c:74
+msgid "Audio device"
+msgstr "오디오 장치"
+
+#: ../lib/bluetooth-utils.c:76
+msgid "Keyboard"
+msgstr "키보드"
+
+#: ../lib/bluetooth-utils.c:78
+msgid "Mouse"
+msgstr "마우스"
+
+#: ../lib/bluetooth-utils.c:80
+msgid "Camera"
+msgstr "카메라"
+
+#: ../lib/bluetooth-utils.c:82
+msgid "Printer"
+msgstr "프린터"
+
+#: ../lib/bluetooth-utils.c:84
+msgid "Joypad"
+msgstr "조이패드"
+
+#: ../lib/bluetooth-utils.c:86
+msgid "Tablet"
+msgstr "태블릿"
+
+#: ../lib/bluetooth-utils.c:88
+msgid "Video device"
+msgstr "비디오 장치"
+
+#: ../lib/bluetooth-utils.c:90
+msgid "Remote control"
+msgstr "원격 컨트롤"
+
+#: ../lib/bluetooth-utils.c:92
+msgid "Scanner"
+msgstr "스캐너"
+
+#: ../lib/bluetooth-utils.c:94
+msgid "Display"
+msgstr "디스플레이"
+
+#: ../lib/bluetooth-utils.c:96
+msgid "Wearable"
+msgstr "착용가능"
+
+#: ../lib/bluetooth-utils.c:98
+msgid "Toy"
+msgstr "완구"
+
+#: ../lib/settings.ui.h:1
+msgid "Connection"
+msgstr "연결"
+
+#: ../lib/settings.ui.h:2
+msgid "page 1"
+msgstr "1 페이지"
+
+#: ../lib/settings.ui.h:3
+msgid "page 2"
+msgstr "2 페이지"
+
+#: ../lib/settings.ui.h:6
+msgid "Address"
+msgstr "주소"
+
+#: ../lib/settings.ui.h:7
+msgid "_Mouse & Touchpad Settings"
+msgstr "마우스와 터치패드 설정(_M)"
+
+#: ../lib/settings.ui.h:8
+msgid "_Sound Settings"
+msgstr "소리 설정(_S)"
+
+#: ../lib/settings.ui.h:9
+msgid "_Keyboard Settings"
+msgstr "키보드 설정(_K)"
+
+#: ../lib/settings.ui.h:10
+msgid "Send _Files…"
+msgstr "파일 보내기(_F)…"
+
+#: ../lib/settings.ui.h:11
+msgid "_Remove Device"
+msgstr "장치 제거(_R)"
+
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:1
+msgid "Bluetooth Transfer"
+msgstr "블루투스 전송"
+
+# long description
+#: ../sendto/bluetooth-sendto.desktop.in.in.h:2
+msgid "Send files via Bluetooth"
+msgstr "블루투스를 통해 파일을 전송합니다"
+
+#: ../sendto/main.c:117
+msgid "An unknown error occurred"
+msgstr "알 수 없는 오류 발생"
+
+#: ../sendto/main.c:339
+#, c-format
+msgid "%'d second"
+msgid_plural "%'d seconds"
+msgstr[0] "%'d초"
+
+#: ../sendto/main.c:344 ../sendto/main.c:357
+#, c-format
+msgid "%'d minute"
+msgid_plural "%'d minutes"
+msgstr[0] "%'d분"
+
+#: ../sendto/main.c:355
+#, c-format
+msgid "%'d hour"
+msgid_plural "%'d hours"
+msgstr[0] "%'d시간"
+
+#: ../sendto/main.c:365
+#, c-format
+msgid "approximately %'d hour"
+msgid_plural "approximately %'d hours"
+msgstr[0] "약 %'d시간"
+
+#: ../sendto/main.c:378 ../sendto/main.c:476
+msgid "Connecting…"
+msgstr "연결하는 중…"
+
+#: ../sendto/main.c:420
+msgid "Bluetooth File Transfer"
+msgstr "블루투스 파일 전송"
+
+#: ../sendto/main.c:424
+msgid "_Retry"
+msgstr "다시 시도(_R)"
+
+#: ../sendto/main.c:446
+msgid "From:"
+msgstr "원본:"
+
+#: ../sendto/main.c:460
+msgid "To:"
+msgstr "대상:"
+
+#: ../sendto/main.c:555
+#, c-format
+msgid "Sending %s"
+msgstr "%s 보내는 중"
+
+#: ../sendto/main.c:562 ../sendto/main.c:611
+#, c-format
+msgid "Sending file %d of %d"
+msgstr "파일 %d개(전체 %d개) 보내는 중"
+
+#: ../sendto/main.c:607
+#, c-format
+msgid "%d kB/s"
+msgstr "%d kB/s"
+
+#: ../sendto/main.c:609
+#, c-format
+msgid "%d B/s"
+msgstr "%d B/s"
+
+#: ../sendto/main.c:640
+#, c-format
+msgid "%u transfer complete"
+msgid_plural "%u transfers complete"
+msgstr[0] "전송 %u건 완료"
+
+#: ../sendto/main.c:647
+msgid "_Close"
+msgstr "닫기(_C)"
+
+#: ../sendto/main.c:657
+msgid "There was an error"
+msgstr "오류가 있습니다"
+
+#: ../sendto/main.c:695
+msgid "Select device to send to"
+msgstr "보낼 장치를 선택하십시오"
+
+#: ../sendto/main.c:700
+msgid "_Send"
+msgstr "보내기(_S)"
+
+#: ../sendto/main.c:750
+msgid "Choose files to send"
+msgstr "보낼 파일을 선택하십시오"
+
+#: ../sendto/main.c:756
+msgid "Select"
+msgstr "선택"
+
+#: ../sendto/main.c:786
+msgid "Remote device to use"
+msgstr "사용할 원격 장치"
+
+#: ../sendto/main.c:786
+msgid "ADDRESS"
+msgstr "<주소>"
+
+#: ../sendto/main.c:788
+msgid "Remote device's name"
+msgstr "원격 장치 이름"
+
+#: ../sendto/main.c:788
+msgid "NAME"
+msgstr "<이름>"
+
+#: ../sendto/main.c:807
+msgid "[FILE...]"
+msgstr "[<파일>...]"
+
+#~ msgid "Done"
+#~ msgstr "완료"

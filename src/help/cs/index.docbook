@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.28">
+<!ENTITY app "<application>gnome-bluetooth</application>">
+<!ENTITY appname "gnome-bluetooth">
+<!ENTITY legal SYSTEM "legal.xml">
+]>
+<article id="index" lang="cs">
+    <articleinfo>
+        <title>Příručka ke gnome-bluetooth</title>
+        <copyright><year>2009</year> <holder>Baptiste Mille-Mathias</holder></copyright>
+        
+           <legalnotice id="legalnotice">
+         <para>Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License (GFDL) ve verzi 1.1 nebo v jakékoli další verzi vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopii licence GFDL naleznete pod <ulink type="help" url="help:fdl">tímto odkazem</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou.</para>
+          <para>Tato příručka je součástí sbírky příruček GNOME šířených za podmínek licence GNU FDL. Pokud chcete tento dokument šířit odděleně od sbírky, musíte přiložit kopii licence dle popisu v oddílu 6 dané licence.</para>
+ 
+         <para>Mnoho názvů použitých firmami k zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tyto názvy v dokumentaci použity a členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takovýto název psán velkými písmeny celý nebo s velkým písmenem na začátku.</para>
+ 
+         <para>DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <orderedlist>
+                 <listitem>
+                   <para>DOKUMENT JE POSKYTOVÁN V PODOBĚ „JAK JE“, BEZ ZÁRUKY JAKÉHOKOLIV DRUHU, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ, NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL, NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, NESETE VY. POKUD JE TENTO DOKUMENT NEBO JEHO UPRAVENÁ VERZE VADNÁ V JAKÉMKOLIV SMYSLU, VY (NIKOLIV PŮVODCE, AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE ODPOVĚDNOST ZA JAKÉKOLIV NÁKLADY NA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ PODLE TÉTO DOHODY POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ.</para>
+                 </listitem>
+           </orderedlist></para>
+   </legalnotice>
+ 
+
+        <authorgroup>
+            <author role="maintainer"><firstname>Baptiste</firstname> <surname>Mille-Mathias</surname> <affiliation> <orgname>Dokumentační projekt GNOME</orgname> <address> <email>baptiste.millemathias@gmail.com</email> </address> </affiliation></author>
+        </authorgroup>
+        
+        <!-- According to GNU FDL, revision history is mandatory if you are -->
+        <!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+        <revhistory>
+            <revision><revnumber>1.0</revnumber> <date>březen 2009</date> <revdescription>
+                    <para role="author">Baptiste Mille-Mathias <email>baptiste.millemathias@gmail.com</email></para>
+                </revdescription></revision>
+            <!-- Uncomment for future revision
+		<revision>
+		  <revnumber>1.1</revnumber>
+		  <date>March 2009</date>
+		  <revdescription>
+			 <para role="author">Baptiste Mille-Mathias
+			     <email>baptiste.millemathias@gmail.com</email></para>
+		  </revdescription>
+		</revision>
+		-->
+        </revhistory>
+        <releaseinfo>Tato příručka popisuje gnome-bluetooth ve verzi 2.28</releaseinfo>
+        <legalnotice>
+            <title>Ohlasy</title>
+            <para>Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci <application>gnome-bluetooth</application> nebo této příručce, postupujte dle instrukcí na stránce <ulink url="ghelp:user-guide?feedback-bugs" type="help">Stránka s ohlasy na GNOME</ulink>.</para>
+        </legalnotice>
+        <abstract role="description">
+            <para><application>gnome-bluetooth</application> je aplikace na správu Bluetooth v pracovním prostředí GNOME.</para>
+        </abstract>
+    
+    <othercredit class="translator">
+      <personname>
+        <firstname>Marek Černocký</firstname>
+      </personname>
+      <email>marek@manet.cz</email>
+    </othercredit>
+    <copyright>
+      
+        <year>2009</year>
+      
+        <year>2010</year>
+      
+        <year>2013</year>
+      
+      <holder>Marek Černocký</holder>
+    </copyright>
+  </articleinfo>
+    <indexterm><primary>gnome-bluetooth</primary></indexterm>
+    <indexterm><primary>Bluetooth</primary></indexterm>
+    <indexterm><primary>Komunikace</primary></indexterm>
+    
+    <sect1 id="gnome-bluetooth-intro">
+        <title>Úvod</title>
+        <para><application>gnome-bluetooth</application> je aplikace, díky které můžete spravovat Bluetooth v pracovním prostředí GNOME. <itemizedlist>
+                <listitem>
+                    <para><application>gnome-bluetooth</application> dovoluje odesílání souborů do vašeho zařízení Bluetooth nebo procházení jeho obsahu.</para>
+                </listitem>
+                <listitem>
+                    <para>Připojuje vaše zařízení, jako například sluchátka nebo hudební brány.</para>
+                </listitem>
+                <listitem>
+                    <para>Můžete přidávat a odebírat zařízení Bluetooth nebo spravovat jejich oprávnění.</para>
+                </listitem>
+            </itemizedlist></para>
+    </sect1>
+    
+    <sect1 id="gnome-bluetooth-applet">
+        <title>Applet Bluetooth</title>
+        
+        <para>Applet je rezidentní aplikace, kterou můžete najít v oznamovací oblasti a tak se přes ni rychle dostat k funkcím, jako je odeslání souborů nebo správa zařízení.</para>
+        <figure id="gnome-bluetooth-applet-notification">
+            <title>Ikona appletu Bluetooth na panelu</title>
+            <screenshot>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="figures/bluetooth-applet.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </screenshot>
+        </figure>
+        
+        <sect2 id="gnome-bluetooth-applet-start">
+            <title>Spuštění appletu Bluetooth</title>
+            
+            <para>Applet <application>gnome-bluetooth</application> se spustí automaticky, když se přihlásíte do svého sezení a můžete jej najít v podobě ikony v oznamovací oblasti. Pokud jej chcete spustit ručně, otevřete nabídku <menuchoice><guimenu>Aplikace</guimenu><guimenu>Příslušenství</guimenu><guimenu>Terminál</guimenu></menuchoice> a zadejte <command>bluetooth-applet</command>.</para>
+            <para>V případě, že nechcete, aby se applet ve vašem pracovním prostředí spouštěl, otevřete nabídku <menuchoice><guimenu>Systém</guimenu><guimenu>Volby</guimenu><guimenu>Sezení</guimenu></menuchoice> a zakažte <guilabel>Správa Bluetooth</guilabel>.</para>
+        </sect2>
+        <sect2 id="gnome-bluetooh-applet-power">
+            <title>Vypnutí vašeho adaptéru Bluetooth</title>
+            <para>Vypnutím svého adaptéru Bluetooth zastavíte současnou i budoucí komunikaci z a do svého adaptéru Bluetooth. Vypnutí adaptéru Bluetooth vám přinese úsporu energie baterií vašeho notebooku a tím zvýšení autonomie. Proto je dobrý nápad vypnout své zařízení Bluetooth, když jej nepoužíváte.</para>
+            <para>Klikněte na ikonu appletu a zvolte <menuchoice><guimenu>Vypnout Bluetooth</guimenu></menuchoice>. Oznamovací ikona potom zešedne.</para>
+        </sect2>
+
+        <sect2 id="gnome-bluetooth-applet-sending">
+            <title>Odesílání souborů do zařízení Bluetooth</title>
+	    <para>Pokud chcete do zařízení odeslat soubor, zvolte Odeslat soubor do zařízení. Objeví se dialogové okno na výběr souboru, který chcete odeslat, a dialogové okno na výběr zařízení, do kterého chcete soubor odeslat.</para>
+        </sect2>
+        
+        <sect2 id="gnome-bluetooth-applet-browsing">
+            <title>Procházení zařízení Bluetooth</title>
+            <para>Pokud chcete přímo ve svém správci souborů procházet souborový systém zařízení, zvolte v nabídce Procházet soubory v zařízení.</para>
+        </sect2>
+
+	<sect2 id="gnome-bluetooth-applet-devices">
+	    <title>Nedávno použitá zařízení</title>
+	    <para>Tato část zobrazuje spárovaná zařízení, ke kterým se můžete připojit.</para>
+	    <para>Když se k zařízení chcete připojit, klikněte na jeho název, který bude po úspěšném připojení uvedený tučným písmem.</para>
+	</sect2>
+        
+        <sect2 id="gnome-bluetooth-applet-setup">
+            <title>Přidání nového zařízení</title>
+            
+            <para>Pokud chcete přidat nové zařízení (což představuje spárování vašeho adaptéru s vaším zařízením), klikněte na ikonu appletu a zvolte <guimenu>Nastavit nové zařízení</guimenu>. Grafický průvodce vám s  nastavení vašeho zařízení pomůže.</para>
+            
+            <note>
+                <para>Než začnete, nezapomeňte nastavit své připojované zařízení jako vyhledatelné, jinak jej průvodce nebude schopen vyhledat.</para>
+            </note>
+            
+            <para>Průvodce vám nabídne vyhledatelná zařízení, která našel kolem dokola. Seznam těchto zařízení si můžete omezit jen na ta, která vás zajímají tím, že v rozbalovacím seznamu vyberete typ zařízení.</para>
+            
+            <figure id="gnome-bluetooth-wizard-img">
+                <title>Průvodce vyhledání zařízení</title>
+                <screenshot>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata fileref="figures/bluetooth-wizard.png" format="PNG"/>
+                        </imageobject>
+                    </mediaobject>
+                </screenshot>
+            </figure>
+            
+            <para>V případě, že má vaše zařízení napevno určený PIN, zmáčkněte <guibutton>Volby kódu PIN</guibutton> a v novém dialogovém okně vyberte PIN, který se má použít.</para>
+            <para>Tlačítkem <guibutton>Vpřed</guibutton> přejděte na další krok, kterým je vlastní párování. Pokud jste v předchozím kroku určili pevný PIN, provede se spárování automaticky. Pokud ne, zobrazí se vám PIN pro vložení do vašeho zařízení. Ten do zařízení zadáte a tím dokončíte spárování zařízení se adaptérem.</para>
+        </sect2>
+
+        <sect2 id="gnome-bluetooth-applet-preferences">
+            <title>Předvolby</title>
+            
+            <para>Klikněte na ikonu appletu a zvolte <menuchoice><guilabel>Předvolby</guilabel></menuchoice>, objeví se dialogové okno předvoleb.</para>
+            <para>Více informací o předvolbách uvádí <xref linkend="gnome-bluetooth-preferences"/>.</para>
+        </sect2>
+    </sect1>
+    
+    <sect1 id="gnome-bluetooth-preferences">
+        <title>Předvolby</title>
+        <para>Dialogové okno s předvolbami aplikace <application>gnome-bluetooth</application> vám umožňuje spravovat rozmanitá zařízení Bluetooth a měnit vlastnosti vašich adaptérů Bluetooth.</para>
+        
+        <figure id="gnome-bluetooth-prefs-img">
+            <title>Dialogové okno Předvolby Bluetooth</title>
+            <screenshot>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata fileref="figures/bluetooth-properties.png" format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </screenshot>
+        </figure>
+            
+	<sect2 id="gnome-bluetooth-prefs-adapter-discover">
+	    <title>Vyhledatelné</title>
+	    
+	    <para>Pokud je váš adaptér nastavený jako <guilabel>Vyhledatelný</guilabel>, budou jej všechna okolní Bluetooth zařízení vidět a tím pádem ho budou moci žádat o spárování.</para>
+	    <important>
+		<para>Bluetooth, stejně jako jiné sítě, představuje jisté bezpečnostní riziko, proto je dobrý nápad nastavit své zařízení jako nevyhledatelné a tak omezit možnosti napadení.</para>
+	    </important>
+	    <para>Je dobrým zvykem nastavit své zařízení jako vyhledatelné, když se chystáte jej spárovat s jiným zařízením, a až to dokončíte, tak volbu <guilabel>Vyhledatelné</guilabel> vypnout.</para>
+	    <note>
+		<para>I když zařízení není nastavené jako nevyhledatelné, se zařízeními, se kterými již bylo spárované, může normálně komunikovat.</para>
+	    </note>
+	</sect2>
+	
+	<sect2 id="gnome-bluetooth-prefs-adapter-name">
+	    <title>Přívětivý název</title>
+	    <para>Přívětivý název je přezdívka adresy, kterou používá každé zařízení Bluetooth k identifikaci, a slouží pro vaše snadnější zapamatování.</para>
+	    <para>Výchozí přívětivý název vašeho adaptéru je <envar>HOSTNAME</envar>-0 (kde <envar>HOSTNAME</envar> je název vašeho počítače). V textovém poli jej můžete změnit na jméno, které vám vyhovuje. Změna se ihned projeví.</para>
+	</sect2>
+	
+	<sect2 id="gnome-bluetooth-prefs-adapter-devices">
+	    <title>Známá zařízení</title>
+	    <para><guilabel>Známá zařízení</guilabel> je seznam zařízení Bluetooth, která jste spárovali a nyní je zde můžete spravovat – mazat je, připojovat s k nim nebo přidávat nová. <itemizedlist>
+		    <listitem>
+			<para>Nastavit nové zařízení - postup popisuje <xref linkend="gnome-bluetooth-applet-setup"/></para>
+		    </listitem>
+		    <listitem>
+			<para>Připojit / Odpojit - připojení a odpojení zařízení.</para>
+		    </listitem>
+		    <listitem>
+			<para>Odebrat - odebráním se zruší spárovaní mezi adaptérem a zařízení a komunikace již nebude možná. Pokud budete chtít v budoucnu mezi nimi přenášet data, budete je muset znovu spárovat.</para>
+		    </listitem>
+		</itemizedlist></para>
+	</sect2>
+	
+	<sect2 id="gnome-bluetooth-prefs-show-icon">
+	    <title>Zobrazení ikony Bluetooth</title>
+	    <para>Ikonu Bluetooth na panelu můžete zobrazit nebo skrýt. Viz <xref linkend="gnome-bluetooth-applet"/> pro funkce apletu.</para>
+	    
+	    <important>
+		<para>Když zakážete ikonu na panelu, bude dostupný jen omezený počet akcí.</para>
+	    </important>
+	</sect2>
+
+	<sect2 id="gnome-bluetooth-prefs-receive">
+	    <title>Příjem souborů</title>
+	    
+	    <para>Klikněte na tlačítko <guilabel>Přijmout soubory</guilabel> a objeví se dialogové okno <guilabel>Předvolby sdílení osobních souborů</guilabel>. Zde můžete nastavit příjem a sdílení souborů přes Bluetooth .</para>
+	    <important>
+		<para>Tuto funkci neposkytuje aplikace <application>gnome-bluetooth</application>. Musíte mít nainstalovanou aplikaci <application>gnome-user-share</application>.</para>
+		<para>Více se dočtete v <ulink type="help" url="help:gnome-user-share">Příručce sdílení osobních souborů</ulink>: <ulink type="help" url="help:gnome-user-share/gnome-user-share-getting-started#gnome-user-share-bluetooth-receiving">příjem</ulink> a <ulink type="help" url="help:gnome-user-share/gnome-user-share-getting-started#gnome-user-share-enabling-bluetooth">sdílení</ulink>.</para>
+	    </important>
+	</sect2>
+    </sect1>
+
+    <sect1 id="gnome-bluetooth-FAQ">
+        <title>Časté dotazy a odpovědi</title>
+        <qandaset>
+            <qandaentry>
+                <question>
+                    <para>Nevidím, jak v aplikaci <application>gnome-bluetooth</application> přijmout soubory přes Bluetooth do mého počítače, jsem slepý?</para>
+                </question>
+                <answer>
+                    <para>Příjem souborů nemá na starosti <application>gnome-bluetooth</application>, ale aplikace <application>gnome-user-share</application>. Abyste mohli přijímat soubory přes Bluetooth, musíte si nainstalovat tuto aplikaci. Tlačítko, o němž se zmiňuje <xref linkend="gnome-bluetooth-prefs-receive"/>, je jen spouštěč dialogového okna s nastavením této aplikace.</para>
+                </answer>
+            </qandaentry>
+            <qandaentry>
+                <question>
+                    <para>Našel jsem v aplikaci <application>gnome-bluetooth</application> chybu. Co má udělat?</para>
+                </question>
+                <answer>
+                    <para>Měli byste chybu nahlásit na <ulink url="http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-bluetooth"/>.</para>
+                </answer>
+            </qandaentry>
+            <!--
+	  <qandaentry>
+	      <question>
+		  <para></para>
+	      </question>
+	      <answer>
+		  <para></para>
+	      </answer>
+	  </qandaentry>-->
+        </qandaset>
+    </sect1>
+    
+    
+</article>
