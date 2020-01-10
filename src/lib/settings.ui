@@ -1,98 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.0 on Thu Dec  5 15:20:37 2013 -->
+<!-- Generated with glade 3.19.0 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="pairing_dialog_box">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_start">50</property>
-    <property name="margin_end">50</property>
-    <property name="margin_top">24</property>
-    <property name="margin_bottom">30</property>
-    <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkLabel" id="help_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <!-- placeholder text: never appears in the actual UI -->
-        <property name="label">Please enter the following PIN on 'Foobar':</property>
-        <property name="justify">center</property>
-        <property name="wrap">True</property>
-        <property name="width_chars">40</property>
-        <property name="max_width_chars">40</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkNotebook" id="pin_notebook">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="margin_top">24</property>
-        <property name="show_tabs">False</property>
-        <property name="show_border">False</property>
-        <child>
-          <object class="GtkAspectFrame" id="aspectframe1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label_xalign">0</property>
-            <property name="shadow_type">none</property>
-            <child>
-              <object class="GtkEntry" id="entry_pin">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="margin_start">25</property>
-                <property name="margin_end">25</property>
-                <property name="max_length">6</property>
-                <property name="width_chars">6</property>
-                <property name="xalign">0.5</property>
-                <property name="input_purpose">digits</property>
-                <property name="input_hints">GTK_INPUT_HINT_NO_SPELLCHECK | GTK_INPUT_HINT_NONE</property>
-                <property name="activates-default">True</property>
-                <style>
-                  <class name="pin-entry"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_pin">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label">123456</property>
-            <style>
-              <class name="pin-label"/>
-            </style>
-          </object>
-          <packing>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label_placeholder">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label"></property>
-          </object>
-          <packing>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-  </object>
+  <requires lib="gtk+" version="3.16"/>
   <object class="GtkBox" id="properties_vbox">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -113,7 +22,8 @@
             <property name="can_focus">False</property>
             <property name="margin_top">16</property>
             <property name="margin_bottom">16</property>
-            <property name="stock">gtk-missing-image</property>
+            <property name="icon_name">image-missing</property>
+            <property name="use_fallback">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -131,8 +41,8 @@
               <object class="GtkLabel" id="connection_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">1</property>
                 <property name="label" translatable="yes">Connection</property>
+                <property name="xalign">1</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -161,7 +71,7 @@
                   <object class="GtkLabel" id="label3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">page 1</property>
+                    <property name="label">page 1</property>
                   </object>
                   <packing>
                     <property name="tab_fill">False</property>
@@ -181,7 +91,7 @@
                   <object class="GtkLabel" id="label9">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">page 2</property>
+                    <property name="label">page 2</property>
                   </object>
                   <packing>
                     <property name="position">1</property>
@@ -221,8 +131,8 @@
               <object class="GtkLabel" id="label4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">1</property>
                 <property name="label" translatable="yes">Paired</property>
+                <property name="xalign">1</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -237,8 +147,8 @@
               <object class="GtkLabel" id="paired_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label">Yes</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -266,8 +176,8 @@
               <object class="GtkLabel" id="label5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">1</property>
                 <property name="label" translatable="yes">Type</property>
+                <property name="xalign">1</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -282,8 +192,8 @@
               <object class="GtkLabel" id="type_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label">Keyboard</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -311,8 +221,8 @@
               <object class="GtkLabel" id="label6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">1</property>
                 <property name="label" translatable="yes">Address</property>
+                <property name="xalign">1</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -327,9 +237,9 @@
               <object class="GtkLabel" id="address_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
                 <property name="label">00:00:00:00:00</property>
                 <property name="selectable">True</property>
+                <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -454,19 +364,46 @@
       </packing>
     </child>
   </object>
-  <object class="GtkBox" id="vbox_bluetooth">
+  <object class="GtkScrolledWindow" id="scrolledwindow1">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_top">12</property>
-    <property name="border_width">12</property>
-    <property name="orientation">vertical</property>
-    <property name="spacing">3</property>
-  </object>
-  <object class="GtkSizeGroup" id="sizegroup1">
-    <property name="mode">both</property>
-    <widgets>
-      <widget name="entry_pin"/>
-      <widget name="label_pin"/>
-    </widgets>
+    <property name="can_focus">True</property>
+    <property name="shadow_type">in</property>
+    <child>
+      <object class="GtkViewport" id="viewport1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkBox" id="vbox_bluetooth">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="explanation-label">
+                <property name="width_request">470</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="margin_top">16</property>
+                <property name="margin_bottom">8</property>
+                <property name="label">Visible as “Bastien's computer” and available for Bluetooth file transfers. Transferred files are placed in the &lt;a href="http://www.gnome.org"&gt;Downloads&lt;/a&gt; folder.</property>
+                <property name="use_markup">True</property>
+                <property name="justify">fill</property>
+                <property name="wrap">True</property>
+                <property name="width_chars">25</property>
+                <property name="max_width_chars">25</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
   </object>
 </interface>

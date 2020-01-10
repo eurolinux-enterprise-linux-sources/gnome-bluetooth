@@ -4,13 +4,13 @@ BUILT_SOURCES =
 
 lib_LTLIBRARIES = libgnome-bluetooth.la
 
-resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/settings.gresource.xml)
-bluetooth-settings-resources.c: settings.gresource.xml $(resource_files)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/bluetooth.gresource.xml)
+bluetooth-settings-resources.c: bluetooth.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name bluetooth_settings $<
-bluetooth-settings-resources.h: settings.gresource.xml $(resource_files)
+bluetooth-settings-resources.h: bluetooth.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name bluetooth_settings $<
 
-EXTRA_DIST += settings.gresource.xml settings.ui
+EXTRA_DIST += bluetooth.gresource.xml settings.ui bluetooth-pairing-dialog.ui bluetooth-settings-row.ui bluetooth-settings.css
 BUILT_SOURCES += bluetooth-settings-resources.c bluetooth-settings-resources.h
 
 # will be scanned for introspection annotation, but won't be installed
@@ -29,7 +29,8 @@ libgnome_bluetooth_c_sources =		\
 	bluetooth-settings-resources.c	\
 	bluetooth-settings-row.c	\
 	bluetooth-pairing-dialog.c	\
-	pin.c
+	pin.c				\
+	bluetooth-settings-obexpush.c
 
 libgnome_bluetooth_private_headers =	\
 	bluetooth-client-private.h	\
@@ -41,7 +42,8 @@ libgnome_bluetooth_private_headers =	\
 	bluetooth-settings-resources.h	\
 	bluetooth-settings-row.h	\
 	bluetooth-pairing-dialog.h	\
-	pin.h
+	pin.h				\
+	bluetooth-settings-obexpush.h
 
 # public headers don't need to be listed, are handled by _HEADERS
 libgnome_bluetooth_la_SOURCES =			\

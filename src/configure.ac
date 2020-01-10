@@ -1,7 +1,7 @@
 AC_PREREQ(2.52)
 
 m4_define(gnomebt_version_major, 3)
-m4_define(gnomebt_version_minor, 14)
+m4_define(gnomebt_version_minor, 20)
 m4_define(gnomebt_version_micro, 1)
 
 AC_INIT([gnome-bluetooth],
@@ -12,7 +12,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([lib/bluetooth-client.c])
 AC_CONFIG_HEADERS([config.h])
 
-AM_INIT_AUTOMAKE([1.8 dist-xz no-dist-gzip check-news tar-ustar])
+AM_INIT_AUTOMAKE([1.11.2 dist-xz no-dist-gzip check-news tar-ustar])
 
 # Before making a release, the GNOMEBT_LT_VERSION string should be modified.
 # The string is of the form C:R:A.
@@ -21,7 +21,7 @@ AM_INIT_AUTOMAKE([1.8 dist-xz no-dist-gzip check-news tar-ustar])
 # - If binary compatibility has been broken (eg removed or changed interfaces)
 #   change to C+1:0:0
 # - If the interface is the same as the previous version, change to C:R+1:A
-GNOMEBT_LT_VERSION=13:0:0
+GNOMEBT_LT_VERSION=13:1:0
 AC_SUBST(GNOMEBT_LT_VERSION)
 
 AM_MAINTAINER_MODE
@@ -72,8 +72,8 @@ if (test "$enable_icon_update" != no); then
 fi
 AM_CONDITIONAL([ICON_UPDATE], [test -n "$UPDATE_ICON_CACHE"])
 
-GTK_REQUIRED=3.11.2
-GLIB_REQUIRED=2.36.0
+GTK_REQUIRED=3.12.0
+GLIB_REQUIRED=2.38.0
 NOTIFY_REQUIRED=0.7.0
 NAUTILUS_SENDTO_REQUIRED=2.29.0
 NAUTILUS_SENDTO_MAX_REQUIRED=3.7.0
@@ -94,7 +94,9 @@ PKG_CHECK_MODULES(LIBGNOMEBT,
 	gmodule-2.0
 	gio-unix-2.0
 	gtk+-3.0 >= $GTK_REQUIRED
-	libudev)
+	libudev
+	libnotify
+	libcanberra-gtk3)
 
 GDBUS_CODEGEN="gdbus-codegen"
 AC_SUBST(GDBUS_CODEGEN)
@@ -111,8 +113,6 @@ AC_ARG_ENABLE([documentation],
 	[], [enable_documentation=yes])
 AM_CONDITIONAL(ENABLE_DOCUMENTATION, test x$enable_documentation = xyes)
 
-YELP_HELP_INIT
-
 AC_OUTPUT(Makefile
 	  gnome-bluetooth-1.0.pc
 	  icons/Makefile
@@ -124,7 +124,6 @@ AC_OUTPUT(Makefile
 	  docs/reference/libgnome-bluetooth/Makefile
 	  docs/reference/libgnome-bluetooth/version.xml
 	  po/Makefile.in
-	  help/Makefile
 )
 
 echo "

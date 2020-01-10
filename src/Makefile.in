@@ -88,7 +88,6 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@ENABLE_DOCUMENTATION_TRUE@am__append_1 = help
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gtk-doc.m4 \
@@ -191,11 +190,11 @@ am__define_uniq_tagged_files = \
 ETAGS = etags
 CTAGS = ctags
 CSCOPE = cscope
-DIST_SUBDIRS = icons lib sendto docs po help
+DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(srcdir)/gnome-bluetooth-1.0.pc.in AUTHORS COPYING \
 	COPYING.LIB ChangeLog INSTALL NEWS README compile config.guess \
-	config.sub depcomp install-sh ltmain.sh missing
+	config.sub install-sh ltmain.sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -278,7 +277,6 @@ GTKDOC_DEPS_CFLAGS = @GTKDOC_DEPS_CFLAGS@
 GTKDOC_DEPS_LIBS = @GTKDOC_DEPS_LIBS@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
-HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INPUT_CFLAGS = @INPUT_CFLAGS@
 INPUT_LIBS = @INPUT_LIBS@
@@ -303,7 +301,6 @@ INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
 INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
 INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
-ITSTOOL = @ITSTOOL@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBGNOMEBT_CFLAGS = @LIBGNOMEBT_CFLAGS@
@@ -315,6 +312,7 @@ LIBTOOL = @LIBTOOL@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -353,8 +351,6 @@ WARN_CFLAGS = @WARN_CFLAGS@
 WARN_CXXFLAGS = @WARN_CXXFLAGS@
 XGETTEXT = @XGETTEXT@
 XMLLINT = @XMLLINT@
-YELP_LC_DIST = @YELP_LC_DIST@
-YELP_LC_MEDIA_LINKS = @YELP_LC_MEDIA_LINKS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -410,11 +406,10 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-DEF_SUBDIRS = icons lib sendto docs po help
-SUBDIRS = icons lib sendto docs po $(am__append_1)
+SUBDIRS = icons lib sendto docs po
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make
-DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
+AM_DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
 	--disable-desktop-update --disable-mime-update --disable-icon-update \
 	--enable-gtk-doc --disable-scrollkeeper --enable-introspection
 
@@ -689,7 +684,7 @@ distdir: $(DISTFILES)
 	  ! -type d ! -perm -444 -exec $(install_sh) -c -m a+r {} {} \; \
 	|| chmod -R a+r "$(distdir)"
 dist-gzip: distdir
-	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	tardir=$(distdir) && $(am__tar) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).tar.gz
 	$(am__post_remove_distdir)
 
 dist-bzip2: distdir
@@ -714,7 +709,7 @@ dist-shar: distdir
 	@echo WARNING: "Support for shar distribution archives is" \
 	               "deprecated." >&2
 	@echo WARNING: "It will be removed altogether in Automake 2.0" >&2
-	shar $(distdir) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).shar.gz
+	shar $(distdir) | eval GZIP= gzip $(GZIP_ENV) -c >$(distdir).shar.gz
 	$(am__post_remove_distdir)
 
 dist-zip: distdir
@@ -732,7 +727,7 @@ dist dist-all:
 distcheck: dist
 	case '$(DIST_ARCHIVES)' in \
 	*.tar.gz*) \
-	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).tar.gz | $(am__untar) ;;\
+	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).tar.gz | $(am__untar) ;;\
 	*.tar.bz2*) \
 	  bzip2 -dc $(distdir).tar.bz2 | $(am__untar) ;;\
 	*.tar.lz*) \
@@ -742,7 +737,7 @@ distcheck: dist
 	*.tar.Z*) \
 	  uncompress -c $(distdir).tar.Z | $(am__untar) ;;\
 	*.shar.gz*) \
-	  GZIP=$(GZIP_ENV) gzip -dc $(distdir).shar.gz | unshar ;;\
+	  eval GZIP= gzip $(GZIP_ENV) -dc $(distdir).shar.gz | unshar ;;\
 	*.zip*) \
 	  unzip $(distdir).zip ;;\
 	esac
@@ -955,7 +950,8 @@ uninstall-hook:
 
 # Build ChangeLog from GIT history
 ChangeLog:
-	@if test -f $(top_srcdir)/.git/HEAD; then \
+	@if test -f $(top_srcdir)/.git/HEAD; then			\
+		cd $(top_srcdir) ;					\
 		git log --stat --after="Fri Feb 20 00:08:02 2009" > $@; \
 	fi
 

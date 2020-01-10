@@ -108,18 +108,42 @@ update_from_label (void)
 	g_free (markup);
 }
 
+static char *
+cleanup_error (GError *error)
+{
+	char *remote_error;
+
+	if (!error || *error->message == '\0')
+		return g_strdup (_("An unknown error occurred"));
+	if (g_dbus_error_is_remote_error (error) == FALSE)
+		return g_strdup (error->message);
+
+	remote_error = g_dbus_error_get_remote_error (error);
+	g_debug ("Remote error is: %s", remote_error);
+	g_free (remote_error);
+
+	g_dbus_error_strip_remote_error (error);
+	g_debug ("Error message is: %s", error->message);
+
+	/* And now, take advantage of the fact that obexd isn't translated */
+	if (g_strcmp0 (error->message, "Unable to find service record") == 0) {
+		return g_strdup (_("Make sure that the remote device is switched on and that it accepts Bluetooth connections"));
+	}
+
+	return g_strdup (error->message);
+}
+
 static void
 handle_error (GError *error)
 {
-	const char *message;
+	char *message;
 
-	if (!error || *error->message == '\0')
-		message = _("An unknown error occurred");
-	else
-		message = error->message;
+	message = cleanup_error (error);
+
 	gtk_widget_show (image_status);
 	gtk_label_set_markup (GTK_LABEL (label_status), message);
 	g_clear_error (&error);
+	g_free (message);
 
 	/* Clear the progress bar as it may be saying 'Connecting' or
 	 * 'Sending file 1 of 1' which is not true. */
@@ -495,8 +519,6 @@ static void create_window(void)
 	gtk_widget_show_all(dialog);
 }
 
-#define OPENOBEX_CONNECTION_FAILED "org.openobex.Error.ConnectionAttemptFailed"
-
 static gchar *get_device_name(const gchar *address)
 {
 	BluetoothClient *client;
@@ -668,9 +690,26 @@ select_device_changed(BluetoothChooser *sel,
 		      gpointer user_data)
 {
 	GtkDialog *dialog = user_data;
+	char *icon;
 
-	gtk_dialog_set_response_sensitive(dialog,
-				GTK_RESPONSE_ACCEPT, address != NULL);
+	if (address == NULL)
+		goto bail;
+
+	icon = bluetooth_chooser_get_selected_device_icon (sel);
+	if (icon == NULL)
+		goto bail;
+
+	/* Apple's device don't have OBEX */
+	if (g_str_equal (icon, "phone-apple-iphone"))
+		goto bail;
+
+	gtk_dialog_set_response_sensitive (dialog,
+					   GTK_RESPONSE_ACCEPT, TRUE);
+	return;
+
+bail:
+	gtk_dialog_set_response_sensitive (dialog,
+					   GTK_RESPONSE_ACCEPT, FALSE);
 }
 
 static void

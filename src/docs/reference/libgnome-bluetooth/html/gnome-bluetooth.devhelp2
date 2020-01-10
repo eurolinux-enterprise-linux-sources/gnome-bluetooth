@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
-<book xmlns="http://www.devhelp.net/book" title="gnome-bluetooth Reference Manual" link="index.html" author="" name="gnome-bluetooth" version="2" language="c">
+<book xmlns="http://www.devhelp.net/book" title="gnome-bluetooth Reference Manual" link="index.html" author="" name="gnome-bluetooth" version="2" language="c" online="http://library.gnome.org/devel/gnome-bluetooth/unstable/">
   <chapters>
     <sub name="API Reference" link="ch01.html">
       <sub name="BluetoothClient" link="BluetoothClient.html"/>
@@ -12,70 +11,6 @@
     </sub>
     <sub name="Object Hierarchy" link="object-tree.html"/>
     <sub name="API Index" link="api-index-full.html"/>
-    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
-  <functions>
-    <keyword type="function" name="bluetooth_client_connect_service ()" link="BluetoothClient.html#bluetooth-client-connect-service"/>
-    <keyword type="function" name="bluetooth_client_connect_service_finish ()" link="BluetoothClient.html#bluetooth-client-connect-service-finish"/>
-    <keyword type="function" name="bluetooth_client_get_adapter_model ()" link="BluetoothClient.html#bluetooth-client-get-adapter-model"/>
-    <keyword type="function" name="bluetooth_client_get_device_model ()" link="BluetoothClient.html#bluetooth-client-get-device-model"/>
-    <keyword type="function" name="bluetooth_client_get_filter_model ()" link="BluetoothClient.html#bluetooth-client-get-filter-model"/>
-    <keyword type="function" name="bluetooth_client_get_model ()" link="BluetoothClient.html#bluetooth-client-get-model"/>
-    <keyword type="function" name="bluetooth_client_new ()" link="BluetoothClient.html#bluetooth-client-new"/>
-    <keyword type="struct" name="struct BluetoothClient" link="BluetoothClient.html#BluetoothClient-struct"/>
-    <keyword type="property" name="The “default-adapter” property" link="BluetoothClient.html#BluetoothClient--default-adapter"/>
-    <keyword type="property" name="The “default-adapter-discoverable” property" link="BluetoothClient.html#BluetoothClient--default-adapter-discoverable"/>
-    <keyword type="property" name="The “default-adapter-discovering” property" link="BluetoothClient.html#BluetoothClient--default-adapter-discovering"/>
-    <keyword type="property" name="The “default-adapter-name” property" link="BluetoothClient.html#BluetoothClient--default-adapter-name"/>
-    <keyword type="property" name="The “default-adapter-powered” property" link="BluetoothClient.html#BluetoothClient--default-adapter-powered"/>
-    <keyword type="signal" name="The “device-removed” signal" link="BluetoothClient.html#BluetoothClient-device-removed"/>
-    <keyword type="function" name="bluetooth_chooser_dump_selected_device ()" link="BluetoothChooser.html#bluetooth-chooser-dump-selected-device"/>
-    <keyword type="function" name="bluetooth_chooser_get_scrolled_window ()" link="BluetoothChooser.html#bluetooth-chooser-get-scrolled-window"/>
-    <keyword type="function" name="bluetooth_chooser_get_selected_device ()" link="BluetoothChooser.html#bluetooth-chooser-get-selected-device"/>
-    <keyword type="function" name="bluetooth_chooser_get_selected_device_icon ()" link="BluetoothChooser.html#bluetooth-chooser-get-selected-device-icon"/>
-    <keyword type="function" name="bluetooth_chooser_get_selected_device_info ()" link="BluetoothChooser.html#bluetooth-chooser-get-selected-device-info"/>
-    <keyword type="function" name="bluetooth_chooser_get_selected_device_is_connected ()" link="BluetoothChooser.html#bluetooth-chooser-get-selected-device-is-connected"/>
-    <keyword type="function" name="bluetooth_chooser_get_selected_device_name ()" link="BluetoothChooser.html#bluetooth-chooser-get-selected-device-name"/>
-    <keyword type="function" name="bluetooth_chooser_get_selected_device_type ()" link="BluetoothChooser.html#bluetooth-chooser-get-selected-device-type"/>
-    <keyword type="function" name="bluetooth_chooser_new ()" link="BluetoothChooser.html#bluetooth-chooser-new"/>
-    <keyword type="function" name="bluetooth_chooser_start_discovery ()" link="BluetoothChooser.html#bluetooth-chooser-start-discovery"/>
-    <keyword type="function" name="bluetooth_chooser_stop_discovery ()" link="BluetoothChooser.html#bluetooth-chooser-stop-discovery"/>
-    <keyword type="struct" name="struct BluetoothChooser" link="BluetoothChooser.html#BluetoothChooser-struct"/>
-    <keyword type="property" name="The “device-category-filter” property" link="BluetoothChooser.html#BluetoothChooser--device-category-filter"/>
-    <keyword type="property" name="The “device-selected” property" link="BluetoothChooser.html#BluetoothChooser--device-selected"/>
-    <keyword type="property" name="The “device-service-filter” property" link="BluetoothChooser.html#BluetoothChooser--device-service-filter"/>
-    <keyword type="property" name="The “device-type-filter” property" link="BluetoothChooser.html#BluetoothChooser--device-type-filter"/>
-    <keyword type="property" name="The “has-internal-device-filter” property" link="BluetoothChooser.html#BluetoothChooser--has-internal-device-filter"/>
-    <keyword type="property" name="The “show-connected” property" link="BluetoothChooser.html#BluetoothChooser--show-connected"/>
-    <keyword type="property" name="The “show-device-category” property" link="BluetoothChooser.html#BluetoothChooser--show-device-category"/>
-    <keyword type="property" name="The “show-device-type” property" link="BluetoothChooser.html#BluetoothChooser--show-device-type"/>
-    <keyword type="property" name="The “show-device-type-column” property" link="BluetoothChooser.html#BluetoothChooser--show-device-type-column"/>
-    <keyword type="property" name="The “show-pairing” property" link="BluetoothChooser.html#BluetoothChooser--show-pairing"/>
-    <keyword type="property" name="The “show-searching” property" link="BluetoothChooser.html#BluetoothChooser--show-searching"/>
-    <keyword type="signal" name="The “selected-device-activated” signal" link="BluetoothChooser.html#BluetoothChooser-selected-device-activated"/>
-    <keyword type="signal" name="The “selected-device-changed” signal" link="BluetoothChooser.html#BluetoothChooser-selected-device-changed"/>
-    <keyword type="function" name="bluetooth_chooser_button_available ()" link="BluetoothChooserButton.html#bluetooth-chooser-button-available"/>
-    <keyword type="function" name="bluetooth_chooser_button_new ()" link="BluetoothChooserButton.html#bluetooth-chooser-button-new"/>
-    <keyword type="struct" name="BluetoothChooserButton" link="BluetoothChooserButton.html#BluetoothChooserButton-struct"/>
-    <keyword type="property" name="The “device” property" link="BluetoothChooserButton.html#BluetoothChooserButton--device"/>
-    <keyword type="property" name="The “is-available” property" link="BluetoothChooserButton.html#BluetoothChooserButton--is-available"/>
-    <keyword type="signal" name="The “chooser-created” signal" link="BluetoothChooserButton.html#BluetoothChooserButton-chooser-created"/>
-    <keyword type="function" name="bluetooth_chooser_combo_new ()" link="BluetoothChooserCombo.html#bluetooth-chooser-combo-new"/>
-    <keyword type="macro" name="BLUETOOTH_CHOOSER_COMBO_FIRST_DEVICE" link="BluetoothChooserCombo.html#BLUETOOTH-CHOOSER-COMBO-FIRST-DEVICE:CAPS"/>
-    <keyword type="struct" name="BluetoothChooserCombo" link="BluetoothChooserCombo.html#BluetoothChooserCombo-struct"/>
-    <keyword type="property" name="The “chooser” property" link="BluetoothChooserCombo.html#BluetoothChooserCombo--chooser"/>
-    <keyword type="property" name="The “device” property" link="BluetoothChooserCombo.html#BluetoothChooserCombo--device"/>
-    <keyword type="signal" name="The “chooser-created” signal" link="BluetoothChooserCombo.html#BluetoothChooserCombo-chooser-created"/>
-    <keyword type="macro" name="BLUETOOTH_TYPE_AUDIO" link="gnome-bluetooth-bluetooth-enums.html#BLUETOOTH-TYPE-AUDIO:CAPS"/>
-    <keyword type="macro" name="BLUETOOTH_TYPE_INPUT" link="gnome-bluetooth-bluetooth-enums.html#BLUETOOTH-TYPE-INPUT:CAPS"/>
-    <keyword type="enum" name="enum BluetoothCategory" link="gnome-bluetooth-bluetooth-enums.html#BluetoothCategory"/>
-    <keyword type="enum" name="enum BluetoothColumn" link="gnome-bluetooth-bluetooth-enums.html#BluetoothColumn"/>
-    <keyword type="enum" name="enum BluetoothStatus" link="gnome-bluetooth-bluetooth-enums.html#BluetoothStatus"/>
-    <keyword type="enum" name="enum BluetoothType" link="gnome-bluetooth-bluetooth-enums.html#BluetoothType"/>
-    <keyword type="function" name="bluetooth_class_to_type ()" link="gnome-bluetooth-bluetooth-utils.html#bluetooth-class-to-type"/>
-    <keyword type="function" name="bluetooth_send_to_address ()" link="gnome-bluetooth-bluetooth-utils.html#bluetooth-send-to-address"/>
-    <keyword type="function" name="bluetooth_type_to_string ()" link="gnome-bluetooth-bluetooth-utils.html#bluetooth-type-to-string"/>
-    <keyword type="function" name="bluetooth_uuid_to_string ()" link="gnome-bluetooth-bluetooth-utils.html#bluetooth-uuid-to-string"/>
-    <keyword type="function" name="bluetooth_verify_address ()" link="gnome-bluetooth-bluetooth-utils.html#bluetooth-verify-address"/>
-  </functions>
+  <functions/>
 </book>

@@ -32,7 +32,7 @@ G_BEGIN_DECLS
 
 /*
  * The profile UUID list is provided by the Bluetooth SIG:
- * https://www.bluetooth.org/en-us/specification/assigned-numbers-overview/service-discovery
+ * https://www.bluetooth.com/specifications/assigned-numbers/service-discovery
  */
 #define BLUETOOTH_UUID_SPP		0x1101
 #define BLUETOOTH_UUID_DUN		0x1103
@@ -43,6 +43,7 @@ G_BEGIN_DECLS
 #define BLUETOOTH_UUID_A2DP_SOURCE	0x110A
 #define BLUETOOTH_UUID_A2DP_SINK	0x110B
 #define BLUETOOTH_UUID_AVRCP_TARGET	0x110C
+#define BLUETOOTH_UUID_A2DP		0x110D
 #define BLUETOOTH_UUID_AVRCP_CONTROL	0x110E
 #define BLUETOOTH_UUID_HSP_AG		0x1112
 #define BLUETOOTH_UUID_PAN_PANU		0x1115
@@ -59,10 +60,11 @@ G_BEGIN_DECLS
 #define BLUETOOTH_UUID_GENERIC_NET	0x1201
 #define BLUETOOTH_UUID_VDP_SOURCE	0x1303
 
-BluetoothType  bluetooth_class_to_type  (guint32 class);
-const gchar   *bluetooth_type_to_string (guint type);
-gboolean       bluetooth_verify_address (const char *bdaddr);
-const char    *bluetooth_uuid_to_string (const char *uuid);
+BluetoothType  bluetooth_class_to_type         (guint32 class);
+const gchar   *bluetooth_type_to_string        (guint type);
+const gchar   *bluetooth_type_to_filter_string (guint type);
+gboolean       bluetooth_verify_address        (const char *bdaddr);
+const char    *bluetooth_uuid_to_string        (const char *uuid);
 
 void bluetooth_send_to_address (const char *address,
 				const char *alias);

@@ -1,13 +1,12 @@
 Name:		gnome-bluetooth
 Epoch:		1
-Version:	3.14.1
+Version:	3.20.1
 Release:	1%{?dist}
 Summary:	Bluetooth graphical utilities
 
-Group:		Applications/Communications
 License:	GPLv2+
-URL:		http://live.gnome.org/GnomeBluetooth
-Source0:	http://download.gnome.org/sources/gnome-bluetooth/3.14/gnome-bluetooth-%{version}.tar.xz
+URL:		https://wiki.gnome.org/Projects/GnomeBluetooth
+Source0:	https://download.gnome.org/sources/gnome-bluetooth/3.20/gnome-bluetooth-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
 
 %if 0%{?rhel}
@@ -19,18 +18,20 @@ BuildRequires:	dbus-glib-devel
 
 BuildRequires:	intltool desktop-file-utils gettext gtk-doc
 BuildRequires:	itstool
+BuildRequires:	pkgconfig(libnotify)
+BuildRequires:	pkgconfig(libcanberra-gtk3)
 BuildRequires:	systemd-devel
 
 BuildRequires:	gobject-introspection-devel
 
-Obsoletes:	bluez-pin
 Provides:	dbus-bluez-pin-helper
-Conflicts:	bluez-gnome <= 1.8
-Obsoletes:	bluez-gnome <= 1.8
 
 # Otherwise we might end up with mismatching version
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:	bluez >= 5.0
+%if 0%{?fedora}
+Requires:	bluez-obexd
+%endif
 %ifnarch s390 s390x
 Requires:	pulseaudio-module-bluetooth
 %endif
@@ -44,9 +45,7 @@ monitor and use Bluetooth devices.
 
 %package libs
 Summary:	GTK+ Bluetooth device selection widgets
-Group:		System Environment/Libraries
 License:	LGPLv2+
-Requires:	gobject-introspection
 
 %description libs
 This package contains libraries needed for applications that
@@ -54,13 +53,9 @@ want to display a Bluetooth device selection widget.
 
 %package libs-devel
 Summary:	Development files for %{name}-libs
-Group:		Development/Libraries
 License:	LGPLv2+
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	gobject-introspection-devel
-Obsoletes:	gnome-bluetooth-devel < 2.27.1-4
-Provides:	gnome-bluetooth-devel = %{version}
+Requires:	%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
+Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
 
 %description libs-devel
 This package contains the libraries and header files that are needed
@@ -74,19 +69,13 @@ for writing applications that require a Bluetooth device selection widget.
 make %{?_smp_mflags}
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 
-rm -f 	   $RPM_BUILD_ROOT/%{_libdir}/gnome-bluetooth/plugins/*.la \
-	   $RPM_BUILD_ROOT/%{_libdir}/nautilus-sendto/plugins/*.la
-#	   $RPM_BUILD_ROOT%{_libdir}/libgnome-bluetooth.la \
+find $RPM_BUILD_ROOT -name '*.la' -delete
 
 install -m0644 -D %{SOURCE1} $RPM_BUILD_ROOT/usr/lib/udev/rules.d/61-gnome-bluetooth-rfkill.rules
 
-# gnome-bluetooth2 is the name for the gettext domain,
-# gnome-bluetooth is the name in the docs
 %find_lang gnome-bluetooth2
-%find_lang %{name} --with-gnome
-cat %{name}.lang >> gnome-bluetooth2.lang
 
 %post
 update-desktop-database &>/dev/null || :
@@ -113,7 +102,8 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %files
-%doc README NEWS COPYING
+%license COPYING
+%doc README NEWS
 %{_bindir}/bluetooth-sendto
 %{_datadir}/applications/*.desktop
 %{_datadir}/gnome-bluetooth/
@@ -121,8 +111,9 @@ fi
 /usr/lib/udev/rules.d/61-gnome-bluetooth-rfkill.rules
 
 %files -f gnome-bluetooth2.lang libs
-%doc COPYING.LIB
+%license COPYING.LIB
 %{_libdir}/libgnome-bluetooth.so.*
+%dir %{_libdir}/girepository-1.0
 %{_libdir}/girepository-1.0/GnomeBluetooth-1.0.typelib
 %{_datadir}/icons/hicolor/*/apps/*
 %{_datadir}/icons/hicolor/*/status/*
@@ -130,12 +121,20 @@ fi
 %files libs-devel
 %{_includedir}/gnome-bluetooth/
 %{_libdir}/libgnome-bluetooth.so
-%{_libdir}/libgnome-bluetooth.la
 %{_libdir}/pkgconfig/gnome-bluetooth-1.0.pc
+%dir %{_datadir}/gir-1.0
 %{_datadir}/gir-1.0/GnomeBluetooth-1.0.gir
 %{_datadir}/gtk-doc
 
 %changelog
+* Mon Feb 13 2017 Kalev Lember <klember@redhat.com> - 1:3.20.1-1
+- Update to 3.20.1
+- Resolves: #1386878
+
+* Mon Oct 17 2016 Kalev Lember <klember@redhat.com> - 1:3.20.0-1
+- Update to 3.20.0
+- Resolves: #1386878
+
 * Thu Apr 30 2015 Bastien Nocera <bnocera@redhat.com> 3.14.1-1
 - Update to 3.14.1
 Resolves: #1174547

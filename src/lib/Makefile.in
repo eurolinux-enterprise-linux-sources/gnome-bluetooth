@@ -153,7 +153,8 @@ am__objects_2 = bluetooth-client.lo bluetooth-utils.lo \
 	bluetooth-chooser-button.lo bluetooth-chooser-combo.lo \
 	bluetooth-client-glue.lo bluetooth-fdo-glue.lo \
 	bluetooth-settings-widget.lo bluetooth-settings-resources.lo \
-	bluetooth-settings-row.lo bluetooth-pairing-dialog.lo pin.lo
+	bluetooth-settings-row.lo bluetooth-pairing-dialog.lo pin.lo \
+	bluetooth-settings-obexpush.lo
 am_libgnome_bluetooth_la_OBJECTS = $(am__objects_1) $(am__objects_2)
 libgnome_bluetooth_la_OBJECTS = $(am_libgnome_bluetooth_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -297,7 +298,6 @@ GTKDOC_DEPS_CFLAGS = @GTKDOC_DEPS_CFLAGS@
 GTKDOC_DEPS_LIBS = @GTKDOC_DEPS_LIBS@
 GTKDOC_MKPDF = @GTKDOC_MKPDF@
 GTKDOC_REBASE = @GTKDOC_REBASE@
-HELP_DIR = @HELP_DIR@
 HTML_DIR = @HTML_DIR@
 INPUT_CFLAGS = @INPUT_CFLAGS@
 INPUT_LIBS = @INPUT_LIBS@
@@ -322,7 +322,6 @@ INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
 INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
 INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
-ITSTOOL = @ITSTOOL@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
 LIBGNOMEBT_CFLAGS = @LIBGNOMEBT_CFLAGS@
@@ -334,6 +333,7 @@ LIBTOOL = @LIBTOOL@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -372,8 +372,6 @@ WARN_CFLAGS = @WARN_CFLAGS@
 WARN_CXXFLAGS = @WARN_CXXFLAGS@
 XGETTEXT = @XGETTEXT@
 XMLLINT = @XMLLINT@
-YELP_LC_DIST = @YELP_LC_DIST@
-YELP_LC_MEDIA_LINKS = @YELP_LC_MEDIA_LINKS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -429,8 +427,10 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-EXTRA_DIST = settings.gresource.xml settings.ui bluetooth-client.xml \
-	bluetooth-fdo.xml gnome-bluetooth.symbols $(pin_DATA)
+EXTRA_DIST = bluetooth.gresource.xml settings.ui \
+	bluetooth-pairing-dialog.ui bluetooth-settings-row.ui \
+	bluetooth-settings.css bluetooth-client.xml bluetooth-fdo.xml \
+	gnome-bluetooth.symbols $(pin_DATA)
 CLEANFILES = $(am__append_2) $(BUILT_SOURCES) \
 	pin-code-database.xml.valid
 BUILT_SOURCES = bluetooth-settings-resources.c \
@@ -439,7 +439,7 @@ BUILT_SOURCES = bluetooth-settings-resources.c \
 	bluetooth-fdo-glue.c gnome-bluetooth-enum-types.h \
 	gnome-bluetooth-enum-types.c
 lib_LTLIBRARIES = libgnome-bluetooth.la
-resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/settings.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/bluetooth.gresource.xml)
 
 # will be scanned for introspection annotation, but won't be installed
 libgnome_bluetooth_c_sources = \
@@ -457,7 +457,8 @@ libgnome_bluetooth_c_sources = \
 	bluetooth-settings-resources.c	\
 	bluetooth-settings-row.c	\
 	bluetooth-pairing-dialog.c	\
-	pin.c
+	pin.c				\
+	bluetooth-settings-obexpush.c
 
 libgnome_bluetooth_private_headers = \
 	bluetooth-client-private.h	\
@@ -469,7 +470,8 @@ libgnome_bluetooth_private_headers = \
 	bluetooth-settings-resources.h	\
 	bluetooth-settings-row.h	\
 	bluetooth-pairing-dialog.h	\
-	pin.h
+	pin.h				\
+	bluetooth-settings-obexpush.h
 
 
 # public headers don't need to be listed, are handled by _HEADERS
@@ -662,6 +664,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bluetooth-fdo-glue.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bluetooth-filter-widget.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bluetooth-pairing-dialog.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bluetooth-settings-obexpush.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bluetooth-settings-resources.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bluetooth-settings-row.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bluetooth-settings-widget.Plo@am__quote@
@@ -1008,9 +1011,9 @@ uninstall-am: uninstall-girDATA uninstall-gnomebluetoothHEADERS \
 
 .PRECIOUS: Makefile
 
-bluetooth-settings-resources.c: settings.gresource.xml $(resource_files)
+bluetooth-settings-resources.c: bluetooth.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name bluetooth_settings $<
-bluetooth-settings-resources.h: settings.gresource.xml $(resource_files)
+bluetooth-settings-resources.h: bluetooth.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name bluetooth_settings $<
 
 -include $(INTROSPECTION_MAKEFILE)

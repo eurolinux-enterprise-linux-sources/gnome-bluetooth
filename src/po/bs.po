@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: gnome-bluetooth\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "bluetooth&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-02-27 07:01+0000\n"
+"POT-Creation-Date: 2015-02-27 07:03+0000\n"
 "PO-Revision-Date: 2015-02-04 15:39+0000\n"
 "Last-Translator: Merima Cisija <cisijam@gmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -22,7 +22,7 @@ msgstr "Klikni za odabir uređaja"
 
 #: ../lib/bluetooth-chooser-button.c:201
 #: ../lib/bluetooth-settings-widget.c:1195 ../sendto/main.c:423
-#: ../sendto/main.c:699 ../sendto/main.c:755
+#: ../sendto/main.c:697 ../sendto/main.c:753
 msgid "_Cancel"
 msgstr "_Odustani"
 
@@ -39,19 +39,19 @@ msgstr "Nepoznato"
 msgid "No adapters available"
 msgstr "Nema dostupnih adaptira"
 
-#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:804
+#: ../lib/bluetooth-chooser.c:180 ../lib/bluetooth-chooser.c:806
 msgid "Searching for devices…"
 msgstr "Traženje uređaja…"
 
-#: ../lib/bluetooth-chooser.c:696 ../lib/bluetooth-chooser.c:985
+#: ../lib/bluetooth-chooser.c:698 ../lib/bluetooth-chooser.c:988
 msgid "Device"
 msgstr "Uređaj"
 
-#: ../lib/bluetooth-chooser.c:732 ../lib/settings.ui.h:5
+#: ../lib/bluetooth-chooser.c:734 ../lib/settings.ui.h:5
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../lib/bluetooth-chooser.c:987 ../lib/bluetooth-settings-widget.c:1443
+#: ../lib/bluetooth-chooser.c:990 ../lib/bluetooth-settings-widget.c:1443
 msgid "Devices"
 msgstr "Uređaji"
 
@@ -107,22 +107,22 @@ msgstr "Ulazni uređaji (miš, tastature, itd)"
 msgid "Headphones, headsets and other audio devices"
 msgstr "Slušalice, slušalice sa mikrofonom i drugi audio uređaji"
 
-#: ../lib/bluetooth-pairing-dialog.c:87 ../lib/bluetooth-pairing-dialog.c:94
-#: ../lib/bluetooth-pairing-dialog.c:108
+#: ../lib/bluetooth-pairing-dialog.c:83 ../lib/bluetooth-pairing-dialog.c:90
+#: ../lib/bluetooth-pairing-dialog.c:104
 msgid "Confirm Bluetooth PIN"
 msgstr "Potvrdi Bluetooth PIN"
 
-#: ../lib/bluetooth-pairing-dialog.c:88
+#: ../lib/bluetooth-pairing-dialog.c:84
 #, c-format
 msgid "Please confirm the PIN that was entered on '%s'."
 msgstr "Molim potvrdite PIN koji je unesen u '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:92 ../lib/bluetooth-pairing-dialog.c:105
-#: ../lib/bluetooth-pairing-dialog.c:146
+#: ../lib/bluetooth-pairing-dialog.c:88 ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:142
 msgid "Confirm"
 msgstr "Potvrdi"
 
-#: ../lib/bluetooth-pairing-dialog.c:95
+#: ../lib/bluetooth-pairing-dialog.c:91
 #, c-format
 msgid ""
 "Confirm the Bluetooth PIN for '%s'. This can usually be found in the "
@@ -130,32 +130,32 @@ msgid ""
 msgstr ""
 "Potvrdi Bluetooth PIN za '%s'. Ovo se obično može naći u priručniku uređaja."
 
-#: ../lib/bluetooth-pairing-dialog.c:101
+#: ../lib/bluetooth-pairing-dialog.c:97
 #, c-format
 msgid "Pairing '%s'"
 msgstr "Uparivanje '%s'"
 
-#: ../lib/bluetooth-pairing-dialog.c:109
+#: ../lib/bluetooth-pairing-dialog.c:105
 #, c-format
 msgid ""
 "Please confirm that the following PIN matches the one displayed on '%s'."
 msgstr "Molim potvrdite da sljedeći PIN odgovara onom prikazanom na '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:114
+#: ../lib/bluetooth-pairing-dialog.c:110
 msgid "Bluetooth Pairing Request"
 msgstr "Bluetooth zahtjev za uparivanje"
 
-#: ../lib/bluetooth-pairing-dialog.c:115
+#: ../lib/bluetooth-pairing-dialog.c:111
 #, c-format
 msgid "'%s' wants to pair with this device. Do you want to allow pairing?"
 msgstr "'%s' se želi spojiti sa ovim uređajem. Želite li to dozvoliti?"
 
-#: ../lib/bluetooth-pairing-dialog.c:123
+#: ../lib/bluetooth-pairing-dialog.c:119
 #, c-format
 msgid "Please enter the following PIN on '%s'."
 msgstr "Molim unesite sljedeći PIN na '%s'."
 
-#: ../lib/bluetooth-pairing-dialog.c:126
+#: ../lib/bluetooth-pairing-dialog.c:122
 #, c-format
 msgid ""
 "Please enter the following PIN on '%s'. Then press “Return” on the keyboard."
@@ -163,7 +163,7 @@ msgstr ""
 "Molim unesite sljedeći PIN na '%s'. Zatim pritisnite \"Povratak\" na "
 "tastaturi."
 
-#: ../lib/bluetooth-pairing-dialog.c:129
+#: ../lib/bluetooth-pairing-dialog.c:125
 msgid ""
 "Please move the joystick of your iCade in the following directions. Then "
 "press any of the white buttons."
@@ -171,26 +171,25 @@ msgstr ""
 "Molim pomjerajte upravljač za igrice Vašeg iCade-a u sljedćim smjernicama. "
 "Zatim pritisnite bilo koju bijelu tipku."
 
-#: ../lib/bluetooth-pairing-dialog.c:136
+#: ../lib/bluetooth-pairing-dialog.c:132
 msgid "Allow"
 msgstr "Dozvoli"
 
-#: ../lib/bluetooth-pairing-dialog.c:140
+#: ../lib/bluetooth-pairing-dialog.c:136
 msgid "Dismiss"
 msgstr "Odbaci"
 
 #. Cancel button
-#: ../lib/bluetooth-pairing-dialog.c:150 ../lib/bluetooth-pairing-dialog.c:309
+#: ../lib/bluetooth-pairing-dialog.c:146 ../lib/bluetooth-pairing-dialog.c:289
 msgid "Cancel"
 msgstr "Poništi"
 
 #. OK button
-#: ../lib/bluetooth-pairing-dialog.c:290
+#: ../lib/bluetooth-pairing-dialog.c:270
 msgid "Accept"
 msgstr "Prihvati"
 
-#. Placeholder text
-#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.c:121
+#: ../lib/bluetooth-settings-row.c:79 ../lib/bluetooth-settings-row.ui.h:1
 msgid "Not Set Up"
 msgstr "Nije postavljeno"
 
@@ -414,27 +413,27 @@ msgstr "Od:"
 msgid "To:"
 msgstr "Do:"
 
-#: ../sendto/main.c:555
+#: ../sendto/main.c:553
 #, c-format
 msgid "Sending %s"
 msgstr "Slanje %s"
 
-#: ../sendto/main.c:562 ../sendto/main.c:611
+#: ../sendto/main.c:560 ../sendto/main.c:609
 #, c-format
 msgid "Sending file %d of %d"
 msgstr "Šaljem datoteku broj %d od ukupno %d"
 
-#: ../sendto/main.c:607
+#: ../sendto/main.c:605
 #, c-format
 msgid "%d kB/s"
 msgstr "%d kB/s"
 
-#: ../sendto/main.c:609
+#: ../sendto/main.c:607
 #, c-format
 msgid "%d B/s"
 msgstr "%d B/s"
 
-#: ../sendto/main.c:640
+#: ../sendto/main.c:638
 #, c-format
 msgid "%u transfer complete"
 msgid_plural "%u transfers complete"
@@ -442,46 +441,46 @@ msgstr[0] "%u prijenos završen"
 msgstr[1] "%u prijenosa završena"
 msgstr[2] "%u prijenosa završeno"
 
-#: ../sendto/main.c:647
+#: ../sendto/main.c:645
 msgid "_Close"
 msgstr "_Zatvori"
 
-#: ../sendto/main.c:657
+#: ../sendto/main.c:655
 msgid "There was an error"
 msgstr "Desila se greška"
 
-#: ../sendto/main.c:695
+#: ../sendto/main.c:693
 msgid "Select device to send to"
 msgstr "Izaberite uređaj na koji da pošaljem"
 
-#: ../sendto/main.c:700
+#: ../sendto/main.c:698
 msgid "_Send"
 msgstr "_Pošalji"
 
-#: ../sendto/main.c:750
+#: ../sendto/main.c:748
 msgid "Choose files to send"
 msgstr "Odaberite datoteke za slanje"
 
-#: ../sendto/main.c:756
+#: ../sendto/main.c:754
 msgid "Select"
 msgstr "Odaberi"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:784
 msgid "Remote device to use"
 msgstr "Udaljeni uređaji za korištenje"
 
-#: ../sendto/main.c:786
+#: ../sendto/main.c:784
 msgid "ADDRESS"
 msgstr "ADRESA"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:786
 msgid "Remote device's name"
 msgstr "Ime udaljenog uređaja"
 
-#: ../sendto/main.c:788
+#: ../sendto/main.c:786
 msgid "NAME"
 msgstr "IME"
 
-#: ../sendto/main.c:807
+#: ../sendto/main.c:805
 msgid "[FILE...]"
 msgstr "[DATOTEKA...]"

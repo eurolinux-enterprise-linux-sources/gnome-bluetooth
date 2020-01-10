@@ -1,16 +1,10 @@
-DEF_SUBDIRS = icons lib sendto docs po help
-
 SUBDIRS = icons lib sendto docs po
-
-if ENABLE_DOCUMENTATION
-SUBDIRS += help
-endif
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 EXTRA_DIST = intltool-extract.in intltool-update.in intltool-merge.in ChangeLog.pre-2.27 gtk-doc.make
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
+AM_DISTCHECK_CONFIGURE_FLAGS = --disable-schemas-install \
 	--disable-desktop-update --disable-mime-update --disable-icon-update \
 	--enable-gtk-doc --disable-scrollkeeper --enable-introspection
 
@@ -37,7 +31,8 @@ endif
 
 # Build ChangeLog from GIT history
 ChangeLog:
-	@if test -f $(top_srcdir)/.git/HEAD; then \
+	@if test -f $(top_srcdir)/.git/HEAD; then			\
+		cd $(top_srcdir) ;					\
 		git log --stat --after="Fri Feb 20 00:08:02 2009" > $@; \
 	fi
 

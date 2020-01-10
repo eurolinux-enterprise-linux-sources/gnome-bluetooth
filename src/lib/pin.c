@@ -43,7 +43,7 @@ oui_to_vendor (const char *oui)
 	struct udev *udev;
 	struct udev_hwdb *hwdb;
 	struct udev_list_entry *list, *l;
-	char *modalias;
+	char *modalias = NULL;
 	char *vendor = NULL;
 
 	if (oui == NULL ||
@@ -100,6 +100,7 @@ static guint string_to_type(const char *type)
 	TYPE_IS ("audio", BLUETOOTH_TYPE_OTHER_AUDIO);
 	TYPE_IS ("printer", BLUETOOTH_TYPE_PRINTER);
 	TYPE_IS ("network", BLUETOOTH_TYPE_NETWORK);
+	TYPE_IS ("joypad", BLUETOOTH_TYPE_JOYPAD);
 
 	g_warning ("unhandled type '%s'", type);
 	return BLUETOOTH_TYPE_ANY;
@@ -175,11 +176,11 @@ get_pincode_for_device (guint       type,
 {
 	GMarkupParseContext *ctx;
 	GMarkupParser parser = { pin_db_parse_start_tag, NULL, NULL, NULL, NULL };
-	PinParseData data;
+	PinParseData *data;
 	char *buf;
 	gsize buf_len;
 	GError *err = NULL;
-	char *tmp_vendor;
+	char *tmp_vendor, *ret_pin;
 
 	g_return_val_if_fail (address != NULL, NULL);
 
@@ -199,18 +200,18 @@ get_pincode_for_device (guint       type,
 		g_free (filename);
 	}
 
-	data.ret_pin = NULL;
-	data.max_digits = 0;
-	data.type = type;
-	data.address = address;
-	data.name = name;
-	data.confirm = TRUE;
+	data = g_new0 (PinParseData, 1);
+	data->type = type;
+	data->address = address;
+	data->name = name;
+	data->confirm = TRUE;
 
 	tmp_vendor = oui_to_vendor (address);
-	data.vendor = g_ascii_strdown (tmp_vendor, -1);
+	if (tmp_vendor)
+		data->vendor = g_ascii_strdown (tmp_vendor, -1);
 	g_free (tmp_vendor);
 
-	ctx = g_markup_parse_context_new (&parser, 0, &data, NULL);
+	ctx = g_markup_parse_context_new (&parser, 0, data, NULL);
 
 	if (!g_markup_parse_context_parse (ctx, buf, buf_len, &err)) {
 		g_warning ("Failed to parse '%s': %s\n", PIN_CODE_DB, err->message);
@@ -221,16 +222,18 @@ get_pincode_for_device (guint       type,
 	g_free (buf);
 
 	if (max_digits != NULL)
-		*max_digits = data.max_digits;
+		*max_digits = data->max_digits;
 	if (confirm != NULL)
-		*confirm = data.confirm;
+		*confirm = data->confirm;
 
 	g_debug ("Got pin '%s' (max digits: %d, confirm: %d) for device '%s' (type: %s address: %s, vendor: %s)",
-		 data.ret_pin, data.max_digits, data.confirm,
-		 name ? name : "", bluetooth_type_to_string (type), address, data.vendor);
+		 data->ret_pin, data->max_digits, data->confirm,
+		 name ? name : "", bluetooth_type_to_string (type), address, data->vendor);
 
-	g_free (data.vendor);
+	g_free (data->vendor);
+	ret_pin = data->ret_pin;
+	g_free (data);
 
-	return data.ret_pin;
+	return ret_pin;
 }
 

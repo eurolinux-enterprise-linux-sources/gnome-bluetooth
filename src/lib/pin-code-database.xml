@@ -43,7 +43,7 @@
 <!DOCTYPE devices [
 	<!ELEMENT devices (device)+>
 	<!ELEMENT device EMPTY>
-	<!ATTLIST device type (any|mouse|tablet|keyboard|headset|headphones|audio|printer|network) "any">
+	<!ATTLIST device type (any|mouse|tablet|keyboard|headset|headphones|audio|printer|network|joypad) "any">
 	<!ATTLIST device oui CDATA #IMPLIED>
 	<!ATTLIST device vendor CDATA #IMPLIED>
 	<!ATTLIST device name CDATA #IMPLIED>
@@ -74,6 +74,8 @@
 	     Again, same as above -->
 	<device oui="7C:1E:52:" type="mouse" name="Microsoft Wedge Touch Mouse" pin="0000"/>
 	<device oui="00:1D:D8:" type="mouse" name="Microsoft Wireless Notebook Presenter Mouse 8000" pin="0000"/>
+	<device oui="28:18:78:" type="mouse" name="Microsoft Sculpt Comfort Mouse" pin="0000"/>
+	<device oui="30:59:B7:" type="mouse" name="Microsoft Sculpt Comfort Mouse" pin="0000"/>
 
 	<!-- BT-GPS8 JENTRO, GPS mouse -->
 	<device oui="00:0D:B5:" name="BT-GPS8 JENTRO" pin="0000"/>
@@ -83,6 +85,9 @@
 
 	<!-- ION iCade Game Controller -->
 	<device name="iCade" type="keyboard" pin="ICADE"/>
+
+	<!-- Logitech Ultrathin Touch Mouse -->
+	<device oui="00:1F:20:" name="Ultrathin Touch Mouse" pin="0000"/>
 
 <!-- GPS devices -->
 	<device oui="00:0D:B5:" name="TomTom Wireless GPS MkII" pin="0000"/>
@@ -165,6 +170,9 @@
 
 	<!-- Printers -->
 	<device type="printer" pin="0000"/>
+
+	<!-- Joypads and joysticks -->
+	<device type="joypad" pin="0000"/>
 
 	<!-- Headphones and headsets -->
 	<device type="headphones" pin="0000"/>

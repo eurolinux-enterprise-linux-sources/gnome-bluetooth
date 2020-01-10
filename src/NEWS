@@ -1,6 +1,57 @@
-ver 3.14.1:
+ver 3.20.1:
+- Unknown device types now show as "Unknown" rather than "All types"
+- Fix an invisible spinner when pairing
+- Fix PIN font size
+
+ver 3.20.0:
+- Add support for joysticks
+- Fix small memory leaks
+- Fix a runtime warning when the vendor is unknown
+- Fix PIN label size
+
+ver 3.18.3:
+- Trust devices paired from the remote device
+
+ver 3.18.2:
+- Added API to export adapter status
+- Translation updates
+
+ver 3.18.1:
+- Fix a number of style regressions in PIN dialogues
+- Translation updates
+
+ver 3.18.0:
+- Translation updates
+
+ver 3.17.90:
+
+This version of the library adds Obex support to the settings
+widget. When the settings panel will be opened, other devices
+will be able to send files to the computer.
+
+- Remove outdated end-user documentation
+
+Settings:
+- Better empty and disabled state views
+- Handle service authorisation requests for HID devices (mice, joypads)
+- Fix phone icon if extra icons aren't installed
+- Add default PIN for Logitech Ultrathin Touch mouse and
+  Microsoft Sculpt Comfort mice
+
+Send-to:
+- Show better error message when sending a file fails
+- Disallow sending files to iDevices, they don't support Obex
+
+ver 3.16.1:
 - Fix Bluetooth 2.1 keyboards not being pairable
-- Fix some memory leaks
+
+ver 3.16.0:
+- Translation updates
+
+ver 3.15.4:
+- Fix some memory leaks in BluetoothAgent
+- Deprecation warning fixes
+- Use widget templates to create the UI
 
 ver 3.14.0:
 - Translation updates
