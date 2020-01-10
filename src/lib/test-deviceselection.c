@@ -123,10 +123,9 @@ create_phone_dialogue (const char *bdaddr)
 {
 	GtkWidget *dialog, *button;
 
-	dialog = g_object_new(GTK_TYPE_DIALOG,
-			      "use-header-bar", 1,
-			      "title", "My test prefs",
-			      NULL);
+	dialog = gtk_dialog_new_with_buttons("My test prefs", NULL,
+					     0,
+					     GTK_STOCK_CLOSE, GTK_RESPONSE_ACCEPT, NULL);
 	button = bluetooth_chooser_button_new ();
 	if (bdaddr != NULL)
 		g_object_set (G_OBJECT (button), "device", bdaddr, NULL);
@@ -144,8 +143,6 @@ create_phone_dialogue (const char *bdaddr)
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (gtk_main_quit), NULL);
 
-	g_object_add_weak_pointer (G_OBJECT(dialog), (gpointer *) (&dialog));
-
 	return dialog;
 }
 
@@ -153,26 +150,18 @@ create_phone_dialogue (const char *bdaddr)
 static GtkWidget *
 create_dialogue (const char *title)
 {
-	GtkWidget *dialog, *button;
-	GtkStyleContext *context;
+	GtkWidget *dialog;
 
-	dialog = g_object_new (GTK_TYPE_DIALOG,
-			       "use-header-bar", 1,
-			       "title", title,
-			       NULL);
-	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
-			       "_Cancel", GTK_RESPONSE_CANCEL,
-			       "Connect", GTK_RESPONSE_ACCEPT, NULL);
+	dialog = gtk_dialog_new_with_buttons(title, NULL,
+					     0,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+					     GTK_STOCK_CONNECT, GTK_RESPONSE_ACCEPT, NULL);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
 					GTK_RESPONSE_ACCEPT, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
 
 	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
 	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), 2);
-
-	button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	context = gtk_widget_get_style_context(button);
-	gtk_style_context_add_class (context, "suggested-action");
 
 	return dialog;
 }
@@ -426,8 +415,7 @@ int main(int argc, char **argv)
 
 	gtk_main ();
 
-	if (dialog)
-		gtk_widget_destroy(dialog);
+	gtk_widget_destroy(dialog);
 
 	return 0;
 }

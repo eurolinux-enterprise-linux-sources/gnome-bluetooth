@@ -3,7 +3,6 @@
  *  BlueZ - Bluetooth protocol stack for Linux
  *
  *  Copyright (C) 2005-2008  Marcel Holtmann <marcel@holtmann.org>
- *  Copyright (C) 2013 Intel Corporation.
  *
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -33,22 +32,17 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
+#include <obex-agent.h>
 #include <bluetooth-client.h>
 #include <bluetooth-chooser.h>
 
-#define OBEX_SERVICE	"org.bluez.obex"
-#define OBEX_PATH	"/org/bluez/obex"
-#define TRANSFER_IFACE	"org.bluez.obex.Transfer1"
-#define OPP_IFACE	"org.bluez.obex.ObjectPush1"
-#define CLIENT_IFACE	"org.bluez.obex.Client1"
+#define AGENT_PATH "/org/bluez/agent/sendto"
 
 #define RESPONSE_RETRY 1
 
 static GDBusConnection *conn = NULL;
+static ObexAgent *agent = NULL;
 static GDBusProxy *client_proxy = NULL;
-static GDBusProxy *session = NULL;
-static GDBusProxy *current_transfer = NULL;
-static GCancellable *cancellable = NULL;
 
 static GtkWidget *dialog;
 static GtkWidget *label_from;
@@ -60,6 +54,7 @@ static gchar *option_device = NULL;
 static gchar *option_device_name = NULL;
 static gchar **option_files = NULL;
 
+static GDBusProxy *current_transfer = NULL;
 static guint64 current_size = 0;
 static guint64 total_size = 0;
 static guint64 total_sent = 0;
@@ -70,251 +65,20 @@ static int file_index = 0;
 static gint64 first_update = 0;
 static gint64 last_update = 0;
 
-static void on_transfer_properties (GVariant *props);
-static void on_transfer_progress (guint64 transferred);
-static void on_transfer_complete (void);
-static void on_transfer_error (void);
+static void send_notify(GDBusProxy *proxy, GAsyncResult *res, gpointer user_data);
 
-static gint64
-get_system_time (void)
-{
-	struct timeval tmp;
-
-	gettimeofday(&tmp, NULL);
-
-	return (gint64) tmp.tv_usec +
-		(gint64) tmp.tv_sec * G_GINT64_CONSTANT(1000000);
-}
-
-static void
-update_from_label (void)
-{
-	char *filename = option_files[file_index];
-	GFile *file, *dir;
-	char *text, *markup;
-
-	file = g_file_new_for_path (filename);
-	dir = g_file_get_parent (file);
-	g_object_unref (file);
-	if (g_file_has_uri_scheme (dir, "file") != FALSE) {
-		text = g_file_get_path (dir);
-	} else {
-		text = g_file_get_uri (dir);
-	}
-	markup = g_markup_escape_text (text, -1);
-	g_free (text);
-	g_object_unref (dir);
-	gtk_label_set_markup (GTK_LABEL (label_from), markup);
-	g_free (markup);
-}
-
-static char *
-cleanup_error (GError *error)
-{
-	char *remote_error;
-
-	if (!error || *error->message == '\0')
-		return g_strdup (_("An unknown error occurred"));
-	if (g_dbus_error_is_remote_error (error) == FALSE)
-		return g_strdup (error->message);
-
-	remote_error = g_dbus_error_get_remote_error (error);
-	g_debug ("Remote error is: %s", remote_error);
-	g_free (remote_error);
-
-	g_dbus_error_strip_remote_error (error);
-	g_debug ("Error message is: %s", error->message);
-
-	/* And now, take advantage of the fact that obexd isn't translated */
-	if (g_strcmp0 (error->message, "Unable to find service record") == 0) {
-		return g_strdup (_("Make sure that the remote device is switched on and that it accepts Bluetooth connections"));
-	}
-
-	return g_strdup (error->message);
-}
-
-static void
-handle_error (GError *error)
-{
-	char *message;
-
-	message = cleanup_error (error);
-
-	gtk_widget_show (image_status);
-	gtk_label_set_markup (GTK_LABEL (label_status), message);
-	g_clear_error (&error);
-	g_free (message);
-
-	/* Clear the progress bar as it may be saying 'Connecting' or
-	 * 'Sending file 1 of 1' which is not true. */
-	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress), "");
-
-	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
-}
-
-static void
-transfer_properties_changed (GDBusProxy *proxy,
-			     GVariant *changed_properties,
-			     GStrv invalidated_properties,
-			     gpointer user_data)
-{
-	GVariantIter iter;
-	const char *key;
-	GVariant *value;
-
-	g_variant_iter_init (&iter, changed_properties);
-	while (g_variant_iter_next (&iter, "{&sv}", &key, &value)) {
-		if (g_str_equal (key, "Status")) {
-			const char *status;
-
-			status = g_variant_get_string (value, NULL);
-
-			if (g_str_equal (status, "complete")) {
-				on_transfer_complete ();
-			} else if (g_str_equal (status, "error")) {
-				on_transfer_error ();
-			}
-		} else if (g_str_equal (key, "Transferred")) {
-			guint64 transferred = g_variant_get_uint64 (value);
-
-			on_transfer_progress (transferred);
-		}
-
-		g_variant_unref (value);
-	}
-}
-
-static void
-transfer_proxy (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
-{
-	GError *error = NULL;
-
-	current_transfer = g_dbus_proxy_new_finish (res, &error);
-
-	if (current_transfer == NULL) {
-		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-			g_error_free (error);
-			return;
-		}
-
-		handle_error (error);
-		return;
-	}
-
-	g_signal_connect (G_OBJECT (current_transfer), "g-properties-changed",
-		G_CALLBACK (transfer_properties_changed), NULL);
-}
-
-static void
-transfer_created (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
-{
-	GError *error = NULL;
-	GVariant *variant, *properties;
-	const char *transfer;
-
-	variant = g_dbus_proxy_call_finish (proxy, res, &error);
-
-	if (variant == NULL) {
-		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-			g_error_free (error);
-			return;
-		}
-
-		handle_error (error);
-		return;
-	}
-
-	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress), NULL);
-
-	first_update = get_system_time ();
-
-	g_variant_get (variant, "(&o@a{sv})", &transfer, &properties);
-
-	on_transfer_properties (properties);
-
-	g_dbus_proxy_new (conn,
-			  G_DBUS_PROXY_FLAGS_NONE,
-			  NULL,
-			  OBEX_SERVICE,
-			  transfer,
-			  TRANSFER_IFACE,
-			  cancellable,
-			  (GAsyncReadyCallback) transfer_proxy,
-			  NULL);
-
-	g_variant_unref (properties);
-	g_variant_unref (variant);
-}
-
-static void
-send_next_file (void)
-{
-	update_from_label ();
-
-	g_dbus_proxy_call (session,
-			   "SendFile",
-			   g_variant_new ("(s)", option_files[file_index]),
-			   G_DBUS_CALL_FLAGS_NONE,
-			   -1,
-			   cancellable,
-			   (GAsyncReadyCallback) transfer_created,
-			   NULL);
-}
-
-static void
-session_proxy (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
-{
-	GError *error = NULL;
-
-	g_clear_object (&session);
-	session = g_dbus_proxy_new_finish (res, &error);
-
-	if (session == NULL) {
-		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-			g_error_free (error);
-			return;
-		}
-
-		handle_error (error);
-		return;
-	}
-
-	send_next_file ();
-}
-
-static void
-session_created (GDBusProxy *proxy, GAsyncResult *res, gpointer user_data)
-{
-	GError *error = NULL;
-	GVariant *variant;
-	const char *session;
-
-	variant = g_dbus_proxy_call_finish (proxy, res, &error);
-
-	if (variant == NULL) {
-		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-			g_error_free (error);
-			return;
-		}
-
-		handle_error (error);
-		return;
-	}
-
-	g_variant_get (variant, "(&o)", &session);
-
-	g_dbus_proxy_new (conn,
-			  G_DBUS_PROXY_FLAGS_NONE,
-			  NULL,
-			  OBEX_SERVICE,
-			  session,
-			  OPP_IFACE,
-			  cancellable,
-			  (GAsyncReadyCallback) session_proxy,
-			  NULL);
-
-	g_variant_unref (variant);
-}
+/* Agent callbacks */
+static gboolean release_callback(GDBusMethodInvocation *context, gpointer user_data);
+static gboolean request_callback(GDBusMethodInvocation *context, GDBusProxy *transfer, gpointer user_data);
+static gboolean progress_callback(GDBusMethodInvocation *context,
+				  GDBusProxy *transfer,
+				  guint64 transferred,
+				  gpointer user_data);
+static gboolean complete_callback(GDBusMethodInvocation *context, GDBusProxy *transfer, gpointer user_data);
+static gboolean error_callback(GDBusMethodInvocation *context,
+			       GDBusProxy *transfer,
+			       const char *message,
+			       gpointer user_data);
 
 static void
 send_files (void)
@@ -323,21 +87,35 @@ send_files (void)
 	GVariantBuilder *builder;
 
 	builder = g_variant_builder_new (G_VARIANT_TYPE_DICTIONARY);
-	g_variant_builder_add (builder, "{sv}", "Target",
-						g_variant_new_string ("opp"));
+	g_variant_builder_add (builder, "{sv}", "Destination", g_variant_new_string (option_device));
 
-	parameters = g_variant_new ("(sa{sv})", option_device, builder);
+	parameters = g_variant_new ("(a{sv}^aso)", builder, option_files, AGENT_PATH);
 
 	g_dbus_proxy_call (client_proxy,
-			   "CreateSession",
+			   "SendFiles",
 			   parameters,
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
-			   cancellable,
-			   (GAsyncReadyCallback) session_created,
+			   NULL,
+			   (GAsyncReadyCallback) send_notify,
 			   NULL);
 
 	g_variant_builder_unref (builder);
+}
+
+static void
+setup_agent (void)
+{
+	if (agent == NULL)
+		agent = obex_agent_new();
+
+	obex_agent_set_release_func(agent, release_callback, NULL);
+	obex_agent_set_request_func(agent, request_callback, NULL);
+	obex_agent_set_progress_func(agent, progress_callback, NULL);
+	obex_agent_set_complete_func(agent, complete_callback, NULL);
+	obex_agent_set_error_func(agent, error_callback, NULL);
+
+	obex_agent_setup(agent, AGENT_PATH);
 }
 
 static gchar *filename_to_path(const gchar *filename)
@@ -350,6 +128,16 @@ static gchar *filename_to_path(const gchar *filename)
 	g_object_unref(file);
 
 	return path;
+}
+
+static gint64 get_system_time(void)
+{
+	struct timeval tmp;
+
+	gettimeofday(&tmp, NULL);
+
+	return (gint64) tmp.tv_usec +
+			(gint64) tmp.tv_sec * G_GINT64_CONSTANT(1000000);
 }
 
 static gchar *format_time(gint seconds)
@@ -394,28 +182,22 @@ static void response_callback(GtkWidget *dialog,
 					gint response, gpointer user_data)
 {
 	if (response == RESPONSE_RETRY) {
+		setup_agent ();
+
 		/* Reset buttons */
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 
 		/* Reset status and progress bar */
 		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (progress),
-					  _("Connecting…"));
+					  _("Connecting..."));
 		gtk_label_set_text (GTK_LABEL (label_status), "");
 		gtk_widget_hide (image_status);
-
-		/* If we have a session, we don't need to create another one. */
-		if (session)
-			send_next_file ();
-		else
-			send_files ();
-
+		send_files ();
 		return;
 	}
 
-	/* Cancel any ongoing dbus calls we may have */
-	g_cancellable_cancel (cancellable);
-
 	if (current_transfer != NULL) {
+		obex_agent_set_error_func(agent, NULL, NULL);
 		g_dbus_proxy_call (current_transfer,
 				   "Cancel",
 				   NULL,
@@ -432,6 +214,13 @@ static void response_callback(GtkWidget *dialog,
 	gtk_main_quit();
 }
 
+static gboolean is_palm_device(const gchar *bdaddr)
+{
+	return (g_str_has_prefix(bdaddr, "00:04:6B") ||
+		g_str_has_prefix(bdaddr, "00:07:E0") ||
+		g_str_has_prefix(bdaddr, "00:0E:20"));
+}
+
 static void create_window(void)
 {
 	GtkWidget *vbox, *hbox;
@@ -439,17 +228,14 @@ static void create_window(void)
 	GtkWidget *label;
 	gchar *text;
 
-	dialog = g_object_new (GTK_TYPE_DIALOG,
-			       "use-header-bar", 1,
-			       "title", _("Bluetooth File Transfer"),
-			       NULL);
-	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
-			       _("_Cancel"), GTK_RESPONSE_CANCEL,
-			       _("_Retry"), RESPONSE_RETRY,
-			       NULL);
+	dialog = gtk_dialog_new_with_buttons(_("File Transfer"), NULL,
+				0,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				_("_Retry"), RESPONSE_RETRY,
+				NULL);
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, FALSE);
 	gtk_window_set_type_hint(GTK_WINDOW(dialog),
-				 GDK_WINDOW_TYPE_HINT_NORMAL);
+						GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 400, -1);
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 6);
@@ -459,6 +245,15 @@ static void create_window(void)
 	gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
 	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (dialog))),
 	                   vbox);
+
+	label = gtk_label_new(NULL);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	text = g_markup_printf_escaped("<span size=\"larger\"><b>%s</b></span>",
+	/* translators: This is the heading for the progress dialogue */
+					_("Sending files via Bluetooth"));
+	gtk_label_set_markup(GTK_LABEL(label), text);
+	g_free(text);
+	gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
 
 	table = gtk_grid_new();
 	gtk_grid_set_column_spacing(GTK_GRID(table), 4);
@@ -477,8 +272,6 @@ static void create_window(void)
 	gtk_label_set_ellipsize(GTK_LABEL(label_from), PANGO_ELLIPSIZE_MIDDLE);
 	gtk_grid_attach(GTK_GRID(table), label_from, 1, 0, 1, 1);
 
-	update_from_label ();
-
 	label = gtk_label_new(NULL);
 	gtk_misc_set_alignment(GTK_MISC(label), 1, 0.5);
 	text = g_markup_printf_escaped("<b>%s</b>", _("To:"));
@@ -493,16 +286,15 @@ static void create_window(void)
 	gtk_grid_attach(GTK_GRID(table), label, 1, 1, 1, 1);
 
 	progress = gtk_progress_bar_new();
-	gtk_progress_bar_set_show_text (GTK_PROGRESS_BAR (progress), TRUE);
 	gtk_progress_bar_set_ellipsize(GTK_PROGRESS_BAR(progress),
 							PANGO_ELLIPSIZE_END);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress),
-							_("Connecting…"));
+							_("Connecting..."));
 	gtk_box_pack_start(GTK_BOX(vbox), progress, TRUE, TRUE, 0);
 
 	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 4);
 
-	image_status = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_MENU);
+	image_status = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_MENU);
 	gtk_widget_set_no_show_all (image_status, TRUE);
 	gtk_box_pack_start(GTK_BOX (hbox), image_status, FALSE, FALSE, 4);
 
@@ -517,6 +309,41 @@ static void create_window(void)
 				G_CALLBACK(response_callback), NULL);
 
 	gtk_widget_show_all(dialog);
+}
+
+#define OPENOBEX_CONNECTION_FAILED "org.openobex.Error.ConnectionAttemptFailed"
+
+static gchar *get_error_message(GError *error)
+{
+	char *message;
+
+	if (error == NULL)
+		return g_strdup(_("An unknown error occurred"));
+
+	if (g_dbus_error_is_remote_error (error) == FALSE) {
+		message = g_strdup(error->message);
+		goto done;
+	}
+
+	/* FIXME */
+#if 0
+	if (dbus_g_error_has_name(error, OPENOBEX_CONNECTION_FAILED) == TRUE &&
+	    is_palm_device(option_device)) {
+		message = g_strdup(_("Make sure that the remote device "
+					"is switched on and that it "
+					"accepts Bluetooth connections"));
+		goto done;
+	}
+#endif
+	if (*error->message == '\0')
+		message = g_strdup(_("An unknown error occurred"));
+	else
+		message = g_strdup(error->message);
+
+done:
+	g_error_free(error);
+
+	return message;
 }
 
 static gchar *get_device_name(const gchar *address)
@@ -560,18 +387,44 @@ static gchar *get_device_name(const gchar *address)
 	return found_name;
 }
 
-static void
-on_transfer_properties (GVariant *props)
+static void get_properties_callback (GDBusProxy   *proxy,
+				     GAsyncResult *res,
+				     gpointer      user_data)
 {
-	char *filename = option_files[file_index];
-	char *basename, *text, *markup;
-	GVariant *size;
+	GError *error = NULL;
+	gchar *filename = option_files[file_index];
+	GFile *file, *dir;
+	gchar *basename, *text, *markup;
+	GVariant *variant;
 
-	size = g_variant_lookup_value (props, "Size", G_VARIANT_TYPE_UINT64);
-	if (size) {
-		current_size = g_variant_get_uint64 (size);
-		last_update = get_system_time ();
+	variant = g_dbus_proxy_call_finish (proxy, res, &error);
+
+	if (variant) {
+		GVariant *dict, *size;
+
+		g_variant_get (variant, "(@a{sv})", &dict);
+		size = g_variant_lookup_value (dict, "Size", G_VARIANT_TYPE_UINT64);
+		if (size) {
+			current_size = g_variant_get_uint64 (size);
+			last_update = get_system_time();
+		}
+
+		g_variant_unref (variant);
 	}
+
+	file = g_file_new_for_path (filename);
+	dir = g_file_get_parent (file);
+	g_object_unref (file);
+	if (g_file_has_uri_scheme (dir, "file") != FALSE) {
+		text = g_file_get_path (dir);
+	} else {
+		text = g_file_get_uri (dir);
+	}
+	markup = g_markup_escape_text (text, -1);
+	g_free (text);
+	g_object_unref (dir);
+	gtk_label_set_markup(GTK_LABEL(label_from), markup);
+	g_free(markup);
 
 	basename = g_path_get_basename(filename);
 	text = g_strdup_printf(_("Sending %s"), basename);
@@ -587,8 +440,30 @@ on_transfer_properties (GVariant *props)
 	g_free(text);
 }
 
-static void
-on_transfer_progress (guint64 transferred)
+static gboolean request_callback(GDBusMethodInvocation *invocation,
+				GDBusProxy *transfer, gpointer user_data)
+{
+	g_assert (current_transfer == NULL);
+
+	current_transfer = g_object_ref (transfer);
+	g_dbus_proxy_call (current_transfer,
+			   "GetProperties",
+			   NULL,
+			   G_DBUS_CALL_FLAGS_NONE,
+			   -1,
+			   NULL,
+			   (GAsyncReadyCallback) get_properties_callback,
+			   NULL);
+
+	g_dbus_method_invocation_return_value (invocation,
+					       g_variant_new ("(s)", ""));
+
+	return TRUE;
+}
+
+static gboolean progress_callback(GDBusMethodInvocation *invocation,
+				GDBusProxy *transfer, guint64 transferred,
+							gpointer user_data)
 {
 	gint64 current_time;
 	gint elapsed_time;
@@ -609,17 +484,17 @@ on_transfer_progress (guint64 transferred)
 	elapsed_time = (current_time - first_update) / 1000000;
 
 	if (current_time < last_update + 1000000)
-		return;
+		goto done;
 
 	last_update = current_time;
 
 	if (elapsed_time == 0)
-		return;
+		goto done;
 
 	transfer_rate = current_sent / elapsed_time;
 
 	if (transfer_rate == 0)
-		return;
+		goto done;
 
 	remaining_time = (total_size - current_sent) / transfer_rate;
 
@@ -638,10 +513,15 @@ on_transfer_progress (guint64 transferred)
 	g_free(time);
 	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), text);
 	g_free(text);
+
+done:
+	g_dbus_method_invocation_return_value (invocation, NULL);
+
+	return TRUE;
 }
 
-static void
-on_transfer_complete (void)
+static gboolean complete_callback(GDBusMethodInvocation *invocation,
+				GDBusProxy *transfer, gpointer user_data)
 {
 	total_sent += current_size;
 
@@ -651,37 +531,81 @@ on_transfer_complete (void)
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
 
-	if (file_index == file_count) {
-		GtkWidget *button;
-		char *complete;
-
+	if (file_index == file_count)
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(progress), 1.0);
 
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), "");
+	g_dbus_method_invocation_return_value (invocation, NULL);
 
-		complete = g_strdup_printf (ngettext ("%u transfer complete",
-						      "%u transfers complete",
-						      file_count), file_count);
-		gtk_label_set_text (GTK_LABEL (label_status), complete);
-		g_free (complete);
-
-		button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
-		gtk_button_set_label (GTK_BUTTON (button), _("_Close"));
-	} else {
-		send_next_file ();
-	}
+	return TRUE;
 }
 
-static void
-on_transfer_error (void)
+static gboolean release_callback(GDBusMethodInvocation *invocation,
+							gpointer user_data)
+{
+	g_dbus_method_invocation_return_value (invocation, NULL);
+
+	g_clear_object (&agent);
+
+	gtk_label_set_markup(GTK_LABEL(label_status), NULL);
+
+	gtk_widget_destroy(dialog);
+
+	gtk_main_quit();
+
+	return TRUE;
+}
+
+static gboolean error_callback(GDBusMethodInvocation *invocation,
+			       GDBusProxy *transfer,
+			       const char *message,
+			       gpointer user_data)
 {
 	gtk_widget_show (image_status);
-	gtk_label_set_markup (GTK_LABEL (label_status), _("There was an error"));
+	gtk_label_set_markup(GTK_LABEL(label_status), message);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
 
 	g_object_unref (current_transfer);
 	current_transfer = NULL;
+
+	if (agent != NULL) {
+		obex_agent_set_release_func(agent, NULL, NULL);
+		g_clear_object (&agent);
+	}
+
+	g_dbus_method_invocation_return_value (invocation, NULL);
+
+	return TRUE;
+}
+
+static void
+send_notify (GDBusProxy   *proxy,
+	     GAsyncResult *res,
+	     gpointer      user_data)
+{
+	GError *error = NULL;
+	GVariant *variant;
+
+	variant = g_dbus_proxy_call_finish (proxy, res, &error);
+
+	if (variant == NULL) {
+		char *message;
+
+		message = get_error_message(error);
+		gtk_widget_show (image_status);
+		gtk_label_set_markup(GTK_LABEL(label_status), message);
+		g_free (message);
+
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog), RESPONSE_RETRY, TRUE);
+
+		return;
+	}
+
+	gtk_progress_bar_set_text(GTK_PROGRESS_BAR(progress), NULL);
+
+	first_update = get_system_time();
+
+	g_variant_unref (variant);
 }
 
 static void
@@ -690,26 +614,9 @@ select_device_changed(BluetoothChooser *sel,
 		      gpointer user_data)
 {
 	GtkDialog *dialog = user_data;
-	char *icon;
 
-	if (address == NULL)
-		goto bail;
-
-	icon = bluetooth_chooser_get_selected_device_icon (sel);
-	if (icon == NULL)
-		goto bail;
-
-	/* Apple's device don't have OBEX */
-	if (g_str_equal (icon, "phone-apple-iphone"))
-		goto bail;
-
-	gtk_dialog_set_response_sensitive (dialog,
-					   GTK_RESPONSE_ACCEPT, TRUE);
-	return;
-
-bail:
-	gtk_dialog_set_response_sensitive (dialog,
-					   GTK_RESPONSE_ACCEPT, FALSE);
+	gtk_dialog_set_response_sensitive(dialog,
+				GTK_RESPONSE_ACCEPT, address != NULL);
 }
 
 static void
@@ -725,24 +632,18 @@ select_device_activated(BluetoothChooser *sel,
 static char *
 show_browse_dialog (char **device_name)
 {
-	GtkWidget *dialog, *selector, *send_button, *content_area;
+	GtkWidget *dialog, *selector, *send_button, *image, *content_area;
 	char *bdaddr;
 	int response_id;
-	GtkStyleContext *context;
 
-	dialog = g_object_new (GTK_TYPE_DIALOG,
-			       "title", _("Select device to send to"),
-			       "use-header-bar", 1,
-			       NULL);
-	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
-			       _("_Cancel"), GTK_RESPONSE_CANCEL,
-			       _("_Send"), GTK_RESPONSE_ACCEPT,
-			       NULL);
+	dialog = gtk_dialog_new_with_buttons(_("Select device to send to"), NULL,
+					     0,
+					     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+					     NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
-	send_button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	context = gtk_widget_get_style_context(send_button);
-	gtk_style_context_add_class (context, "suggested-action");
-
+	send_button = gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Send"), GTK_RESPONSE_ACCEPT);
+	image = gtk_image_new_from_icon_name ("document-send", GTK_ICON_SIZE_BUTTON);
+	gtk_button_set_image (GTK_BUTTON (send_button), image);
 	gtk_dialog_set_response_sensitive(GTK_DIALOG(dialog),
 					  GTK_RESPONSE_ACCEPT, FALSE);
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 480, 400);
@@ -781,24 +682,15 @@ show_browse_dialog (char **device_name)
 static char **
 show_select_dialog(void)
 {
-	GtkWidget *dialog, *button;
+	GtkWidget *dialog;
 	gchar **files = NULL;
-	GtkStyleContext *context;
 
-	dialog = g_object_new (GTK_TYPE_FILE_CHOOSER_DIALOG,
-			       "title", _("Choose files to send"),
-			       "action", GTK_FILE_CHOOSER_ACTION_OPEN,
-			       "use-header-bar", 1,
-			       NULL);
-	gtk_dialog_add_buttons(GTK_DIALOG (dialog),
-			       _("_Cancel"), GTK_RESPONSE_CANCEL,
-			       _("Select"), GTK_RESPONSE_ACCEPT, NULL);
+	dialog = gtk_file_chooser_dialog_new(_("Choose files to send"), NULL,
+				GTK_FILE_CHOOSER_ACTION_OPEN,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				_("Select"), GTK_RESPONSE_ACCEPT, NULL);
 	gtk_window_set_type_hint (GTK_WINDOW (dialog), GDK_WINDOW_TYPE_HINT_NORMAL);
 	gtk_file_chooser_set_select_multiple(GTK_FILE_CHOOSER(dialog), TRUE);
-
-	button = gtk_dialog_get_widget_for_response(GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-	context = gtk_widget_get_style_context(button);
-	gtk_style_context_add_class (context, "suggested-action");
 
 	if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT) {
 		GSList *list, *filenames;
@@ -824,7 +716,7 @@ static GOptionEntry options[] = {
 	{ "device", 0, 0, G_OPTION_ARG_STRING, &option_device,
 				N_("Remote device to use"), N_("ADDRESS") },
 	{ "name", 0, 0, G_OPTION_ARG_STRING, &option_device_name,
-				N_("Remote device’s name"), N_("NAME") },
+				N_("Remote device's name"), N_("NAME") },
 	{ "dest", 0, G_OPTION_FLAG_HIDDEN,
 			G_OPTION_ARG_STRING, &option_device, NULL, NULL },
 	{ G_OPTION_REMAINING, 0, 0,
@@ -843,7 +735,7 @@ int main(int argc, char *argv[])
 
 	error = NULL;
 
-	if (gtk_init_with_args(&argc, &argv, _("[FILE…]"),
+	if (gtk_init_with_args(&argc, &argv, _("[FILE...]"),
 				options, GETTEXT_PACKAGE, &error) == FALSE) {
 		if (error != NULL) {
 			g_printerr("%s\n", error->message);
@@ -855,8 +747,6 @@ int main(int argc, char *argv[])
 	}
 
 	gtk_window_set_default_icon_name("bluetooth");
-
-	cancellable = g_cancellable_new ();
 
 	/* A device name, but no device? */
 	if (option_device == NULL && option_device_name != NULL) {
@@ -917,20 +807,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	client_proxy = g_dbus_proxy_new_sync (conn,
-					      G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
-					      NULL,
-					      OBEX_SERVICE,
-					      OBEX_PATH,
-					      CLIENT_IFACE,
-					      cancellable,
-					      &error);
-	if (client_proxy == NULL) {
-		g_printerr("Acquiring proxy failed: %s\n", error->message);
-		g_error_free (error);
-		return 1;
-	}
-
 	if (option_device_name == NULL)
 		option_device_name = get_device_name(option_device);
 	if (option_device_name == NULL)
@@ -938,16 +814,21 @@ int main(int argc, char *argv[])
 
 	create_window();
 
-	if (!g_cancellable_is_cancelled (cancellable))
-		send_files ();
+	client_proxy = g_dbus_proxy_new_sync (conn,
+					      G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES | G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
+					      NULL,
+					      "org.openobex.client",
+					      "/",
+					      "org.openobex.Client",
+					      NULL,
+					      NULL);
+
+	setup_agent ();
+
+	send_files ();
 
 	gtk_main();
 
-	g_cancellable_cancel (cancellable);
-
-	g_clear_object (&cancellable);
-	g_clear_object (&current_transfer);
-	g_clear_object (&session);
 	g_object_unref (client_proxy);
 	g_object_unref (conn);
 

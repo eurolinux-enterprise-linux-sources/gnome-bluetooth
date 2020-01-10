@@ -13,7 +13,9 @@
  * Library General Public License for more details.
  *
  * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 #ifndef __BLUETOOTH_CHOOSER_BUTTON_H__
@@ -27,12 +29,6 @@ G_BEGIN_DECLS
 #define BLUETOOTH_CHOOSER_BUTTON(obj)     (G_TYPE_CHECK_INSTANCE_CAST ((obj), BLUETOOTH_TYPE_CHOOSER_BUTTON, BluetoothChooserButton))
 #define BLUETOOTH_IS_CHOOSER_BUTTON(obj)  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BLUETOOTH_TYPE_CHOOSER_BUTTON))
 
-/**
- * BluetoothChooserButton:
- *
- * The <structname>BluetoothChooserButton</structname> struct contains
- * only private fields and should not be directly accessed.
- */
 typedef struct _BluetoothChooserButton BluetoothChooserButton;
 
 typedef struct _BluetoothChooserButtonClass BluetoothChooserButtonClass;

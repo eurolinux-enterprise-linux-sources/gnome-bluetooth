@@ -74,11 +74,6 @@ typedef enum {
  * @BLUETOOTH_TYPE_JOYPAD: a joypad, joystick, or other game controller
  * @BLUETOOTH_TYPE_TABLET: a drawing tablet
  * @BLUETOOTH_TYPE_VIDEO: a video device, such as a webcam
- * @BLUETOOTH_TYPE_REMOTE_CONTROL: a remote control
- * @BLUETOOTH_TYPE_SCANNER: a scanner
- * @BLUETOOTH_TYPE_DISPLAY: a display
- * @BLUETOOTH_TYPE_WEARABLE: a wearable computer
- * @BLUETOOTH_TYPE_TOY: a toy or game
  *
  * The type of a Bluetooth device. See also %BLUETOOTH_TYPE_INPUT and %BLUETOOTH_TYPE_AUDIO
  **/
@@ -98,14 +93,9 @@ typedef enum {
 	BLUETOOTH_TYPE_JOYPAD		= 1 << 12,
 	BLUETOOTH_TYPE_TABLET		= 1 << 13,
 	BLUETOOTH_TYPE_VIDEO		= 1 << 14,
-	BLUETOOTH_TYPE_REMOTE_CONTROL	= 1 << 15,
-	BLUETOOTH_TYPE_SCANNER		= 1 << 16,
-	BLUETOOTH_TYPE_DISPLAY		= 1 << 17,
-	BLUETOOTH_TYPE_WEARABLE		= 1 << 18,
-	BLUETOOTH_TYPE_TOY		= 1 << 19
 } BluetoothType;
 
-#define _BLUETOOTH_TYPE_NUM_TYPES 20
+#define _BLUETOOTH_TYPE_NUM_TYPES 15
 
 /**
  * BLUETOOTH_TYPE_INPUT:
@@ -123,7 +113,6 @@ typedef enum {
 /**
  * BluetoothColumn:
  * @BLUETOOTH_COLUMN_PROXY: a #GDBusProxy object
- * @BLUETOOTH_COLUMN_PROPERTIES: Used to be #GDBusProxy object for DBus.Properties, now always %NULL
  * @BLUETOOTH_COLUMN_ADDRESS: a string representing a Bluetooth address
  * @BLUETOOTH_COLUMN_ALIAS: a string to use for display (the name of the device, or its address if the name is not known). Only available for devices.
  * @BLUETOOTH_COLUMN_NAME: a string representing the device or adapter's name
@@ -144,7 +133,6 @@ typedef enum {
  **/
 typedef enum {
 	BLUETOOTH_COLUMN_PROXY,
-	BLUETOOTH_COLUMN_PROPERTIES,
 	BLUETOOTH_COLUMN_ADDRESS,
 	BLUETOOTH_COLUMN_ALIAS,
 	BLUETOOTH_COLUMN_NAME,
@@ -160,9 +148,9 @@ typedef enum {
 	BLUETOOTH_COLUMN_POWERED,
 	BLUETOOTH_COLUMN_SERVICES,
 	BLUETOOTH_COLUMN_UUIDS,
+	/* < private > */
+	_BLUETOOTH_NUM_COLUMNS /*< skip >*/
 } BluetoothColumn;
-
-#define _BLUETOOTH_NUM_COLUMNS (BLUETOOTH_COLUMN_UUIDS + 1)
 
 /**
  * BluetoothStatus:

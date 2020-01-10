@@ -42,12 +42,6 @@ G_BEGIN_DECLS
 #define BLUETOOTH_GET_CLIENT_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
 					BLUETOOTH_TYPE_CLIENT, BluetoothClientClass))
 
-/**
- * BluetoothClient:
- *
- * The <structname>BluetoothClient</structname> struct contains
- * only private fields and should not be directly accessed.
- */
 typedef struct _BluetoothClient BluetoothClient;
 typedef struct _BluetoothClientClass BluetoothClientClass;
 
@@ -72,7 +66,7 @@ GtkTreeModel *bluetooth_client_get_adapter_model(BluetoothClient *client);
 GtkTreeModel *bluetooth_client_get_device_model(BluetoothClient *client);
 
 void bluetooth_client_connect_service (BluetoothClient     *client,
-				       const char          *path,
+				       const char          *device,
 				       gboolean             connect,
 				       GCancellable        *cancellable,
 				       GAsyncReadyCallback  callback,

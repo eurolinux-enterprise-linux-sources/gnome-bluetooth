@@ -31,20 +31,37 @@
 #include <signal.h>
 
 #include "bluetooth-agent.h"
+#include "bluetooth-client-glue.h"
 
-static void
-agent_confirm (GDBusMethodInvocation *invocation,
+static gboolean
+agent_pincode (GDBusMethodInvocation *invocation,
 	       GDBusProxy *device,
-	       guint passkey,
-	       gpointer data)
+	       gpointer user_data)
 {
-	const char *path;
+	GVariant *value;
+	GVariant *result;
+	const char *alias, *address;
 
-	path = g_dbus_proxy_get_object_path(device);
+	result = g_dbus_proxy_call_sync (device, "GetProperties",  NULL,
+					 G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+	if (result != NULL) {
+		value = g_variant_lookup_value (result, "Address", G_VARIANT_TYPE_STRING);
+		address = value ? g_variant_get_string (value, NULL) : "No address";
 
-	g_print ("Confirming passkey %6.6d from %s\n", passkey, path);
+		value = g_variant_lookup_value (result, "Name", G_VARIANT_TYPE_STRING);
+		alias = value ? g_variant_get_string (value, NULL) : address;
 
-	g_dbus_method_invocation_return_value (invocation, NULL);
+		printf("address %s name %s\n", address, alias);
+
+		g_variant_unref (result);
+	} else {
+		g_message ("Could not get address or name for '%s'",
+			   g_dbus_proxy_get_object_path (device));
+	}
+
+	g_dbus_method_invocation_return_value (invocation, g_variant_new ("(s)", "1234"));
+
+	return TRUE;
 }
 
 static GMainLoop *mainloop = NULL;
@@ -66,11 +83,13 @@ int main (int argc, char **argv)
 	sigaction(SIGTERM, &sa, NULL);
 	sigaction(SIGINT,  &sa, NULL);
 
+	g_type_init();
+
 	mainloop = g_main_loop_new(NULL, FALSE);
 
-	agent = bluetooth_agent_new(NULL);
+	agent = bluetooth_agent_new();
 
-	bluetooth_agent_set_confirm_func(agent, agent_confirm, NULL);
+	bluetooth_agent_set_pincode_func(agent, agent_pincode, NULL);
 
 	bluetooth_agent_register(agent);
 

@@ -121,6 +121,42 @@ legacypairing_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 	}
 }
 
+static void
+services_foreach (const char *service, gpointer value, GString *str)
+{
+	GEnumClass *eclass;
+	GEnumValue *ev;
+	BluetoothStatus status = GPOINTER_TO_INT (value);
+
+	eclass = g_type_class_ref (BLUETOOTH_TYPE_STATUS);
+	ev = g_enum_get_value (eclass, status);
+	if (ev == NULL)
+		g_warning ("Unknown status value %d", status);
+
+	g_string_append_printf (str, "%s (%s) ", service, ev ? ev->value_nick : "unknown");
+	g_type_class_unref (eclass);
+}
+
+static void services_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
+		GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data)
+{
+	GString *str;
+	GHashTable *services;
+
+	gtk_tree_model_get(model, iter, BLUETOOTH_COLUMN_SERVICES, &services, -1);
+	if (services == NULL) {
+		g_object_set(cell, "text", NULL, NULL);
+		return;
+	}
+
+	str = g_string_new (NULL);
+	g_hash_table_foreach (services, (GHFunc) services_foreach, str);
+	g_object_set(cell, "text", str->str, NULL);
+	g_string_free (str, TRUE);
+
+	g_hash_table_unref (services);
+}
+
 static void uuids_to_text(GtkTreeViewColumn *column, GtkCellRenderer *cell,
 			  GtkTreeModel *model, GtkTreeIter *iter, gpointer user_data)
 {
@@ -165,7 +201,7 @@ static void create_window(void)
 	gtk_toolbar_set_show_arrow(GTK_TOOLBAR(toolbar), FALSE);
 	gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, TRUE, 0);
 
-	item = gtk_tool_button_new (gtk_image_new_from_icon_name ("view-refresh", GTK_ICON_SIZE_LARGE_TOOLBAR), NULL);
+	item = gtk_tool_button_new_from_stock(GTK_STOCK_REFRESH);
 	gtk_toolbar_insert(GTK_TOOLBAR(toolbar), item, -1);
 	g_signal_connect(item, "clicked", G_CALLBACK(scan_callback), NULL);
 
@@ -237,6 +273,10 @@ static void create_window(void)
 					"text", BLUETOOTH_COLUMN_POWERED, NULL);
 
 	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
+					"Services", gtk_cell_renderer_text_new(),
+						services_to_text, NULL, NULL);
+
+	gtk_tree_view_insert_column_with_data_func(GTK_TREE_VIEW(tree), -1,
 					"UUIDs", gtk_cell_renderer_text_new(),
 						uuids_to_text, NULL, NULL);
 
@@ -284,17 +324,6 @@ default_adapter_powered_changed (GObject    *gobject,
 	g_message ("Default adapter is %s", powered ? "powered" : "switched off");
 }
 
-static void
-default_adapter_discovering_changed (GObject    *gobject,
-				     GParamSpec *pspec,
-				     gpointer    user_data)
-{
-	gboolean discovering;
-
-	g_object_get (G_OBJECT (gobject), "default-adapter-discovering", &discovering, NULL);
-	g_message ("Default adapter is %s", discovering ? "discovering" : "not discovering");
-}
-
 int main(int argc, char *argv[])
 {
 	GLogLevelFlags fatal_mask;
@@ -310,8 +339,6 @@ int main(int argc, char *argv[])
 			  G_CALLBACK (default_adapter_changed), NULL);
 	g_signal_connect (G_OBJECT (client), "notify::default-adapter-powered",
 			  G_CALLBACK (default_adapter_powered_changed), NULL);
-	g_signal_connect (G_OBJECT (client), "notify::default-adapter-discovering",
-			  G_CALLBACK (default_adapter_discovering_changed), NULL);
 
 	default_adapter_changed (G_OBJECT (client), NULL, NULL);
 	default_adapter_powered_changed (G_OBJECT (client), NULL, NULL);

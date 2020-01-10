@@ -1,14 +1,13 @@
-lib/bluetooth-chooser-button.c
-lib/bluetooth-chooser.c
-lib/bluetooth-chooser-combo.c
 lib/bluetooth-client.c
+lib/bluetooth-chooser-button.c
+lib/bluetooth-chooser-combo.c
+lib/bluetooth-chooser.c
 lib/bluetooth-filter-widget.c
-lib/bluetooth-pairing-dialog.c
-lib/bluetooth-settings-row.c
-lib/bluetooth-settings-row.ui
-lib/bluetooth-settings-widget.c
-lib/bluetooth-settings-obexpush.c
 lib/bluetooth-utils.c
-lib/settings.ui
-sendto/bluetooth-sendto.desktop.in.in
+lib/plugins/geoclue.c
+lib/plugins/test.c
+wizard/main.c
+[type: gettext/glade] wizard/wizard.ui
+wizard/bluetooth-wizard.desktop.in.in
 sendto/main.c
+sendto/bluetooth-sendto.desktop.in.in

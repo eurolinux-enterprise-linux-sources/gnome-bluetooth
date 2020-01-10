@@ -13,7 +13,9 @@
  * Library General Public License for more details.
  *
  * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, see <http://www.gnu.org/licenses/>.
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 /**
@@ -66,9 +68,11 @@ static int signals[LAST_SIGNAL] = { 0 };
 static void	bluetooth_chooser_button_class_init	(BluetoothChooserButtonClass * klass);
 static void	bluetooth_chooser_button_init		(BluetoothChooserButton      * button);
 
+static GtkButtonClass *parent_class;
+
 G_DEFINE_TYPE(BluetoothChooserButton, bluetooth_chooser_button, GTK_TYPE_BUTTON);
 
-#define DEFAULT_STR N_("Click to select device…")
+#define DEFAULT_STR N_("Click to select device...")
 
 static void
 set_btdevname (BluetoothChooserButton *button, const char *bdaddr, const char *name, const char *icon)
@@ -198,8 +202,8 @@ bluetooth_chooser_button_clicked (GtkButton *widget)
 	//FIXME title
 	button->dialog = gtk_dialog_new_with_buttons("", GTK_WINDOW (parent),
 						     GTK_DIALOG_MODAL,
-						     _("_Cancel"), GTK_RESPONSE_REJECT,
-						     _("_OK"), GTK_RESPONSE_ACCEPT, NULL);
+						     GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+						     GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
 	g_signal_connect (button->dialog, "response",
 			  G_CALLBACK (dialog_response_cb), button);
 	gtk_dialog_set_response_sensitive (GTK_DIALOG(button->dialog),
@@ -257,15 +261,17 @@ bluetooth_chooser_button_finalize (GObject *object)
 {
 	BluetoothChooserButton *button = BLUETOOTH_CHOOSER_BUTTON (object);
 
-	g_clear_object (&button->client);
-
+	if (button->client != NULL) {
+		g_object_unref (button->client);
+		button->client = NULL;
+	}
 	if (button->dialog != NULL) {
 		gtk_widget_destroy (button->dialog);
 		button->dialog = NULL;
 		button->chooser = NULL;
 	}
 
-	G_OBJECT_CLASS (bluetooth_chooser_button_parent_class)->finalize (object);
+	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void
@@ -313,6 +319,8 @@ bluetooth_chooser_button_class_init (BluetoothChooserButtonClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkButtonClass *button_class = GTK_BUTTON_CLASS (klass);
+
+	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->finalize = bluetooth_chooser_button_finalize;
 	object_class->set_property = bluetooth_chooser_button_set_property;

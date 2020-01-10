@@ -53,10 +53,10 @@ enum {
 	LAST_SIGNAL
 };
 
-static guint selection_table_signals[LAST_SIGNAL] = { 0 };
+static int selection_table_signals[LAST_SIGNAL] = { 0 };
 
-#define BLUETOOTH_CHOOSER_GET_PRIVATE(obj) \
-	(bluetooth_chooser_get_instance_private (obj))
+#define BLUETOOTH_CHOOSER_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
+									BLUETOOTH_TYPE_CHOOSER, BluetoothChooserPrivate))
 
 typedef struct _BluetoothChooserPrivate BluetoothChooserPrivate;
 
@@ -89,7 +89,7 @@ struct _BluetoothChooserPrivate {
 	guint internal_filter : 1;
 };
 
-G_DEFINE_TYPE_WITH_PRIVATE(BluetoothChooser, bluetooth_chooser, GTK_TYPE_BOX)
+G_DEFINE_TYPE(BluetoothChooser, bluetooth_chooser, GTK_TYPE_BOX)
 
 enum {
 	DEVICE_TYPE_FILTER_COL_NAME = 0,
@@ -121,7 +121,7 @@ connected_to_icon (GtkTreeViewColumn *column, GtkCellRenderer *cell,
 
 	gtk_tree_model_get (model, iter, BLUETOOTH_COLUMN_CONNECTED, &connected, -1);
 
-	g_object_set (cell, "icon-name", connected ? "gtk-connected" : NULL, NULL);
+	g_object_set (cell, "icon-name", connected ? GTK_STOCK_CONNECT : NULL, NULL);
 }
 
 static void
@@ -177,7 +177,7 @@ set_search_label (BluetoothChooser *self, gboolean state)
 	} else {
 		gtk_widget_show (priv->spinner);
 		gtk_spinner_start (GTK_SPINNER (priv->spinner));
-		gtk_label_set_text (GTK_LABEL (priv->search_label), _("Searching for devices…"));
+		gtk_label_set_text (GTK_LABEL (priv->search_label), _("Searching for devices..."));
 	}
 }
 
@@ -570,8 +570,7 @@ filter_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer data)
 static void
 filter_type_changed_cb (GObject *object, GParamSpec *spec, gpointer user_data)
 {
-	BluetoothChooser *self = BLUETOOTH_CHOOSER (object);
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
 
 	if (priv->filter)
 		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
@@ -580,8 +579,7 @@ filter_type_changed_cb (GObject *object, GParamSpec *spec, gpointer user_data)
 static void
 filter_category_changed_cb (GObject *object, GParamSpec *spec, gpointer user_data)
 {
-	BluetoothChooser *self = BLUETOOTH_CHOOSER (object);
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
 
 	if (priv->filter)
 		gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->filter));
@@ -803,7 +801,7 @@ bluetooth_chooser_init(BluetoothChooser *self)
 	priv->spinner = gtk_spinner_new ();
 	gtk_container_add (GTK_CONTAINER (hbox), priv->spinner);
 	gtk_widget_show (priv->spinner);
-	priv->search_label = gtk_label_new (_("Searching for devices…"));
+	priv->search_label = gtk_label_new (_("Searching for devices..."));
 	gtk_container_add (GTK_CONTAINER (hbox), priv->search_label);
 	gtk_widget_show (priv->search_label);
 	gtk_widget_show (hbox);
@@ -871,8 +869,7 @@ bluetooth_chooser_constructor (GType                  type,
 static void
 bluetooth_chooser_finalize (GObject *object)
 {
-	BluetoothChooser *self = BLUETOOTH_CHOOSER (object);
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
 
 	if (priv->client) {
 		g_signal_handler_disconnect (G_OBJECT(priv->client), priv->default_adapter_changed_id);
@@ -915,7 +912,7 @@ bluetooth_chooser_set_property (GObject *object, guint prop_id,
 					 const GValue *value, GParamSpec *pspec)
 {
 	BluetoothChooser *self = BLUETOOTH_CHOOSER (object);
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE (self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE (object);
 
 	switch (prop_id) {
 	case PROP_DEVICE_SELECTED: {
@@ -1028,7 +1025,7 @@ bluetooth_chooser_get_property (GObject *object, guint prop_id,
 					 GValue *value, GParamSpec *pspec)
 {
 	BluetoothChooser *self = BLUETOOTH_CHOOSER(object);
-	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(self);
+	BluetoothChooserPrivate *priv = BLUETOOTH_CHOOSER_GET_PRIVATE(object);
 
 	switch (prop_id) {
 	case PROP_DEVICE_SELECTED:
@@ -1080,6 +1077,8 @@ bluetooth_chooser_class_init (BluetoothChooserClass *klass)
 	int max_filter_val;
 
 	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+
+	g_type_class_add_private(klass, sizeof(BluetoothChooserPrivate));
 
 	G_OBJECT_CLASS(klass)->constructor = bluetooth_chooser_constructor;
 	G_OBJECT_CLASS(klass)->finalize = bluetooth_chooser_finalize;

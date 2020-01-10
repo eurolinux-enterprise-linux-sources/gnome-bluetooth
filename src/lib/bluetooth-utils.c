@@ -55,6 +55,8 @@ const gchar *
 bluetooth_type_to_string (BluetoothType type)
 {
 	switch (type) {
+	case BLUETOOTH_TYPE_ANY:
+		return _("All types");
 	case BLUETOOTH_TYPE_PHONE:
 		return _("Phone");
 	case BLUETOOTH_TYPE_MODEM:
@@ -84,42 +86,9 @@ bluetooth_type_to_string (BluetoothType type)
 		return _("Tablet");
 	case BLUETOOTH_TYPE_VIDEO:
 		return _("Video device");
-	case BLUETOOTH_TYPE_REMOTE_CONTROL:
-		return _("Remote control");
-	case BLUETOOTH_TYPE_SCANNER:
-		return _("Scanner");
-	case BLUETOOTH_TYPE_DISPLAY:
-		return _("Display");
-	case BLUETOOTH_TYPE_WEARABLE:
-		return _("Wearable");
-	case BLUETOOTH_TYPE_TOY:
-		return _("Toy");
-	}
-
-	return _("Unknown");
-}
-
-/**
- * bluetooth_type_to_filter_string:
- * @type: a #BluetoothType
- *
- * Returns a human-readable string representation of @type usable for display to users,
- * when type filters are displayed. Do not free the return value.
- * The returned string is already translated with gettext().
- *
- * Return value: a string.
- **/
-const gchar *
-bluetooth_type_to_filter_string (BluetoothType type)
-{
-	switch (type) {
-	case BLUETOOTH_TYPE_ANY:
-		return _("All types");
 	default:
-		return bluetooth_type_to_string (type);
+		return _("Unknown");
 	}
-
-	g_assert_not_reached ();
 }
 
 /**
@@ -202,8 +171,6 @@ bluetooth_class_to_type (guint32 class)
 			case 0x01:
 			case 0x02:
 				return BLUETOOTH_TYPE_JOYPAD;
-			case 0x03:
-				return BLUETOOTH_TYPE_REMOTE_CONTROL;
 			}
 			break;
 		case 0x01:
@@ -220,64 +187,12 @@ bluetooth_class_to_type (guint32 class)
 	case 0x06:
 		if (class & 0x80)
 			return BLUETOOTH_TYPE_PRINTER;
-		if (class & 0x40)
-			return BLUETOOTH_TYPE_SCANNER;
 		if (class & 0x20)
 			return BLUETOOTH_TYPE_CAMERA;
-		if (class & 0x10)
-			return BLUETOOTH_TYPE_DISPLAY;
-		break;
-	case 0x07:
-		return BLUETOOTH_TYPE_WEARABLE;
-	case 0x08:
-		return BLUETOOTH_TYPE_TOY;
-	}
-
-	return 0;
-}
-
-/**
- * bluetooth_appearance_to_type:
- * @appearance: a Bluetooth device appearance
- *
- * Returns the type of device corresponding to the given @appearance value,
- * as usually found in the GAP service.
- *
- * Return value: a #BluetoothType.
- **/
-BluetoothType
-bluetooth_appearance_to_type (guint16 appearance)
-{
-	switch ((appearance & 0xffc0) >> 6) {
-	case 0x01:
-		return BLUETOOTH_TYPE_PHONE;
-	case 0x02:
-		return BLUETOOTH_TYPE_COMPUTER;
-	case 0x05:
-		return BLUETOOTH_TYPE_DISPLAY;
-	case 0x0a:
-		return BLUETOOTH_TYPE_OTHER_AUDIO;
-	case 0x0b:
-		return BLUETOOTH_TYPE_SCANNER;
-	case 0x0f: /* HID Generic */
-		switch (appearance & 0x3f) {
-		case 0x01:
-			return BLUETOOTH_TYPE_KEYBOARD;
-		case 0x02:
-			return BLUETOOTH_TYPE_MOUSE;
-		case 0x03:
-		case 0x04:
-			return BLUETOOTH_TYPE_JOYPAD;
-		case 0x05:
-			return BLUETOOTH_TYPE_TABLET;
-		case 0x08:
-			return BLUETOOTH_TYPE_SCANNER;
-		}
 		break;
 	}
 
 	return 0;
-
 }
 
 static const char *
@@ -300,56 +215,53 @@ static const char *
 uuid16_to_string (guint uuid16, const char *uuid)
 {
 	switch (uuid16) {
-	case BLUETOOTH_UUID_SPP:
+	case 0x1101:
 		return "SerialPort";
-	case BLUETOOTH_UUID_DUN:
+	case 0x1103:
 		return "DialupNetworking";
-	case BLUETOOTH_UUID_IRMC:
+	case 0x1104:
 		return "IrMCSync";
-	case BLUETOOTH_UUID_OPP:
+	case 0x1105:
 		return "OBEXObjectPush";
-	case BLUETOOTH_UUID_FTP:
+	case 0x1106:
 		return "OBEXFileTransfer";
-	case BLUETOOTH_UUID_HSP:
+	case 0x1108:
 		return "HSP";
-	case BLUETOOTH_UUID_A2DP_SOURCE:
+	case 0x110A:
 		return "AudioSource";
-	case BLUETOOTH_UUID_A2DP_SINK:
+	case 0x110B:
 		return "AudioSink";
-	case BLUETOOTH_UUID_AVRCP_TARGET:
+	case 0x110c:
 		return "A/V_RemoteControlTarget";
-	case BLUETOOTH_UUID_A2DP:
-		return "AdvancedAudioDistribution";
-	case BLUETOOTH_UUID_AVRCP_CONTROL:
+	case 0x110e:
 		return "A/V_RemoteControl";
-	case BLUETOOTH_UUID_HSP_AG:
+	case 0x1112:
 		return "Headset_-_AG";
-	case BLUETOOTH_UUID_PAN_PANU:
+	case 0x1115:
 		return "PANU";
-	case BLUETOOTH_UUID_PAN_NAP:
+	case 0x1116:
 		return "NAP";
-	case BLUETOOTH_UUID_PAN_GN:
+	case 0x1117:
 		return "GN";
-	case BLUETOOTH_UUID_HFP_HF:
+	case 0x111e:
 		return "Handsfree";
-	case BLUETOOTH_UUID_HFP_AG:
+	case 0x111F:
 		return "HandsfreeAudioGateway";
-	case BLUETOOTH_UUID_HID:
-	case 0x1812:
+	case 0x1124:
 		return "HumanInterfaceDeviceService";
-	case BLUETOOTH_UUID_SAP:
+	case 0x112d:
 		return "SIM_Access";
-	case BLUETOOTH_UUID_PBAP:
+	case 0x112F:
 		return "Phonebook_Access_-_PSE";
-	case BLUETOOTH_UUID_GENERIC_AUDIO:
+	case 0x1203:
 		return "GenericAudio";
-	case BLUETOOTH_UUID_SDP: /* ServiceDiscoveryServerServiceClassID */
-	case BLUETOOTH_UUID_PNP: /* PnPInformation */
+	case 0x1000: /* ServiceDiscoveryServerServiceClassID */
+	case 0x1200: /* PnPInformation */
 		/* Those are ignored */
 		return NULL;
-	case BLUETOOTH_UUID_GENERIC_NET:
+	case 0x1201:
 		return "GenericNetworking";
-	case BLUETOOTH_UUID_VDP_SOURCE:
+	case 0x1303:
 		return "VideoSource";
 	case 0x8e771303:
 	case 0x8e771301:

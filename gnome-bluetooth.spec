@@ -1,41 +1,37 @@
 Name:		gnome-bluetooth
 Epoch:		1
-Version:	3.28.2
+Version:	3.8.2.1
 Release:	1%{?dist}
 Summary:	Bluetooth graphical utilities
 
+Group:		Applications/Communications
 License:	GPLv2+
-URL:		https://wiki.gnome.org/Projects/GnomeBluetooth
-Source0:	https://download.gnome.org/sources/gnome-bluetooth/3.28/gnome-bluetooth-%{version}.tar.xz
+URL:		http://live.gnome.org/GnomeBluetooth
+Source0:	http://download.gnome.org/sources/gnome-bluetooth/3.8/gnome-bluetooth-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
-# Fix the build with Python 2
-Patch0:		gnome-bluetooth-python3.patch
 
 %if 0%{?rhel}
 ExcludeArch:	s390 s390x
 %endif
 
+BuildRequires:	gtk3-devel >= 3.0
 BuildRequires:	dbus-glib-devel
-BuildRequires:	desktop-file-utils
-BuildRequires:	gettext
-BuildRequires:	gobject-introspection-devel
-BuildRequires:	gtk3-devel
-BuildRequires:	gtk-doc
-BuildRequires:	itstool
-BuildRequires:	meson
-BuildRequires:	pkgconfig(libcanberra-gtk3)
-BuildRequires:	pkgconfig(libnotify)
-BuildRequires:	systemd-devel
 
+BuildRequires:	intltool desktop-file-utils gettext gtk-doc
+BuildRequires:	itstool
+
+BuildRequires:	gobject-introspection-devel
+
+Obsoletes:	bluez-pin
 Provides:	dbus-bluez-pin-helper
+Conflicts:	bluez-gnome <= 1.8
+Obsoletes:	bluez-gnome <= 1.8
 
 # Otherwise we might end up with mismatching version
-Requires:	%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
-Requires:	bluez >= 5.0
-%if 0%{?fedora}
-Requires:	bluez-obexd
-%endif
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	bluez >= 4.42
 %ifnarch s390 s390x
+Requires:	obexd
 Requires:	pulseaudio-module-bluetooth
 %endif
 
@@ -48,7 +44,9 @@ monitor and use Bluetooth devices.
 
 %package libs
 Summary:	GTK+ Bluetooth device selection widgets
+Group:		System Environment/Libraries
 License:	LGPLv2+
+Requires:	gobject-introspection
 
 %description libs
 This package contains libraries needed for applications that
@@ -56,27 +54,39 @@ want to display a Bluetooth device selection widget.
 
 %package libs-devel
 Summary:	Development files for %{name}-libs
+Group:		Development/Libraries
 License:	LGPLv2+
-Requires:	%{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
-Requires:	%{name}%{?_isa} = %{epoch}:%{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	gobject-introspection-devel
+Obsoletes:	gnome-bluetooth-devel < 2.27.1-4
+Provides:	gnome-bluetooth-devel = %{version}
 
 %description libs-devel
 This package contains the libraries and header files that are needed
 for writing applications that require a Bluetooth device selection widget.
 
 %prep
-%autosetup -p1
+%setup -q
 
 %build
-%meson -Dgtk_doc=true
-%meson_build
+%configure --disable-desktop-update --disable-icon-update --disable-schemas-compile --disable-compile-warnings
+make %{?_smp_mflags}
 
 %install
-%meson_install
+make install DESTDIR=$RPM_BUILD_ROOT
+
+rm -f 	   $RPM_BUILD_ROOT/%{_libdir}/gnome-bluetooth/plugins/*.la \
+	   $RPM_BUILD_ROOT/%{_libdir}/nautilus-sendto/plugins/*.la
+#	   $RPM_BUILD_ROOT%{_libdir}/libgnome-bluetooth.la \
 
 install -m0644 -D %{SOURCE1} $RPM_BUILD_ROOT/usr/lib/udev/rules.d/61-gnome-bluetooth-rfkill.rules
 
+# gnome-bluetooth2 is the name for the gettext domain,
+# gnome-bluetooth is the name in the docs
 %find_lang gnome-bluetooth2
+%find_lang %{name} --with-gnome
+cat %{name}.lang >> gnome-bluetooth2.lang
 
 %post
 update-desktop-database &>/dev/null || :
@@ -103,64 +113,35 @@ if [ $1 -eq 0 ] ; then
 fi
 
 %files
-%license COPYING
-%doc README NEWS
+%doc README NEWS COPYING
 %{_bindir}/bluetooth-sendto
+%{_bindir}/bluetooth-wizard
+%dir %{_libdir}/gnome-bluetooth/
+%{_libdir}/gnome-bluetooth/GnomeBluetoothApplet-1.0.typelib
+%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so.*
+%{_libdir}/gnome-bluetooth/plugins/
 %{_datadir}/applications/*.desktop
 %{_datadir}/gnome-bluetooth/
 %{_mandir}/man1/*
 /usr/lib/udev/rules.d/61-gnome-bluetooth-rfkill.rules
 
 %files -f gnome-bluetooth2.lang libs
-%license COPYING.LIB
+%doc COPYING.LIB
 %{_libdir}/libgnome-bluetooth.so.*
-%dir %{_libdir}/girepository-1.0
 %{_libdir}/girepository-1.0/GnomeBluetooth-1.0.typelib
 %{_datadir}/icons/hicolor/*/apps/*
 %{_datadir}/icons/hicolor/*/status/*
 
 %files libs-devel
 %{_includedir}/gnome-bluetooth/
+%{_libdir}/gnome-bluetooth/libgnome-bluetooth-applet.so
 %{_libdir}/libgnome-bluetooth.so
+%{_libdir}/libgnome-bluetooth.la
 %{_libdir}/pkgconfig/gnome-bluetooth-1.0.pc
-%dir %{_datadir}/gir-1.0
 %{_datadir}/gir-1.0/GnomeBluetooth-1.0.gir
 %{_datadir}/gtk-doc
 
 %changelog
-* Wed Aug 01 2018 Kalev Lember <klember@redhat.com> - 1:3.28.2-1
-- Update to 3.28.2
-- Resolves: #1567381
-
-* Thu Jul 19 2018 Bastien Nocera <bnocera@redhat.com> - 1:3.28.1-1
-+ gnome-bluetooth-3.28.1-1
-- Work-around bluez bug that would leave adapters on Discoverable
-  when exiting
-- Resolves: #1567381
-
-* Mon Mar 12 2018 Kalev Lember <klember@redhat.com> - 1:3.28.0-1
-- Update to 3.28.0
-- Resolves: #1567381
-
-* Mon Feb 13 2017 Kalev Lember <klember@redhat.com> - 1:3.20.1-1
-- Update to 3.20.1
-- Resolves: #1386878
-
-* Mon Oct 17 2016 Kalev Lember <klember@redhat.com> - 1:3.20.0-1
-- Update to 3.20.0
-- Resolves: #1386878
-
-* Thu Apr 30 2015 Bastien Nocera <bnocera@redhat.com> 3.14.1-1
-- Update to 3.14.1
-Resolves: #1174547
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 1:3.8.2.1-3
-- Mass rebuild 2013-12-27
-
-* Fri Nov 22 2013 Bastien Nocera <bnocera@redhat.com> 3.8.2.1-2
-- Fix crasher when disconnecting from a Bluetooth device
-Resolves: #1028078
-
 * Thu Oct 31 2013 Bastien Nocera <bnocera@redhat.com> 3.8.2.1-1
 - Update to 3.8.2.1
 Resolves: #886464
