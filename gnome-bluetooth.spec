@@ -1,28 +1,31 @@
 Name:		gnome-bluetooth
 Epoch:		1
-Version:	3.20.1
+Version:	3.28.2
 Release:	1%{?dist}
 Summary:	Bluetooth graphical utilities
 
 License:	GPLv2+
 URL:		https://wiki.gnome.org/Projects/GnomeBluetooth
-Source0:	https://download.gnome.org/sources/gnome-bluetooth/3.20/gnome-bluetooth-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/gnome-bluetooth/3.28/gnome-bluetooth-%{version}.tar.xz
 Source1:	61-gnome-bluetooth-rfkill.rules
+# Fix the build with Python 2
+Patch0:		gnome-bluetooth-python3.patch
 
 %if 0%{?rhel}
 ExcludeArch:	s390 s390x
 %endif
 
-BuildRequires:	gtk3-devel >= 3.0
 BuildRequires:	dbus-glib-devel
-
-BuildRequires:	intltool desktop-file-utils gettext gtk-doc
-BuildRequires:	itstool
-BuildRequires:	pkgconfig(libnotify)
-BuildRequires:	pkgconfig(libcanberra-gtk3)
-BuildRequires:	systemd-devel
-
+BuildRequires:	desktop-file-utils
+BuildRequires:	gettext
 BuildRequires:	gobject-introspection-devel
+BuildRequires:	gtk3-devel
+BuildRequires:	gtk-doc
+BuildRequires:	itstool
+BuildRequires:	meson
+BuildRequires:	pkgconfig(libcanberra-gtk3)
+BuildRequires:	pkgconfig(libnotify)
+BuildRequires:	systemd-devel
 
 Provides:	dbus-bluez-pin-helper
 
@@ -62,16 +65,14 @@ This package contains the libraries and header files that are needed
 for writing applications that require a Bluetooth device selection widget.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
-%configure --disable-desktop-update --disable-icon-update --disable-schemas-compile --disable-compile-warnings
-make %{?_smp_mflags}
+%meson -Dgtk_doc=true
+%meson_build
 
 %install
-%make_install
-
-find $RPM_BUILD_ROOT -name '*.la' -delete
+%meson_install
 
 install -m0644 -D %{SOURCE1} $RPM_BUILD_ROOT/usr/lib/udev/rules.d/61-gnome-bluetooth-rfkill.rules
 
@@ -127,6 +128,20 @@ fi
 %{_datadir}/gtk-doc
 
 %changelog
+* Wed Aug 01 2018 Kalev Lember <klember@redhat.com> - 1:3.28.2-1
+- Update to 3.28.2
+- Resolves: #1567381
+
+* Thu Jul 19 2018 Bastien Nocera <bnocera@redhat.com> - 1:3.28.1-1
++ gnome-bluetooth-3.28.1-1
+- Work-around bluez bug that would leave adapters on Discoverable
+  when exiting
+- Resolves: #1567381
+
+* Mon Mar 12 2018 Kalev Lember <klember@redhat.com> - 1:3.28.0-1
+- Update to 3.28.0
+- Resolves: #1567381
+
 * Mon Feb 13 2017 Kalev Lember <klember@redhat.com> - 1:3.20.1-1
 - Update to 3.20.1
 - Resolves: #1386878

@@ -1,0 +1,8 @@
+--- gnome-bluetooth-3.28.0/meson_post_install.py.python3	2018-03-12 16:00:35.000000000 +0100
++++ gnome-bluetooth-3.28.0/meson_post_install.py	2018-05-17 14:48:43.745149038 +0200
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/bin/env python
+ 
+ import os
+ import subprocess

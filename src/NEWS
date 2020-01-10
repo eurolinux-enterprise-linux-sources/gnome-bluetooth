@@ -1,3 +1,45 @@
+ver 3.28.2:
+- Use feature of BlueZ 5.51 to avoid Bluetooth adapters being left
+  Discoverable if the Settings panel exits suddenly
+- Build warning fixes
+
+ver 3.28.1:
+- Work-around a race in bluetoothd which would leave Bluetooth adapters
+  discoverable even after the Settings panel closed cleanly
+- Fix icons in Persian and Punjabi translations
+
+ver 3.28.0:
+- Translation updates
+
+ver 3.27.92:
+- Avoid crash when Bluetooth panel is switched away from quickly
+- Fix connection button state becoming out of sync after disconnect
+- Make sure to remove all the devices when bluetoothd crashes
+- Stop spinner when it becomes invisible
+- Fix compile-time warning
+
+ver 3.27.90:
+- Simplify and make BluetoothClient more efficient
+- Fix problems when Bluetooth adapters come and go
+- Remove quirks already handled by autopair plugin
+- Meson build enhancements
+
+ver 3.26.1:
+- Fix installation of Bluetooth icons
+- Fix Bluetooth icon names for bluetooth-sendto in
+  es, ko, sl and zh_TW translations
+
+ver 3.26.0:
+- Fix "file received" notifications not being translated
+- Translation updates
+
+ver 3.25.91:
+- Port to meson build system, and remove autotools build system
+- Use Unicode in translatable strings
+- Update Settings UI for updated gnome-control-center UI
+- Align the explanatory text with the listbox
+- Fix crash when exiting panel during pairing
+
 ver 3.20.1:
 - Unknown device types now show as "Unknown" rather than "All types"
 - Fix an invisible spinner when pairing
